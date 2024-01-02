@@ -5,7 +5,6 @@ import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/variabels.dart';
 import '../../../data/models/response/product_response_model.dart';
-import '../models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final Product data;
@@ -41,8 +40,9 @@ class ProductCard extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(50.0)),
               child: CachedNetworkImage(
                 imageUrl: "${Variables.imageBaseUrl}${data.image}",
-                placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Icon(
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(
                   Icons.food_bank_outlined,
                   size: 80,
                 ),
@@ -52,7 +52,7 @@ class ProductCard extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            data.shortName,
+            data.name,
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,
@@ -62,7 +62,7 @@ class ProductCard extends StatelessWidget {
           ),
           const SpaceHeight(8.0),
           Text(
-            data.type,
+            data.type!,
             style: const TextStyle(
               color: AppColors.grey,
               fontSize: 12,

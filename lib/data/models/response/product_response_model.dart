@@ -32,50 +32,41 @@ class ProductResponseModel {
 }
 
 class Product {
-  final int id;
-  final int satuanId;
-  final int accurateid;
+  final int? id;
   final int typeId;
-  final int tokopediaId;
-  final int shopeeId;
-  final String blibliId;
+  final bool isBestSeller;
   final String name;
-  final String shortName;
-  final String code;
   final String image;
   final String harga;
-  final String tokopediaHarga;
-  final dynamic shopeeHarga;
-  final String minimarket;
-  final String berat;
-  final String active;
-  final String type;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final String satuan;
+  final String? type;
+
+  Product copyWith({
+    int? id,
+    int? typeId,
+    bool? isBestSeller,
+    String? name,
+    String? image,
+    String? harga,
+    String? type,
+  }) =>
+      Product(
+        id: id ?? this.id,
+        typeId: typeId ?? this.typeId,
+        isBestSeller: isBestSeller ?? this.isBestSeller,
+        name: name ?? this.name,
+        image: image ?? this.image,
+        harga: harga ?? this.harga,
+        type: type ?? this.type,
+      );
 
   Product({
-    required this.id,
-    required this.satuanId,
-    required this.accurateid,
+    this.id,
     required this.typeId,
-    required this.tokopediaId,
-    required this.shopeeId,
-    required this.blibliId,
+    required this.isBestSeller,
     required this.name,
-    required this.shortName,
-    required this.code,
     required this.image,
     required this.harga,
-    required this.tokopediaHarga,
-    required this.shopeeHarga,
-    required this.minimarket,
-    required this.berat,
-    required this.active,
-    required this.type,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.satuan,
+    this.type,
   });
 
   factory Product.fromJson(String str) => Product.fromMap(json.decode(str));
@@ -84,32 +75,19 @@ class Product {
 
   factory Product.fromMap(Map<String, dynamic> json) => Product(
         id: json["id"],
-        satuanId: json["satuan_id"] ?? 0,
-        accurateid: json["accurateid"] ?? 0,
-        typeId: json["type_id"] ?? 0,
-        tokopediaId: json["tokopedia_id"] ?? 0,
-        shopeeId: json["shopee_id"] ?? 0,
-        blibliId: json["blibli_id"] ?? "",
-        name: json["name"] ?? "",
-        shortName: json["short_name"] ?? "",
-        code: json["code"] ?? "",
+        typeId: json["type_id"],
+        isBestSeller: json["is_best_seller"] == 1 ? true : false,
+        name: json["short_name"] ?? json["name"],
         image: json["image"] ?? "",
         harga: json["harga"] ?? "",
-        tokopediaHarga: json["tokopedia_harga"] ?? "",
-        shopeeHarga: json["shopee_harga"] ?? "",
-        minimarket: json["minimarket"] ?? "",
-        berat: json["berat"] ?? "",
-        active: json["active"] ?? "",
         type: json["type"] ?? "",
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        satuan: json["satuan"] ?? "",
       );
 
   Map<String, dynamic> toMap() => {
-        "name": shortName,
+        "name": name,
         "image": image,
         "price": harga,
         "category": type,
+        "is_best_seller": isBestSeller ? 1 : 0,
       };
 }

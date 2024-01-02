@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
+import 'package:pos_hdn/presentations/manage/pages/manage_product_page.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/menu_button.dart';
@@ -31,7 +32,7 @@ class ManageMenuPage extends StatelessWidget {
               MenuButton(
                 iconPath: Assets.images.manageProduct.path,
                 label: 'Kelola Produk',
-                onPressed: () {},
+                onPressed: () => context.push(const ManageProductPage()),
                 isImage: true,
               ),
               const SpaceWidth(15.0),

@@ -12,7 +12,7 @@ class ProductLocalDatasource {
     final dbPath = await getDatabasesPath();
     final path = dbPath + filePath;
 
-    return await openDatabase(path, version: 1, onCreate: _createDB);
+    return await openDatabase(path, version: 2, onCreate: _createDB);
   }
 
   Future<void> _createDB(Database db, int version) async {
@@ -22,7 +22,9 @@ class ProductLocalDatasource {
         name TEXT,
         price INTEGER,
         image TEXT,
-        category TEXT
+        category TEXT,
+        is_best_seller INTEGER,
+        is_sync INTEGER DEFAULT 0
       )
     ''');
   }
@@ -30,7 +32,7 @@ class ProductLocalDatasource {
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await _initDB('pos1.db');
+    _database = await _initDB('pos2.db');
 
     return _database!;
   }
@@ -41,11 +43,19 @@ class ProductLocalDatasource {
     await db.delete(tableProducts);
   }
 
-  //insert data product
+  //insert list data product
   Future<void> insertAllProduct(List<Product> products) async {
     final db = await instance.database;
     for (var product in products) {
       await db.insert(tableProducts, product.toMap());
     }
+  }
+
+  //insert data product
+  Future<Product> insertProduct(Product product) async {
+    final db = await instance.database;
+    int id = await db.insert(tableProducts, product.toMap());
+
+    return product.copyWith(id: id);
   }
 }
