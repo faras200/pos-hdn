@@ -96,29 +96,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           centerTitle: true,
-          actions: [
-            BlocConsumer<LogoutBloc, LogoutState>(
-              listener: (context, state) {
-                state.maybeMap(
-                    orElse: () {},
-                    success: (_) {
-                      AuthLocalDatasource().removeAuthData();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginPage()));
-                    });
-              },
-              builder: (context, state) {
-                return IconButton(
-                  onPressed: () {
-                    context.read<LogoutBloc>().add(const LogoutEvent.logout());
-                  },
-                  icon: const Icon(Icons.logout),
-                );
-              },
-            )
-          ],
         ),
         body: ListView(
           padding: const EdgeInsets.all(16.0),

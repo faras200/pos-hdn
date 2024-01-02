@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
+import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/menu_button.dart';
 import '../../../core/components/spaces.dart';
+import '../../../core/constants/colors.dart';
+import '../../../data/datasources/auth_local_datasource.dart';
+import '../../../data/datasources/product_local_datasource.dart';
+import '../../auth/pages/login_page.dart';
+import '../../home/bloc/logout/logout_bloc.dart';
 import 'manage_printer_page.dart';
 
 class ManageMenuPage extends StatelessWidget {
@@ -16,29 +23,92 @@ class ManageMenuPage extends StatelessWidget {
         title: const Text('Kelola'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                MenuButton(
-                  iconPath: Assets.images.manageProduct.path,
-                  label: 'Kelola Produk',
-                  onPressed: () {},
-                  isImage: true,
+      body: ListView(
+        padding: const EdgeInsets.all(16.0),
+        children: [
+          Row(
+            children: [
+              MenuButton(
+                iconPath: Assets.images.manageProduct.path,
+                label: 'Kelola Produk',
+                onPressed: () {},
+                isImage: true,
+              ),
+              const SpaceWidth(15.0),
+              MenuButton(
+                iconPath: Assets.images.managePrinter.path,
+                label: 'Kelola Printer',
+                onPressed: () => context.push(const ManagePrinterPage()),
+                isImage: true,
+              ),
+            ],
+          ),
+          const SpaceHeight(100.0),
+          BlocConsumer<ProductBloc, ProductState>(
+            listener: (context, state) {
+              state.maybeMap(
+                orElse: () {},
+                success: (_) async {
+                  await ProductLocalDatasource.instance.removeAllProducts();
+                  await ProductLocalDatasource.instance
+                      .insertAllProduct(_.products.toList());
+
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      backgroundColor: AppColors.primary,
+                      content: Text('Data Synced Successfuly!')));
+                },
+              );
+            },
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () {
+                  return ElevatedButton(
+                      onPressed: () {
+                        context
+                            .read<ProductBloc>()
+                            .add(const ProductEvent.fetch());
+                      },
+                      child: const Text('Sync Data'));
+                },
+                loading: () {
+                  return const Center(child: CircularProgressIndicator());
+                },
+              );
+            },
+          ),
+          const Divider(),
+          BlocConsumer<LogoutBloc, LogoutState>(
+            listener: (context, state) {
+              state.maybeMap(
+                  orElse: () {},
+                  success: (_) {
+                    AuthLocalDatasource().removeAuthData();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()));
+                  });
+            },
+            builder: (context, state) {
+              return ElevatedButton(
+                onPressed: () {
+                  context.read<LogoutBloc>().add(const LogoutEvent.logout());
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.red,
                 ),
-                const SpaceWidth(15.0),
-                MenuButton(
-                  iconPath: Assets.images.managePrinter.path,
-                  label: 'Kelola Printer',
-                  onPressed: () => context.push(const ManagePrinterPage()),
-                  isImage: true,
+                child: const Text(
+                  'Logout',
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ],
-            ),
-          ],
-        ),
+              );
+            },
+          ),
+          const Divider(),
+        ],
       ),
     );
   }

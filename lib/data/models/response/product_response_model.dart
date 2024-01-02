@@ -107,26 +107,9 @@ class Product {
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "satuan_id": satuanId,
-        "accurateid": accurateid,
-        "type_id": typeId,
-        "tokopedia_id": tokopediaId,
-        "shopee_id": shopeeId,
-        "blibli_id": blibliId,
-        "name": name,
-        "short_name": shortName,
-        "code": code,
+        "name": shortName,
         "image": image,
-        "harga": harga,
-        "tokopedia_harga": tokopediaHarga,
-        "shopee_harga": shopeeHarga,
-        "minimarket": minimarket,
-        "berat": berat,
-        "active": active,
-        "type": type,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "satuan": satuan,
+        "price": harga,
+        "category": type,
       };
 }
