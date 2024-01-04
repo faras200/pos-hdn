@@ -1,14 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:pos_hdn/core/extensions/int_ext.dart';
 
 import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/variabels.dart';
 import '../../../data/models/response/product_response_model.dart';
-import '../../home/models/product_model.dart';
-
-import 'change_price_bottom_sheet.dart';
 
 class MenuProductItem extends StatelessWidget {
   final Product data;
@@ -16,6 +14,7 @@ class MenuProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var price = int.parse(data.harga == "" ? '0' : data.harga);
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: ShapeDecoration(
@@ -51,19 +50,90 @@ class MenuProductItem extends StatelessWidget {
                   ),
                 ),
                 const SpaceHeight(5.0),
-                Text(
-                  data.type!,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
+                Row(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: Text(
+                      data.type!,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
                   ),
-                ),
+                  Text(
+                    price.currencyFormatRp,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ]),
                 const SpaceHeight(10.0),
                 Row(
                   children: [
                     Flexible(
                       child: Button.outlined(
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            // backgroundColor: Colors.white,
+                            builder: (context) {
+                              return AlertDialog(
+                                contentPadding: const EdgeInsets.all(16.0),
+                                content: Container(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            data.name,
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            icon: const Icon(
+                                              Icons.close,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SpaceHeight(10),
+                                      ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        child: CachedNetworkImage(
+                                          imageUrl:
+                                              "${Variables.imageBaseUrl}${data.image}",
+                                        ),
+                                      ),
+                                      const SpaceHeight(10),
+                                      Text(
+                                        price.currencyFormatRp,
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text(
+                                        data.type!,
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                         label: 'Detail',
                         fontSize: 8.0,
                         height: 31,

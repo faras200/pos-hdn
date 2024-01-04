@@ -28,7 +28,7 @@ class _AddProductPageState extends State<AddProductPage> {
   TextEditingController? stockController;
   TextEditingController? categoryController;
 
-  File? imageFile;
+  XFile? imageFile;
   bool isBestSeller = false;
 
   @override
@@ -36,7 +36,6 @@ class _AddProductPageState extends State<AddProductPage> {
     nameController = TextEditingController();
     priceController = TextEditingController();
     stockController = TextEditingController();
-    categoryController = TextEditingController();
     super.initState();
   }
 
@@ -45,9 +44,10 @@ class _AddProductPageState extends State<AddProductPage> {
     nameController!.dispose();
     priceController!.dispose();
     stockController!.dispose();
-    categoryController!.dispose();
     super.dispose();
   }
+
+  String category = '1';
 
   final List<CategoryProductModels> categories = [
     CategoryProductModels(name: 'Dailymeal', value: '1'),
@@ -101,26 +101,51 @@ class _AddProductPageState extends State<AddProductPage> {
             items: categories,
             label: 'Kategori',
             onChanged: (value) {
-              categoryController!.text = value!.value;
+              category = value!.value;
             },
           ),
           const SpaceHeight(24.0),
-          Button.filled(
-            onPressed: () {
-              final String name = nameController!.text;
-              final String price = priceController!.text;
-              final int category = categoryController!.text.toIntegerFromText;
-              final int stock = stockController!.text.toIntegerFromText;
-              final Product product = Product(
-                name: name,
-                harga: price,
-                typeId: category,
-                image: imageFile!.absolute.path,
-                isBestSeller: isBestSeller,
+          BlocConsumer<ProductBloc, ProductState>(
+            listener: (context, state) {
+              state.maybeMap(
+                orElse: () {},
+                success: (value) {
+                  Navigator.pop(context);
+                },
               );
-              context.read<ProductBloc>().add(ProductEvent.addProduct(product));
             },
-            label: 'Simpan',
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                loading: () => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                success: (products) {
+                  return Button.filled(
+                    onPressed: () {
+                      final String name = nameController!.text;
+                      final String price = priceController!.text;
+                      final int stock = stockController!.text.toIntegerFromText;
+                      final Product product = Product(
+                        name: name,
+                        harga: price,
+                        typeId: int.parse(category),
+                        image: imageFile!.path,
+                        isBestSeller: isBestSeller,
+                      );
+                      context
+                          .read<ProductBloc>()
+                          .add(ProductEvent.addProduct(product, imageFile!));
+                    },
+                    label: 'Simpan',
+                  );
+                },
+              );
+            },
           ),
           const SpaceHeight(30.0),
         ],

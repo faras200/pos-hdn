@@ -21,7 +21,7 @@ mixin _$ProductEvent {
     required TResult Function() started,
     required TResult Function() fetch,
     required TResult Function(int category) fetchByCategory,
-    required TResult Function(Product product) addProduct,
+    required TResult Function(Product product, XFile image) addProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$ProductEvent {
     TResult? Function()? started,
     TResult? Function()? fetch,
     TResult? Function(int category)? fetchByCategory,
-    TResult? Function(Product product)? addProduct,
+    TResult? Function(Product product, XFile image)? addProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$ProductEvent {
     TResult Function()? started,
     TResult Function()? fetch,
     TResult Function(int category)? fetchByCategory,
-    TResult Function(Product product)? addProduct,
+    TResult Function(Product product, XFile image)? addProduct,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +127,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function() fetch,
     required TResult Function(int category) fetchByCategory,
-    required TResult Function(Product product) addProduct,
+    required TResult Function(Product product, XFile image) addProduct,
   }) {
     return started();
   }
@@ -138,7 +138,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function()? fetch,
     TResult? Function(int category)? fetchByCategory,
-    TResult? Function(Product product)? addProduct,
+    TResult? Function(Product product, XFile image)? addProduct,
   }) {
     return started?.call();
   }
@@ -149,7 +149,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function()? fetch,
     TResult Function(int category)? fetchByCategory,
-    TResult Function(Product product)? addProduct,
+    TResult Function(Product product, XFile image)? addProduct,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -241,7 +241,7 @@ class _$FetchImpl implements _Fetch {
     required TResult Function() started,
     required TResult Function() fetch,
     required TResult Function(int category) fetchByCategory,
-    required TResult Function(Product product) addProduct,
+    required TResult Function(Product product, XFile image) addProduct,
   }) {
     return fetch();
   }
@@ -252,7 +252,7 @@ class _$FetchImpl implements _Fetch {
     TResult? Function()? started,
     TResult? Function()? fetch,
     TResult? Function(int category)? fetchByCategory,
-    TResult? Function(Product product)? addProduct,
+    TResult? Function(Product product, XFile image)? addProduct,
   }) {
     return fetch?.call();
   }
@@ -263,7 +263,7 @@ class _$FetchImpl implements _Fetch {
     TResult Function()? started,
     TResult Function()? fetch,
     TResult Function(int category)? fetchByCategory,
-    TResult Function(Product product)? addProduct,
+    TResult Function(Product product, XFile image)? addProduct,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -383,7 +383,7 @@ class _$FetchByCategoryImpl implements _FetchByCategory {
     required TResult Function() started,
     required TResult Function() fetch,
     required TResult Function(int category) fetchByCategory,
-    required TResult Function(Product product) addProduct,
+    required TResult Function(Product product, XFile image) addProduct,
   }) {
     return fetchByCategory(category);
   }
@@ -394,7 +394,7 @@ class _$FetchByCategoryImpl implements _FetchByCategory {
     TResult? Function()? started,
     TResult? Function()? fetch,
     TResult? Function(int category)? fetchByCategory,
-    TResult? Function(Product product)? addProduct,
+    TResult? Function(Product product, XFile image)? addProduct,
   }) {
     return fetchByCategory?.call(category);
   }
@@ -405,7 +405,7 @@ class _$FetchByCategoryImpl implements _FetchByCategory {
     TResult Function()? started,
     TResult Function()? fetch,
     TResult Function(int category)? fetchByCategory,
-    TResult Function(Product product)? addProduct,
+    TResult Function(Product product, XFile image)? addProduct,
     required TResult orElse(),
   }) {
     if (fetchByCategory != null) {
@@ -467,7 +467,7 @@ abstract class _$$AddProductImplCopyWith<$Res> {
           _$AddProductImpl value, $Res Function(_$AddProductImpl) then) =
       __$$AddProductImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Product product});
+  $Res call({Product product, XFile image});
 }
 
 /// @nodoc
@@ -482,12 +482,17 @@ class __$$AddProductImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? product = null,
+    Object? image = freezed,
   }) {
     return _then(_$AddProductImpl(
       null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as Product,
+      freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as XFile,
     ));
   }
 }
@@ -495,14 +500,16 @@ class __$$AddProductImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddProductImpl implements _AddProduct {
-  const _$AddProductImpl(this.product);
+  const _$AddProductImpl(this.product, this.image);
 
   @override
   final Product product;
+  @override
+  final XFile image;
 
   @override
   String toString() {
-    return 'ProductEvent.addProduct(product: $product)';
+    return 'ProductEvent.addProduct(product: $product, image: $image)';
   }
 
   @override
@@ -510,11 +517,13 @@ class _$AddProductImpl implements _AddProduct {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddProductImpl &&
-            (identical(other.product, product) || other.product == product));
+            (identical(other.product, product) || other.product == product) &&
+            const DeepCollectionEquality().equals(other.image, image));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, product);
+  int get hashCode => Object.hash(
+      runtimeType, product, const DeepCollectionEquality().hash(image));
 
   @JsonKey(ignore: true)
   @override
@@ -528,9 +537,9 @@ class _$AddProductImpl implements _AddProduct {
     required TResult Function() started,
     required TResult Function() fetch,
     required TResult Function(int category) fetchByCategory,
-    required TResult Function(Product product) addProduct,
+    required TResult Function(Product product, XFile image) addProduct,
   }) {
-    return addProduct(product);
+    return addProduct(product, image);
   }
 
   @override
@@ -539,9 +548,9 @@ class _$AddProductImpl implements _AddProduct {
     TResult? Function()? started,
     TResult? Function()? fetch,
     TResult? Function(int category)? fetchByCategory,
-    TResult? Function(Product product)? addProduct,
+    TResult? Function(Product product, XFile image)? addProduct,
   }) {
-    return addProduct?.call(product);
+    return addProduct?.call(product, image);
   }
 
   @override
@@ -550,11 +559,11 @@ class _$AddProductImpl implements _AddProduct {
     TResult Function()? started,
     TResult Function()? fetch,
     TResult Function(int category)? fetchByCategory,
-    TResult Function(Product product)? addProduct,
+    TResult Function(Product product, XFile image)? addProduct,
     required TResult orElse(),
   }) {
     if (addProduct != null) {
-      return addProduct(product);
+      return addProduct(product, image);
     }
     return orElse();
   }
@@ -598,9 +607,11 @@ class _$AddProductImpl implements _AddProduct {
 }
 
 abstract class _AddProduct implements ProductEvent {
-  const factory _AddProduct(final Product product) = _$AddProductImpl;
+  const factory _AddProduct(final Product product, final XFile image) =
+      _$AddProductImpl;
 
   Product get product;
+  XFile get image;
   @JsonKey(ignore: true)
   _$$AddProductImplCopyWith<_$AddProductImpl> get copyWith =>
       throw _privateConstructorUsedError;

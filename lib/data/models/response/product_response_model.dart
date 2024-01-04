@@ -1,5 +1,7 @@
-import 'package:meta/meta.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
+import 'package:meta/meta.dart';
 
 class ProductResponseModel {
   final bool success;
@@ -40,25 +42,6 @@ class Product {
   final String harga;
   final String? type;
 
-  Product copyWith({
-    int? id,
-    int? typeId,
-    bool? isBestSeller,
-    String? name,
-    String? image,
-    String? harga,
-    String? type,
-  }) =>
-      Product(
-        id: id ?? this.id,
-        typeId: typeId ?? this.typeId,
-        isBestSeller: isBestSeller ?? this.isBestSeller,
-        name: name ?? this.name,
-        image: image ?? this.image,
-        harga: harga ?? this.harga,
-        type: type ?? this.type,
-      );
-
   Product({
     this.id,
     required this.typeId,
@@ -90,4 +73,24 @@ class Product {
         "category": type,
         "is_best_seller": isBestSeller ? 1 : 0,
       };
+
+  Product copyWith({
+    int? id,
+    int? typeId,
+    bool? isBestSeller,
+    String? name,
+    String? image,
+    String? harga,
+    String? type,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      typeId: typeId ?? this.typeId,
+      isBestSeller: isBestSeller ?? this.isBestSeller,
+      name: name ?? this.name,
+      image: image ?? this.image,
+      harga: harga ?? this.harga,
+      type: type ?? this.type,
+    );
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:pos_hdn/core/extensions/int_ext.dart';
 
 import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
@@ -18,6 +19,8 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var price = int.parse(data.harga == "" ? '0' : data.harga);
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: ShapeDecoration(
@@ -74,7 +77,7 @@ class ProductCard extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  'Rp. ${data.harga}',
+                  price.currencyFormatRp,
                   style: const TextStyle(
                     fontWeight: FontWeight.w700,
                   ),
