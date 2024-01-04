@@ -78,22 +78,22 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ),
       ),
-      floatingActionButton: GestureDetector(
-        onTap: () => context.push(const AddProductpage() as Widget),
-        child: Container(
-          padding: const EdgeInsets.all(12.0),
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColors.primary,
-          ),
-          child: const Icon(
-            Icons.add,
-            color: AppColors.white,
-            size: 40.0,
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: GestureDetector(
+      //   onTap: () => context.push(const AddProductpage() as Widget),
+      //   child: Container(
+      //     padding: const EdgeInsets.all(12.0),
+      //     decoration: const BoxDecoration(
+      //       shape: BoxShape.circle,
+      //       color: AppColors.primary,
+      //     ),
+      //     child: const Icon(
+      //       Icons.add,
+      //       color: AppColors.white,
+      //       size: 40.0,
+      //     ),
+      //   ),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 

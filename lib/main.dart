@@ -7,6 +7,7 @@ import 'package:pos_hdn/data/datasources/auth_remote_datasource.dart';
 import 'package:pos_hdn/data/datasources/product_remote_datasource.dart';
 import 'package:pos_hdn/presentations/auth/bloc/login/login_bloc.dart';
 import 'package:pos_hdn/presentations/auth/pages/login_page.dart';
+import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/logout/logout_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
 import 'package:pos_hdn/presentations/home/pages/dashboard_page.dart';
@@ -30,9 +31,12 @@ class MyApp extends StatelessWidget {
           create: (context) => LogoutBloc(AuthRemoteDataSource()),
         ),
         BlocProvider(
-          create: (context) =>
-              ProductBloc(ProductRemoteDatasource())..add(ProductEvent.fetch()),
+          create: (context) => ProductBloc(ProductRemoteDatasource())
+            ..add(const ProductEvent.fetch()),
         ),
+        BlocProvider(
+          create: (context) => CheckoutBloc(),
+        )
       ],
       child: MaterialApp(
         title: 'POS_HDN',
@@ -64,6 +68,9 @@ class MyApp extends StatelessWidget {
                 return const LoginPage();
               }
             }),
+        routes: {
+          "/dashboard": (_) => const DashboardPage(),
+        },
       ),
     );
   }

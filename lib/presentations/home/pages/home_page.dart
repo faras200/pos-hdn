@@ -88,19 +88,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Menu',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          centerTitle: true,
-        ),
+        // appBar: AppBar(
+        //   title: const Text(
+        //     'Produk',
+        //     style: TextStyle(
+        //       fontWeight: FontWeight.bold,
+        //     ),
+        //   ),
+        //   centerTitle: true,
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(16.0),
           children: [
             SearchInput(
+              textCari: 'Cari produk di sini',
               controller: searchController,
               onChanged: (value) {
                 // indexValue.value = 0;
@@ -124,15 +125,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SpaceWidth(10.0),
                   MenuButton(
-                    iconPath: Assets.icons.drink.path,
+                    iconPath: Assets.icons.dailymeal.path,
                     label: 'Dailymeal',
                     isActive: value == 1,
                     onPressed: () => onCategoryTap(1),
                   ),
                   const SpaceWidth(10.0),
                   MenuButton(
-                    iconPath: Assets.icons.food.path,
-                    label: 'Beras',
+                    iconPath: Assets.icons.topikoki.path,
+                    label: 'Topikoki',
                     isActive: value == 2,
                     onPressed: () => onCategoryTap(2),
                   ),

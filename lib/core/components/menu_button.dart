@@ -52,6 +52,7 @@ class MenuButton extends StatelessWidget {
                       width: size, height: size, fit: BoxFit.contain)
                   : SvgPicture.asset(
                       iconPath,
+                      height: 30,
                       colorFilter: ColorFilter.mode(
                         isActive ? AppColors.white : AppColors.primary,
                         BlendMode.srcIn,
@@ -61,7 +62,7 @@ class MenuButton extends StatelessWidget {
               Text(
                 label,
                 style: TextStyle(
-                  color: isActive ? AppColors.white : AppColors.primary,
+                  color: isActive ? AppColors.white : AppColors.black,
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),

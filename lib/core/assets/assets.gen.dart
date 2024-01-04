@@ -21,6 +21,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/cash.svg
   SvgGenImage get cash => const SvgGenImage('assets/icons/cash.svg');
 
+  /// File path: assets/icons/dailymeal.svg
+  SvgGenImage get dailymeal => const SvgGenImage('assets/icons/dailymeal.svg');
+
   /// File path: assets/icons/dashboard.svg
   SvgGenImage get dashboard => const SvgGenImage('assets/icons/dashboard.svg');
 
@@ -48,11 +51,18 @@ class $AssetsIconsGen {
   /// File path: assets/icons/image.svg
   SvgGenImage get image => const SvgGenImage('assets/icons/image.svg');
 
+  /// File path: assets/icons/logodailymeal.svg
+  SvgGenImage get logodailymeal =>
+      const SvgGenImage('assets/icons/logodailymeal.svg');
+
   /// File path: assets/icons/orders.svg
   SvgGenImage get orders => const SvgGenImage('assets/icons/orders.svg');
 
   /// File path: assets/icons/payments.svg
   SvgGenImage get payments => const SvgGenImage('assets/icons/payments.svg');
+
+  /// File path: assets/icons/pos_logo.svg
+  SvgGenImage get posLogo => const SvgGenImage('assets/icons/pos_logo.svg');
 
   /// File path: assets/icons/print.svg
   SvgGenImage get print => const SvgGenImage('assets/icons/print.svg');
@@ -63,10 +73,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/snack.svg
   SvgGenImage get snack => const SvgGenImage('assets/icons/snack.svg');
 
+  /// File path: assets/icons/topikoki.svg
+  SvgGenImage get topikoki => const SvgGenImage('assets/icons/topikoki.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         allCategories,
         cash,
+        dailymeal,
         dashboard,
         debit,
         delete,
@@ -76,11 +90,14 @@ class $AssetsIconsGen {
         history,
         home,
         image,
+        logodailymeal,
         orders,
         payments,
+        posLogo,
         print,
         qrCode,
-        snack
+        snack,
+        topikoki
       ];
 }
 
@@ -126,6 +143,10 @@ class $AssetsImagesGen {
   AssetGenImage get manageProduct =>
       const AssetGenImage('assets/images/manage_product.png');
 
+  /// File path: assets/images/pos_logo.png
+  AssetGenImage get posLogo =>
+      const AssetGenImage('assets/images/pos_logo.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         f1,
@@ -139,7 +160,8 @@ class $AssetsImagesGen {
         logo,
         managePrinter,
         managePrinterx,
-        manageProduct
+        manageProduct,
+        posLogo
       ];
 }
 

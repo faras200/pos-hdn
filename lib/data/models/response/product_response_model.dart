@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 class ProductResponseModel {
@@ -92,5 +93,29 @@ class Product {
       harga: harga ?? this.harga,
       type: type ?? this.type,
     );
+  }
+
+  @override
+  bool operator ==(covariant Product other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.typeId == typeId &&
+        other.isBestSeller == isBestSeller &&
+        other.name == name &&
+        other.image == image &&
+        other.harga == harga &&
+        other.type == type;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        typeId.hashCode ^
+        isBestSeller.hashCode ^
+        name.hashCode ^
+        image.hashCode ^
+        harga.hashCode ^
+        type.hashCode;
   }
 }

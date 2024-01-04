@@ -35,16 +35,16 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           const SpaceHeight(80.0),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 130.0),
+              padding: const EdgeInsets.symmetric(horizontal: 50.0),
               child: Image.asset(
                 Assets.images.logo.path,
-                width: 100,
-                height: 100,
+                width: 150,
+                height: 150,
               )),
           const SpaceHeight(24.0),
           const Center(
             child: Text(
-              "POS Batch 11",
+              "Login Pos HDN",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -81,10 +81,8 @@ class _LoginPageState extends State<LoginPage> {
                 orElse: () {},
                 success: (authResponseModel) {
                   AuthLocalDatasource().saveAuthData(authResponseModel);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const DashboardPage()));
+
+                  Navigator.pushReplacementNamed(context, "/dashboard");
                 },
                 error: (message) =>
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
