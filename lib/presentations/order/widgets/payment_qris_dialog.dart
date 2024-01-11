@@ -4,9 +4,14 @@ import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
 
-class PaymentQrisDialog extends StatelessWidget {
+class PaymentQrisDialog extends StatefulWidget {
   const PaymentQrisDialog({super.key});
 
+  @override
+  State<PaymentQrisDialog> createState() => _PaymentQrisDialogState();
+}
+
+class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

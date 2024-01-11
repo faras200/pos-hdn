@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
+import 'package:pos_hdn/presentations/home/models/order_item.dart';
+import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/menu_button.dart';
@@ -9,33 +13,29 @@ import '../widgets/payment_cash_dialog.dart';
 import '../widgets/payment_qris_dialog.dart';
 import '../widgets/process_button.dart';
 
-class OrdersPage extends StatelessWidget {
-  const OrdersPage({super.key});
+class OrderPage extends StatefulWidget {
+  const OrderPage({super.key});
+
+  @override
+  State<OrderPage> createState() => _OrderPageState();
+}
+
+class _OrderPageState extends State<OrderPage> {
+  final indexValue = ValueNotifier(0);
+
+  int totalPrice = 0;
+  List<OrderItem> orders = [];
+  int calculateTotalPrice(List<OrderItem> orders) {
+    return orders.fold(
+        0,
+        (previousValue, element) =>
+            previousValue +
+            int.parse(element.product.harga) * element.quantity);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final indexValue = ValueNotifier(0);
     const paddingHorizontal = EdgeInsets.symmetric(horizontal: 16.0);
-    final List<OrderModel> orders = [
-      OrderModel(
-        image: Assets.images.f1.path,
-        name: 'Nutty Oat Latte',
-        price: 39000,
-      ),
-      OrderModel(
-        image: Assets.images.f2.path,
-        name: 'Iced Latte',
-        price: 24000,
-      ),
-    ];
-
-    int calculateTotalPrice(List<OrderModel> orders) {
-      int totalPrice = 0;
-      for (final order in orders) {
-        totalPrice += order.price;
-      }
-      return totalPrice;
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -48,65 +48,99 @@ class OrdersPage extends StatelessWidget {
           ),
         ],
       ),
-      body: StatefulBuilder(
-        builder: (context, setState) => ListView.separated(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          itemCount: orders.length,
-          separatorBuilder: (context, index) => const SpaceHeight(20.0),
-          itemBuilder: (context, index) => OrderCard(
-            padding: paddingHorizontal,
-            data: orders[index],
-            onDeleteTap: () {
-              orders.removeAt(index);
-              setState(() {});
+      body: BlocBuilder<CheckoutBloc, CheckoutState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+            orElse: () {
+              return const Center(child: CircularProgressIndicator());
             },
-          ),
-        ),
+            success: (data, qty, total) {
+              if (data.isEmpty) {
+                return const Center(child: Text('Belum ada order'));
+              }
+              totalPrice = total;
+              return ListView.separated(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                itemCount: data.length,
+                separatorBuilder: (context, index) => const SpaceHeight(20.0),
+                itemBuilder: (context, index) => OrderCard(
+                  padding: paddingHorizontal,
+                  data: data[index],
+                  onDeleteTap: () {
+                    // orders.removeAt(index);
+                    setState(() {});
+                  },
+                ),
+              );
+            },
+          );
+        },
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ValueListenableBuilder(
-              valueListenable: indexValue,
-              builder: (context, value, _) => Row(
-                children: [
-                  const SpaceWidth(10.0),
-                  MenuButton(
-                    iconPath: Assets.icons.cash.path,
-                    label: 'Tunai',
-                    isActive: value == 1,
-                    onPressed: () => indexValue.value = 1,
-                  ),
-                  const SpaceWidth(10.0),
-                  MenuButton(
-                    iconPath: Assets.icons.qrCode.path,
-                    label: 'QRIS',
-                    isActive: value == 2,
-                    onPressed: () => indexValue.value = 2,
-                  ),
-                  const SpaceWidth(10.0),
-                ],
-              ),
+            BlocBuilder<CheckoutBloc, CheckoutState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () {
+                    return const SizedBox.shrink();
+                  },
+                  success: (data, qty, total) {
+                    return ValueListenableBuilder(
+                      valueListenable: indexValue,
+                      builder: (context, value, _) => Row(
+                        children: [
+                          const SpaceWidth(10.0),
+                          MenuButton(
+                            iconPath: Assets.icons.cash.path,
+                            label: 'Tunai',
+                            isActive: value == 1,
+                            onPressed: () {
+                              indexValue.value = 1;
+                              context.read<OrderBloc>().add(
+                                  OrderEvent.addPaymentMethod('Tunai', data));
+                            },
+                          ),
+                          const SpaceWidth(10.0),
+                          MenuButton(
+                            iconPath: Assets.icons.qrCode.path,
+                            label: 'QRIS',
+                            isActive: value == 2,
+                            onPressed: () {
+                              indexValue.value = 2;
+                              context.read<OrderBloc>().add(
+                                  OrderEvent.addPaymentMethod('QRIS', data));
+                            },
+                          ),
+                          const SpaceWidth(10.0),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
             ),
             const SpaceHeight(20.0),
             ProcessButton(
-              price: 123000,
+              price: 0,
               onPressed: () async {
                 if (indexValue.value == 0) {
                 } else if (indexValue.value == 1) {
                   showDialog(
                     context: context,
                     builder: (context) => PaymentCashDialog(
-                      price: calculateTotalPrice(orders),
+                      price: totalPrice,
                     ),
                   );
                 } else if (indexValue.value == 2) {
                   showDialog(
                     context: context,
                     barrierDismissible: false,
-                    builder: (context) => const PaymentQrisDialog(),
+                    builder: (context) => PaymentQrisDialog(
+                        // price: totalPrice,
+                        ),
                   );
                 }
               },

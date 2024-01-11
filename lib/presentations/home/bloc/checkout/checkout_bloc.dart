@@ -59,6 +59,9 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       emit(_Success(newCheckout, totalQuantity, totalPrice));
     });
 
-    on<_Started>((event, emit) => emit(const _Success([], 0, 0)));
+    on<_Started>((event, emit) {
+      emit(const _Loading());
+      emit(const _Success([], 0, 0));
+    });
   }
 }

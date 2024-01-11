@@ -11,6 +11,7 @@ import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/logout/logout_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
 import 'package:pos_hdn/presentations/home/pages/dashboard_page.dart';
+import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +37,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CheckoutBloc(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => OrderBloc(),
+        ),
       ],
       child: MaterialApp(
         title: 'POS_HDN',

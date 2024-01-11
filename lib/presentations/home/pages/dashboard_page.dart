@@ -20,7 +20,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const OrdersPage(),
+    const OrderPage(),
     const Placeholder(),
     const ManageMenuPage(),
   ];
@@ -61,7 +61,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 isActive: _selectedIndex == 1,
                 onTap: () {
                   // _onItemTapped(1);
-                  context.push(const OrdersPage());
+                  context.push(const OrderPage());
                 }),
             NavItem(
               iconPath: Assets.icons.payments.path,
