@@ -40,17 +40,15 @@ class PaymentSuccessDialog extends StatelessWidget {
             orElse: () => const SizedBox.shrink(),
             success:
                 (data, qty, total, paymentType, nominal, idKasir, nameKasir) {
-                  context
-                      .read<CheckoutBloc>()
-                      .add(const CheckoutEvent.started());
+              context.read<CheckoutBloc>().add(const CheckoutEvent.started());
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SpaceHeight(12.0),
-                  const _LabelValue(
+                  _LabelValue(
                     label: 'METODE PEMBAYARAN',
-                    value: 'Tunai',
+                    value: paymentType,
                   ),
                   const Divider(height: 36.0),
                   _LabelValue(

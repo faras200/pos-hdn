@@ -5,6 +5,7 @@ import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/data/datasources/auth_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/auth_remote_datasource.dart';
 import 'package:pos_hdn/data/datasources/product_remote_datasource.dart';
+import 'package:pos_hdn/data/datasources/qris_dbs_remote_datasource.dart';
 import 'package:pos_hdn/presentations/auth/bloc/login/login_bloc.dart';
 import 'package:pos_hdn/presentations/auth/pages/login_page.dart';
 import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:pos_hdn/presentations/home/bloc/logout/logout_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
 import 'package:pos_hdn/presentations/home/pages/dashboard_page.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
+import 'package:pos_hdn/presentations/order/bloc/qris/qris_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,6 +42,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => OrderBloc(),
+        ),
+        BlocProvider(
+          create: (context) => QrisBloc(QrisDbsRemoteDatasource()),
         ),
       ],
       child: MaterialApp(

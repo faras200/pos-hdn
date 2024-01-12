@@ -139,8 +139,8 @@ class _OrderPageState extends State<OrderPage> {
                     context: context,
                     barrierDismissible: false,
                     builder: (context) => PaymentQrisDialog(
-                        // price: totalPrice,
-                        ),
+                      price: totalPrice,
+                    ),
                   );
                 }
               },

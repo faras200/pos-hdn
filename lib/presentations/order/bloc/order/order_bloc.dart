@@ -18,7 +18,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         event.orders.fold(
             0,
             (previousValue, element) =>
-                previousValue + int.parse(element.product.harga)),
+                previousValue +
+                (element.quantity * int.parse(element.product.harga))),
         event.paymentMethod,
         0,
         0,
