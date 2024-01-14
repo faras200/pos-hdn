@@ -43,7 +43,9 @@ class _OrderPageState extends State<OrderPage> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<CheckoutBloc>().add(const CheckoutEvent.started());
+            },
             icon: Assets.icons.delete.svg(),
           ),
         ],
