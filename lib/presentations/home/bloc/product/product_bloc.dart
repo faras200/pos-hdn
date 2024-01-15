@@ -28,6 +28,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       );
     });
 
+    on<_FetchLocal>((event, emit) async {
+      emit(const ProductState.loading());
+      final localPproducts =
+          await ProductLocalDatasource.instance.getAllProduct();
+      products = localPproducts;
+
+      emit(ProductState.success(products));
+    });
+
     on<_FetchByCategory>((event, emit) async {
       emit(const ProductState.loading());
 
@@ -56,6 +65,22 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           emit(ProductState.success(products));
         },
       );
+    });
+
+    on<_SearchProduct>((event, emit) async {
+      emit(const ProductState.loading());
+      final newProducts = products
+          .where((element) =>
+              element.name.toLowerCase().contains(event.query.toLowerCase()))
+          .toList();
+
+      emit(ProductState.success(newProducts));
+    });
+
+    on<_FetchAllFromState>((event, emit) async {
+      emit(const ProductState.loading());
+
+      emit(ProductState.success(products));
     });
   }
 }

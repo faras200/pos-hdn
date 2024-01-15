@@ -46,8 +46,9 @@ class OrderCard extends StatelessWidget {
                   height: 76,
                   fit: BoxFit.cover,
                   imageUrl: "${Variables.imageBaseUrl}${data.product.image}",
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
+                  placeholder: (context, url) => Container(
+                      alignment: Alignment.center,
+                      child: const CircularProgressIndicator()),
                   errorWidget: (context, url, error) => const Icon(
                     Icons.food_bank_outlined,
                     size: 80,
@@ -62,10 +63,17 @@ class OrderCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          data.product.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w700,
+                        Container(
+                          constraints: const BoxConstraints(maxWidth: 110.0),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          child: Text(
+                            data.product.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         Text(

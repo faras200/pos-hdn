@@ -47,8 +47,9 @@ class ProductCard extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(50.0)),
                   child: CachedNetworkImage(
                     imageUrl: "${Variables.imageBaseUrl}${data.image}",
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator(),
+                    placeholder: (context, url) => Container(
+                        alignment: Alignment.center,
+                        child: const CircularProgressIndicator()),
                     errorWidget: (context, url, error) => const Icon(
                       Icons.food_bank_outlined,
                       size: 90,

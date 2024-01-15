@@ -8,6 +8,7 @@ import 'package:pos_hdn/data/datasources/product_remote_datasource.dart';
 import 'package:pos_hdn/data/datasources/qris_dbs_remote_datasource.dart';
 import 'package:pos_hdn/presentations/auth/bloc/login/login_bloc.dart';
 import 'package:pos_hdn/presentations/auth/pages/login_page.dart';
+import 'package:pos_hdn/presentations/history/bloc/history/history_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/logout/logout_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => QrisBloc(QrisDbsRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => HistoryBloc(),
         ),
       ],
       child: MaterialApp(

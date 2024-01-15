@@ -1337,10 +1337,10 @@ class __$$StatusCheckImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? qrisDbsStatusResponseModel = freezed,
+    Object? qrisDbsStatusResponseModel = null,
   }) {
     return _then(_$StatusCheckImpl(
-      freezed == qrisDbsStatusResponseModel
+      null == qrisDbsStatusResponseModel
           ? _value.qrisDbsStatusResponseModel
           : qrisDbsStatusResponseModel // ignore: cast_nullable_to_non_nullable
               as QrisDbsStatusResponseModel,
@@ -1366,13 +1366,14 @@ class _$StatusCheckImpl implements _StatusCheck {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StatusCheckImpl &&
-            const DeepCollectionEquality().equals(
-                other.qrisDbsStatusResponseModel, qrisDbsStatusResponseModel));
+            (identical(other.qrisDbsStatusResponseModel,
+                    qrisDbsStatusResponseModel) ||
+                other.qrisDbsStatusResponseModel ==
+                    qrisDbsStatusResponseModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(qrisDbsStatusResponseModel));
+  int get hashCode => Object.hash(runtimeType, qrisDbsStatusResponseModel);
 
   @JsonKey(ignore: true)
   @override

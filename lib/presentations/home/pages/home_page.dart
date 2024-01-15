@@ -104,12 +104,16 @@ class _HomePageState extends State<HomePage> {
               textCari: 'Cari produk di sini',
               controller: searchController,
               onChanged: (value) {
-                // indexValue.value = 0;
-                // searchResults = products
-                //     .where((e) =>
-                //         e.name.toLowerCase().contains(value.toLowerCase()))
-                //     .toList();
-                // setState(() {});
+                if (value.length > 3) {
+                  context
+                      .read<ProductBloc>()
+                      .add(ProductEvent.searchProduct(value));
+                }
+                if (value.isEmpty) {
+                  context
+                      .read<ProductBloc>()
+                      .add(const ProductEvent.fetchAllFromState());
+                }
               },
             ),
             const SpaceHeight(20.0),

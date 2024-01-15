@@ -31,7 +31,8 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
   void initState() {
     orderId = DateTime.now().millisecondsSinceEpoch.toString();
     context.read<QrisBloc>().add(QrisEvent.generateQRCode(
-          orderId, 100,
+          orderId,
+          100,
           // widget.price,
         ));
     super.initState();
@@ -83,7 +84,7 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                           state.maybeWhen(orElse: () {
                             return;
                           }, qrisResponse: (data) {
-                            const onSec = Duration(seconds: 5);
+                            const onSec = Duration(seconds: 3);
                             timer = Timer.periodic(onSec, (timer) {
                               context
                                   .read<QrisBloc>()
