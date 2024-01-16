@@ -36,6 +36,7 @@ class ProductResponseModel {
 
 class Product {
   final int? id;
+  final int? productId;
   final int typeId;
   final bool isBestSeller;
   final String name;
@@ -45,6 +46,7 @@ class Product {
 
   Product({
     this.id,
+    this.productId,
     required this.typeId,
     required this.isBestSeller,
     required this.name,
@@ -59,6 +61,7 @@ class Product {
 
   factory Product.fromMap(Map<String, dynamic> json) => Product(
         id: json["id"],
+        productId: json["id"],
         typeId: json["type_id"],
         isBestSeller: json["is_best_seller"] == 1 ? true : false,
         name: json["short_name"] ?? json["name"],
@@ -75,25 +78,12 @@ class Product {
         "is_best_seller": isBestSeller ? 1 : 0,
       };
 
-  Product copyWith({
-    int? id,
-    int? typeId,
-    bool? isBestSeller,
-    String? name,
-    String? image,
-    String? harga,
-    String? type,
-  }) {
-    return Product(
-      id: id ?? this.id,
-      typeId: typeId ?? this.typeId,
-      isBestSeller: isBestSeller ?? this.isBestSeller,
-      name: name ?? this.name,
-      image: image ?? this.image,
-      harga: harga ?? this.harga,
-      type: type ?? this.type,
-    );
-  }
+  Map<String, dynamic> toLocalMap() => {
+        "name": name,
+        "image": image,
+        "is_best_seller": isBestSeller ? 1 : 0,
+        "product_id": id,
+      };
 
   @override
   bool operator ==(covariant Product other) {
@@ -117,5 +107,27 @@ class Product {
         image.hashCode ^
         harga.hashCode ^
         type.hashCode;
+  }
+
+  Product copyWith({
+    int? id,
+    int? productId,
+    int? typeId,
+    bool? isBestSeller,
+    String? name,
+    String? image,
+    String? harga,
+    String? type,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      productId: productId ?? this.productId,
+      typeId: typeId ?? this.typeId,
+      isBestSeller: isBestSeller ?? this.isBestSeller,
+      name: name ?? this.name,
+      image: image ?? this.image,
+      harga: harga ?? this.harga,
+      type: type ?? this.type,
+    );
   }
 }

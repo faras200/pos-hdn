@@ -3,9 +3,9 @@ import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/date_time_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:pos_hdn/data/dataoutputs/cwb_print.dart';
 import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/pages/dashboard_page.dart';
-import 'package:pos_hdn/presentations/manage/models/cwb_print.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
@@ -85,7 +85,16 @@ class PaymentSuccessDialog extends StatelessWidget {
                       Flexible(
                         child: Button.outlined(
                           onPressed: () async {
-                            // final ticket = await CwbPrint.instance.bluetoothStart();
+                            final printValue =
+                                await CwbPrint.instance.printOrder(
+                              data,
+                              qty,
+                              total,
+                              paymentType,
+                              nominal,
+                              nameKasir,
+                            );
+                            await PrintBluetoothThermal.writeBytes(printValue);
                             // final result =
                             //     await PrintBluetoothThermal.writeBytes(ticket);
                           },

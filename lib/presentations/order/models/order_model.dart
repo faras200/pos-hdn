@@ -30,7 +30,7 @@ class OrderModel {
   final int totalPrice;
   final int idKasir;
   final String namaKasir;
-  // final String transactionTime;
+  final String transactionTime;
   final bool isSync;
   OrderModel({
     this.id,
@@ -41,7 +41,7 @@ class OrderModel {
     required this.totalPrice,
     required this.idKasir,
     required this.namaKasir,
-    // required this.transactionTime,
+    required this.transactionTime,
     required this.isSync,
   });
 
@@ -55,7 +55,7 @@ class OrderModel {
       'totalPrice': totalPrice,
       'idKasir': idKasir,
       'namaKasir': namaKasir,
-      // 'transactionTime': transactionTime,
+      'transactionTime': transactionTime,
       'isSync': isSync,
     };
   }
@@ -75,7 +75,7 @@ class OrderModel {
       'id_kasir': idKasir,
       'nama_kasir': namaKasir,
       'is_sync': isSync ? 1 : 0,
-      // 'transaction_time': transactionTime,
+      'transaction_time': transactionTime,
     };
   }
 
@@ -90,7 +90,7 @@ class OrderModel {
       isSync: map['is_sync'] == 1 ? true : false,
       namaKasir: map['nama_kasir'] ?? '',
       id: map['id']?.toInt() ?? 0,
-      // transactionTime: map['transaction_time'] ?? '',
+      transactionTime: map['transaction_time'] ?? '',
     );
   }
 
@@ -108,7 +108,7 @@ class OrderModel {
       totalPrice: map['totalPrice'] as int,
       idKasir: map['idKasir'] as int,
       namaKasir: map['namaKasir'] as String,
-      // transactionTime: map['transactionTime'] as String,
+      transactionTime: map['transactionTime'] as String,
       isSync: map['isSync'] as bool,
     );
   }

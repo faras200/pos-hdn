@@ -16,13 +16,14 @@ class ProductLocalDatasource {
     final dbPath = await getDatabasesPath();
     final path = dbPath + filePath;
 
-    return await openDatabase(path, version: 4, onCreate: _createDB);
+    return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
   Future<void> _createDB(Database db, int version) async {
     await db.execute('''
       CREATE TABLE $tableProducts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        product_id INTEGER,
         name TEXT,
         price INTEGER,
         image TEXT,
@@ -40,6 +41,7 @@ class ProductLocalDatasource {
         total_item INTEGER,
         id_kasir INTEGER,
         nama_kasir TEXT,
+        transaction_time TEXT,
         is_sync INTEGER DEFAULT 0
       )
     ''');
@@ -73,20 +75,12 @@ class ProductLocalDatasource {
     return result.map((e) => OrderModel.fromLocalMap(e)).toList();
   }
 
-  //get order item by id order
+  //get order item by id order local
   Future<List<OrderItemModel>> getOrderItemByOrderIdLocal(int idOrder) async {
     final db = await instance.database;
     final result = await db.query('order_items', where: 'id_order = $idOrder');
 
     return result.map((e) => OrderItem.fromMapLocal(e)).toList();
-  }
-
-  //get order item by id order
-  Future<List<OrderItem>> getOrderItemByOrderId(int idOrder) async {
-    final db = await instance.database;
-    final result = await db.query('order_items', where: 'id_order = $idOrder');
-
-    return result.map((e) => OrderItem.fromMap(e)).toList();
   }
 
   //update isSync order by id
@@ -105,17 +99,17 @@ class ProductLocalDatasource {
   }
 
   //get order item by id order
-  // Future<List<OrderItem>> getOrderItemByOrderId(int idOrder) async {
-  //   final db = await instance.database;
-  //   final result = await db.query('order_items', where: 'id_order = $idOrder');
+  Future<List<OrderItem>> getOrderItemByOrderId(int idOrder) async {
+    final db = await instance.database;
+    final result = await db.query('order_items', where: 'id_order = $idOrder');
 
-  //   return result.map((e) => OrderItem.fromMap(e)).toList();
-  // }
+    return result.map((e) => OrderItem.fromMap(e)).toList();
+  }
 
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await _initDB('pos4.db');
+    _database = await _initDB('pos6.db');
 
     return _database!;
   }
@@ -130,7 +124,7 @@ class ProductLocalDatasource {
   Future<void> insertAllProduct(List<Product> products) async {
     final db = await instance.database;
     for (var product in products) {
-      await db.insert(tableProducts, product.toMap());
+      await db.insert(tableProducts, product.toLocalMap());
     }
   }
 

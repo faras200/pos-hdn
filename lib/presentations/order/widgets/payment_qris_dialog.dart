@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
@@ -102,6 +103,9 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                                 totalPrice: total,
                                 idKasir: idKasir,
                                 namaKasir: namaKasir,
+                                transactionTime:
+                                    DateFormat('yyyy-MM-ddTHH:mm:ss')
+                                        .format(DateTime.now()),
                                 isSync: false);
                             ProductLocalDatasource.instance
                                 .saveOrder(orderModel);
