@@ -61,8 +61,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 label: 'Orders',
                 isActive: _selectedIndex == 1,
                 onTap: () {
-                  // _onItemTapped(1);
-                  context.push(const OrderPage());
+                  _onItemTapped(1);
+                  // context.push(const OrderPage());
                 }),
             NavItem(
               iconPath: Assets.icons.payments.path,

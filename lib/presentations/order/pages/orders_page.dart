@@ -1,5 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/models/order_item.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
@@ -21,9 +23,10 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
-  final indexValue = ValueNotifier(0);
+  var indexValue = ValueNotifier(0);
 
   int totalPrice = 0;
+  int cekItem = 0;
   List<OrderItem> orders = [];
   int calculateTotalPrice(List<OrderItem> orders) {
     return orders.fold(
@@ -57,7 +60,9 @@ class _OrderPageState extends State<OrderPage> {
               return const Center(child: CircularProgressIndicator());
             },
             success: (data, qty, total) {
+              cekItem = data.length;
               if (data.isEmpty) {
+                indexValue = ValueNotifier(0);
                 return const Center(child: Text('Belum ada order'));
               }
               totalPrice = total;
@@ -100,9 +105,25 @@ class _OrderPageState extends State<OrderPage> {
                             label: 'Tunai',
                             isActive: value == 1,
                             onPressed: () {
-                              indexValue.value = 1;
-                              context.read<OrderBloc>().add(
-                                  OrderEvent.addPaymentMethod('Tunai', data));
+                              if (cekItem != 0) {
+                                indexValue.value = 1;
+                                context.read<OrderBloc>().add(
+                                    OrderEvent.addPaymentMethod('Tunai', data));
+                              } else {
+                                AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.warning,
+                                        headerAnimationLoop: false,
+                                        animType: AnimType.bottomSlide,
+                                        title: 'Peringatan!',
+                                        desc: 'Produk tidak boleh kosong!!',
+                                        buttonsTextStyle: const TextStyle(
+                                            color: Colors.white),
+                                        showCloseIcon: true,
+                                        btnOkOnPress: () {},
+                                        btnOkColor: AppColors.primary)
+                                    .show();
+                              }
                             },
                           ),
                           const SpaceWidth(10.0),
@@ -111,9 +132,25 @@ class _OrderPageState extends State<OrderPage> {
                             label: 'QRIS',
                             isActive: value == 2,
                             onPressed: () {
-                              indexValue.value = 2;
-                              context.read<OrderBloc>().add(
-                                  OrderEvent.addPaymentMethod('QRIS', data));
+                              if (cekItem != 0) {
+                                indexValue.value = 2;
+                                context.read<OrderBloc>().add(
+                                    OrderEvent.addPaymentMethod('QRIS', data));
+                              } else {
+                                AwesomeDialog(
+                                        context: context,
+                                        dialogType: DialogType.warning,
+                                        headerAnimationLoop: false,
+                                        animType: AnimType.bottomSlide,
+                                        title: 'Peringatan!',
+                                        desc: 'Produk tidak boleh kosong!!',
+                                        buttonsTextStyle: const TextStyle(
+                                            color: Colors.white),
+                                        showCloseIcon: true,
+                                        btnOkOnPress: () {},
+                                        btnOkColor: AppColors.primary)
+                                    .show();
+                              }
                             },
                           ),
                           const SpaceWidth(10.0),
@@ -129,6 +166,35 @@ class _OrderPageState extends State<OrderPage> {
               price: 0,
               onPressed: () async {
                 if (indexValue.value == 0) {
+                  if (cekItem == 0) {
+                    AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.warning,
+                            headerAnimationLoop: false,
+                            animType: AnimType.bottomSlide,
+                            title: 'Peringatan!',
+                            desc: 'Produk tidak boleh kosong!!',
+                            buttonsTextStyle:
+                                const TextStyle(color: Colors.white),
+                            showCloseIcon: true,
+                            btnOkOnPress: () {},
+                            btnOkColor: AppColors.primary)
+                        .show();
+                  } else {
+                    AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.warning,
+                            headerAnimationLoop: false,
+                            animType: AnimType.bottomSlide,
+                            title: 'Peringatan!',
+                            desc: 'Metode pembayaran wajib dipilih',
+                            buttonsTextStyle:
+                                const TextStyle(color: Colors.white),
+                            showCloseIcon: true,
+                            btnOkOnPress: () {},
+                            btnOkColor: AppColors.primary)
+                        .show();
+                  }
                 } else if (indexValue.value == 1) {
                   showDialog(
                     context: context,

@@ -62,6 +62,11 @@ class PaymentSuccessDialog extends StatelessWidget {
                   ),
                   const Divider(height: 36.0),
                   _LabelValue(
+                    label: 'Total Kembalian',
+                    value: (nominal - total).currencyFormatRp,
+                  ),
+                  const Divider(height: 36.0),
+                  _LabelValue(
                     label: 'WAKTU PEMBAYARAN',
                     value: DateTime.now().toFormattedTime(),
                   ),

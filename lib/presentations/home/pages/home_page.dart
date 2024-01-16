@@ -24,39 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final searchController = TextEditingController();
   final indexValue = ValueNotifier(0);
-
-  // List<ProductModel> searchResults = [];
-  // final List<ProductModel> products = [
-  //   ProductModel(
-  //     image: Assets.images.f1.path,
-  //     name: 'Nutty Latte',
-  //     category: ProductCategory.drink,
-  //     price: 39000,
-  //     stock: 10,
-  //   ),
-  //   ProductModel(
-  //     image: Assets.images.f2.path,
-  //     name: 'Iced Latte',
-  //     category: ProductCategory.drink,
-  //     price: 24000,
-  //     stock: 10,
-  //   ),
-  //   ProductModel(
-  //     image: Assets.images.f3.path,
-  //     name: 'Iced Mocha',
-  //     category: ProductCategory.drink,
-  //     price: 33000,
-  //     stock: 10,
-  //   ),
-  //   ProductModel(
-  //     image: Assets.images.f4.path,
-  //     name: 'Hot Mocha',
-  //     category: ProductCategory.drink,
-  //     price: 33000,
-  //     stock: 10,
-  //   ),
-  // ];
-
+  late int category = 0;
   @override
   void initState() {
     // searchResults = products;
@@ -66,19 +34,16 @@ class _HomePageState extends State<HomePage> {
   void onCategoryTap(int index) {
     searchController.clear();
     indexValue.value = index;
-    int category = 0;
+
     switch (index) {
       case 0:
-        category = 0;
-        break;
       case 1:
-        category = 1;
-        break;
       case 2:
-        category = 2;
-        break;
       case 3:
-        category = 3;
+        category = index;
+        break;
+      default:
+        category = 0; // Default category, bisa disesuaikan sesuai kebutuhan
         break;
     }
     context.read<ProductBloc>().add(ProductEvent.fetchByCategory(category));

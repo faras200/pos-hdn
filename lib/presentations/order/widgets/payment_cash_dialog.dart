@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -27,8 +28,7 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
 
   @override
   void initState() {
-    priceController =
-        TextEditingController(text: widget.price.currencyFormatRp);
+    priceController = TextEditingController(text: '0');
     super.initState();
   }
 
@@ -65,8 +65,8 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
           const SpaceHeight(16.0),
           CustomTextField(
             controller: priceController!,
-            label: '',
-            showLabel: false,
+            label: 'Nominal Bayar',
+            showLabel: true,
             keyboardType: TextInputType.number,
             onChanged: (value) {
               final int priceValue = value.toIntegerFromText;
@@ -80,20 +80,64 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Button.filled(
-                onPressed: () {},
+                onPressed: () {
+                  priceController?.text = (widget.price).currencyFormatRp;
+                },
+                color: AppColors.light,
+                disabled: false,
                 label: 'Uang Pas',
-                disabled: true,
                 textColor: AppColors.primary,
                 fontSize: 13.0,
-                width: 112.0,
+                width: 120.0,
                 height: 50.0,
               ),
               const SpaceWidth(4.0),
               Flexible(
                 child: Button.filled(
-                  onPressed: () {},
-                  label: widget.price.currencyFormatRp,
-                  disabled: true,
+                  onPressed: () {
+                    priceController?.text =
+                        (priceController!.text.toIntegerFromText + 10000)
+                            .currencyFormatRp;
+                  },
+                  color: AppColors.light,
+                  disabled: false,
+                  label: 10000.currencyFormatRp,
+                  textColor: AppColors.primary,
+                  fontSize: 13.0,
+                  height: 50.0,
+                ),
+              ),
+            ],
+          ),
+          const SpaceHeight(10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Button.filled(
+                onPressed: () {
+                  priceController?.text =
+                      (priceController!.text.toIntegerFromText + 50000)
+                          .currencyFormatRp;
+                },
+                color: AppColors.light,
+                disabled: false,
+                label: 50000.currencyFormatRp,
+                textColor: AppColors.primary,
+                fontSize: 13.0,
+                width: 120.0,
+                height: 50.0,
+              ),
+              const SpaceWidth(4.0),
+              Flexible(
+                child: Button.filled(
+                  onPressed: () {
+                    priceController?.text =
+                        (priceController!.text.toIntegerFromText + 100000)
+                            .currencyFormatRp;
+                  },
+                  color: AppColors.light,
+                  disabled: false,
+                  label: 100000.currencyFormatRp,
                   textColor: AppColors.primary,
                   fontSize: 13.0,
                   height: 50.0,
@@ -134,14 +178,24 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
               }, success: (data, qty, total, payment, _, idKasir, namaKasir) {
                 return Button.filled(
                   onPressed: () {
+                    if (priceController!.text.toIntegerFromText < total) {
+                      return AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.warning,
+                              headerAnimationLoop: false,
+                              animType: AnimType.bottomSlide,
+                              title: 'Peringatan!',
+                              desc: 'Nominal uang bayar kurang',
+                              buttonsTextStyle:
+                                  const TextStyle(color: Colors.white),
+                              showCloseIcon: true,
+                              btnOkOnPress: () {},
+                              btnOkColor: AppColors.primary)
+                          .show();
+                    }
                     context.read<OrderBloc>().add(OrderEvent.addNominalBayar(
                           priceController!.text.toIntegerFromText,
                         ));
-                    // context.pop();
-                    // showDialog(
-                    //   context: context,
-                    //   builder: (context) => const PaymentSuccessDialog(),
-                    // );
                   },
                   label: 'Proses',
                 );
