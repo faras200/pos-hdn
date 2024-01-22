@@ -77,7 +77,7 @@ class OrderCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          int.parse(data.product.harga).currencyFormatRp,
+                          data.product.harga.currencyFormatRp,
                           style: const TextStyle(
                             fontWeight: FontWeight.w700,
                           ),

@@ -27,7 +27,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
 
       newCheckout.forEach((element) {
         totalQuantity += element.quantity;
-        totalPrice += int.parse(element.product.harga) * element.quantity;
+        totalPrice += element.product.harga * element.quantity;
       });
 
       emit(_Success(newCheckout, totalQuantity, totalPrice));
@@ -53,7 +53,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
 
       newCheckout.forEach((element) {
         totalQuantity += element.quantity;
-        totalPrice += int.parse(element.product.harga) * element.quantity;
+        totalPrice += element.product.harga * element.quantity;
       });
 
       emit(_Success(newCheckout, totalQuantity, totalPrice));

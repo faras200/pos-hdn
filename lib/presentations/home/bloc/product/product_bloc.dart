@@ -53,7 +53,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       emit(const ProductState.loading());
       final requestData = ProductRequestModel(
           name: event.product.name,
-          price: int.parse(event.product.harga),
+          price: event.product.harga,
           category: event.product.typeId.toString(),
           isBestSeller: event.product.isBestSeller ? 1 : 0,
           image: event.image);

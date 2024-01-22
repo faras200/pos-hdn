@@ -72,6 +72,7 @@ class OrderModel {
       'payment_method': paymentMethod,
       'total_item': totalQuantity,
       'nominal': totalPrice,
+      'bayar': nominalBayar,
       'id_kasir': idKasir,
       'nama_kasir': namaKasir,
       'is_sync': isSync ? 1 : 0,
@@ -82,7 +83,7 @@ class OrderModel {
   factory OrderModel.fromLocalMap(Map<String, dynamic> map) {
     return OrderModel(
       paymentMethod: map['payment_method'] ?? '',
-      nominalBayar: map['nominal']?.toInt() ?? 0,
+      nominalBayar: map['bayar']?.toInt() ?? 0,
       orders: [],
       totalQuantity: map['total_item']?.toInt() ?? 0,
       totalPrice: map['nominal']?.toInt() ?? 0,

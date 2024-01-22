@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
-import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
 import 'package:pos_hdn/presentations/manage/pages/manage_product_page.dart';
 import 'package:pos_hdn/presentations/manage/pages/save_server_key_page.dart';
 import 'package:pos_hdn/presentations/manage/pages/sync_data_page.dart';
-import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/menu_button.dart';
 import '../../../core/components/spaces.dart';
-import '../../../core/constants/colors.dart';
 import '../../../data/datasources/auth_local_datasource.dart';
-import '../../../data/datasources/product_local_datasource.dart';
 import '../../auth/pages/login_page.dart';
 import '../../home/bloc/logout/logout_bloc.dart';
 import 'manage_printer_page.dart';
@@ -24,7 +20,7 @@ class ManageMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Manage Menu'),
+        title: const Text('Kelola Menu'),
         centerTitle: true,
       ),
       body: Column(

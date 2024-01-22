@@ -128,7 +128,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   return Button.filled(
                     onPressed: () {
                       final String name = nameController!.text;
-                      final String price = priceController!.text;
+                      final int price = priceController!.text.toIntegerFromText;
                       final int stock = stockController!.text.toIntegerFromText;
                       final Product product = Product(
                         name: name,

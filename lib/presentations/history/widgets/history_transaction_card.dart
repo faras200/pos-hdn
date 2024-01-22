@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
+import 'package:pos_hdn/presentations/history/bloc/history_detail/history_detail_bloc.dart';
 import 'package:pos_hdn/presentations/history/widgets/transction_detail_dialoge.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
@@ -35,10 +37,12 @@ class HistoryTransactionCard extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          context.pop();
+          context
+              .read<HistoryDetailBloc>()
+              .add(HistoryDetailEvent.fetchDetail(data.id ?? 0));
           showDialog(
             context: context,
-            builder: (context) => const TransactionDetailDialoge(),
+            builder: (context) => TransactionDetailDialoge(dataDetail: data),
           );
         },
         leading: Assets.icons.payments.svg(),

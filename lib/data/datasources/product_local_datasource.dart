@@ -26,6 +26,7 @@ class ProductLocalDatasource {
         product_id INTEGER,
         name TEXT,
         price INTEGER,
+        harga INTEGER,
         image TEXT,
         category TEXT,
         is_best_seller INTEGER,
@@ -37,6 +38,7 @@ class ProductLocalDatasource {
       CREATE TABLE orders (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nominal INTEGER,
+        bayar INTEGER,
         payment_method TEXT,
         total_item INTEGER,
         id_kasir INTEGER,
@@ -101,7 +103,7 @@ class ProductLocalDatasource {
   //get order item by id order
   Future<List<OrderItem>> getOrderItemByOrderId(int idOrder) async {
     final db = await instance.database;
-    final result = await db.query('order_items', where: 'id_order = $idOrder');
+    final result = await db.query('order_items');
 
     return result.map((e) => OrderItem.fromMap(e)).toList();
   }
@@ -109,7 +111,7 @@ class ProductLocalDatasource {
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await _initDB('pos6.db');
+    _database = await _initDB('pos7.db');
 
     return _database!;
   }
@@ -142,5 +144,14 @@ class ProductLocalDatasource {
     final result = await db.query(tableProducts);
 
     return result.map((e) => Product.fromMap(e)).toList();
+  }
+
+  //get product by id
+  Future<List<Product>> getProductById(productId) async {
+    final db = await instance.database;
+    final result = await db.query(tableProducts,
+        where: 'product_id = $productId', limit: 1);
+
+    return result.map((e) => Product.fromMapLocal(e)).toList();
   }
 }

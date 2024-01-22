@@ -30,7 +30,7 @@ class OrderItem {
       'id_order': orderId,
       'id_product': product.id,
       'quantity': quantity,
-      'price': int.parse(product.harga),
+      'price': product.harga,
     };
   }
 

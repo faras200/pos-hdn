@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  awesome_dialog: ^3.2.0
   badges: ^3.1.2
   cached_network_image: ^3.3.0
   cupertino_icons: ^1.0.2
@@ -42,11 +43,11 @@ dependencies:
   http: ^1.1.2
   image_picker: ^1.0.5
   intl: ^0.19.0
+  logger: ^2.0.2+1
   print_bluetooth_thermal: ^1.0.9
   qr_flutter: ^4.1.0
   shared_preferences: ^2.2.2
   sqflite: ^2.3.0
-  awesome_dialog: ^3.2.0
 
 dev_dependencies:
   build_runner: ^2.4.7
@@ -55,6 +56,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.4.6
+  logger: ^2.0.2+1
 
 flutter_gen:
   output: lib/core/assets/

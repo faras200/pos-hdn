@@ -21,7 +21,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var price = int.parse(data.harga == "" ? '0' : data.harga);
+    int price = data.harga == 0 ? 0 : data.harga;
 
     return Stack(
       children: [

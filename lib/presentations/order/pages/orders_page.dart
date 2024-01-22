@@ -32,8 +32,7 @@ class _OrderPageState extends State<OrderPage> {
     return orders.fold(
         0,
         (previousValue, element) =>
-            previousValue +
-            int.parse(element.product.harga) * element.quantity);
+            previousValue + element.product.harga * element.quantity);
   }
 
   @override

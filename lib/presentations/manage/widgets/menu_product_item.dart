@@ -14,7 +14,7 @@ class MenuProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var price = int.parse(data.harga == "" ? '0' : data.harga);
+    var price = data.harga ?? 0;
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: ShapeDecoration(

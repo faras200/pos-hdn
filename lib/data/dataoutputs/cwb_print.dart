@@ -76,7 +76,7 @@ class CwbPrint {
           styles: const PosStyles(align: PosAlign.left),
         ),
         PosColumn(
-          text: '${int.parse(product.product.harga) * product.quantity}',
+          text: '${product.product.harga * product.quantity}',
           width: 4,
           styles: const PosStyles(align: PosAlign.right),
         ),

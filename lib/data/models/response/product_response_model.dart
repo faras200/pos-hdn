@@ -41,7 +41,7 @@ class Product {
   final bool isBestSeller;
   final String name;
   final String image;
-  final String harga;
+  final int harga;
   final String? type;
 
   Product({
@@ -60,20 +60,31 @@ class Product {
   String toJson() => json.encode(toMap());
 
   factory Product.fromMap(Map<String, dynamic> json) => Product(
-        id: json["id"],
-        productId: json["id"],
-        typeId: json["type_id"],
+        id: json["id"] ?? 0,
+        productId: json["id"] ?? 0,
+        typeId: json["type_id"] ?? 0,
         isBestSeller: json["is_best_seller"] == 1 ? true : false,
         name: json["short_name"] ?? json["name"],
         image: json["image"] ?? "",
-        harga: json["harga"] ?? "",
+        harga: json["harga"] == null ? 0 : int.parse(json["harga"]),
+        type: json["type"] ?? "",
+      );
+
+  factory Product.fromMapLocal(Map<String, dynamic> json) => Product(
+        id: json["id"] ?? 0,
+        productId: json["id"] ?? 0,
+        typeId: json["type_id"] ?? 0,
+        isBestSeller: json["is_best_seller"] == 1 ? true : false,
+        name: json["short_name"] ?? json["name"],
+        image: json["image"] ?? "",
+        harga: json["harga"] ?? 0,
         type: json["type"] ?? "",
       );
 
   Map<String, dynamic> toMap() => {
         "name": name,
         "image": image,
-        "price": harga,
+        "harga": harga,
         "category": type,
         "is_best_seller": isBestSeller ? 1 : 0,
       };
@@ -81,6 +92,7 @@ class Product {
   Map<String, dynamic> toLocalMap() => {
         "name": name,
         "image": image,
+        "harga": harga,
         "is_best_seller": isBestSeller ? 1 : 0,
         "product_id": id,
       };
@@ -116,7 +128,7 @@ class Product {
     bool? isBestSeller,
     String? name,
     String? image,
-    String? harga,
+    int? harga,
     String? type,
   }) {
     return Product(
