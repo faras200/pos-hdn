@@ -56,7 +56,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.4.6
-  logger: ^2.0.2+1
 
 flutter_gen:
   output: lib/core/assets/

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/order_local_datasource.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
@@ -11,7 +11,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   HistoryBloc() : super(const _Initial()) {
     on<_Fetch>((event, emit) async {
       emit(const HistoryState.loading());
-      final data = await ProductLocalDatasource.instance.getAllOrder();
+      final data = await OrderLocalDatasource.instance.getAllOrder();
       emit(HistoryState.success(data));
     });
   }

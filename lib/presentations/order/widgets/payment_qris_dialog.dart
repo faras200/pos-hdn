@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
+import 'package:pos_hdn/data/datasources/order_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:pos_hdn/presentations/order/bloc/qris/qris_bloc.dart';
@@ -28,9 +29,10 @@ class PaymentQrisDialog extends StatefulWidget {
 class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
   String orderId = '';
   Timer? timer;
+  String qris = '';
   @override
   void initState() {
-    orderId = DateTime.now().millisecondsSinceEpoch.toString();
+    orderId = 'INV${DateTime.now().millisecondsSinceEpoch}';
     context.read<QrisBloc>().add(QrisEvent.generateQRCode(
           orderId,
           100,
@@ -96,6 +98,8 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                           }, success: (message) {
                             timer?.cancel();
                             final orderModel = OrderModel(
+                                uuid: orderId,
+                                qris: qris,
                                 paymentMethod: paymentMethod,
                                 nominalBayar: total,
                                 orders: data,
@@ -107,8 +111,7 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                                     DateFormat('yyyy-MM-ddTHH:mm:ss')
                                         .format(DateTime.now()),
                                 isSync: false);
-                            ProductLocalDatasource.instance
-                                .saveOrder(orderModel);
+                            OrderLocalDatasource.instance.saveOrder(orderModel);
                             context
                                 .read<OrderBloc>()
                                 .add(OrderEvent.addNominalBayar(
@@ -129,6 +132,7 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                                 return const SizedBox();
                               },
                               qrisResponse: (data) {
+                                qris = data.qris!;
                                 return Container(
                                   width: 256.0,
                                   height: 256.0,

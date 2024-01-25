@@ -32,6 +32,8 @@ class OrderModel {
   final String namaKasir;
   final String transactionTime;
   final bool isSync;
+  final String uuid;
+  final String qris;
   OrderModel({
     this.id,
     required this.paymentMethod,
@@ -43,6 +45,8 @@ class OrderModel {
     required this.namaKasir,
     required this.transactionTime,
     required this.isSync,
+    required this.uuid,
+    required this.qris,
   });
 
   Map<String, dynamic> toMap() {
@@ -57,6 +61,8 @@ class OrderModel {
       'namaKasir': namaKasir,
       'transactionTime': transactionTime,
       'isSync': isSync,
+      'uuid': uuid,
+      'qris': qris,
     };
   }
 
@@ -70,6 +76,8 @@ class OrderModel {
   Map<String, dynamic> toMapForLocal() {
     return {
       'payment_method': paymentMethod,
+      'uuid': uuid,
+      'qris': qris,
       'total_item': totalQuantity,
       'nominal': totalPrice,
       'bayar': nominalBayar,
@@ -92,6 +100,8 @@ class OrderModel {
       namaKasir: map['nama_kasir'] ?? '',
       id: map['id']?.toInt() ?? 0,
       transactionTime: map['transaction_time'] ?? '',
+      qris: map['qris'] ?? '',
+      uuid: map['uuid'] ?? '',
     );
   }
 
@@ -111,6 +121,8 @@ class OrderModel {
       namaKasir: map['namaKasir'] as String,
       transactionTime: map['transactionTime'] as String,
       isSync: map['isSync'] as bool,
+      uuid: map['uuid'] as String,
+      qris: map['qris'] as String,
     );
   }
 

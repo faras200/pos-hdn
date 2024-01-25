@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pos_hdn/data/datasources/order_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/order_remote_datasource.dart';
-import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
 import 'package:pos_hdn/data/models/request/order_request_model.dart';
 
 part 'sync_order_bloc.freezed.dart';
@@ -17,40 +17,37 @@ class SyncOrderBloc extends Bloc<SyncOrderEvent, SyncOrderState> {
       emit(const SyncOrderState.loading());
       //get orders from local is sync is 0
       final ordersIsSyncZero =
-          await ProductLocalDatasource.instance.getOrderByIsSync();
+          await OrderLocalDatasource.instance.getOrderByIsSync();
+
+      if (ordersIsSyncZero.isEmpty) {
+        return emit(const SyncOrderState.success());
+      }
 
       for (final order in ordersIsSyncZero) {
-        final orderItems = await ProductLocalDatasource.instance
+        final orderItems = await OrderLocalDatasource.instance
             .getOrderItemByOrderIdLocal(order.id!);
 
         final orderRequest = OrderRequestModel(
+            uuid: order.uuid,
             transactionTime: order.transactionTime,
             totalItem: order.totalQuantity,
             totalPrice: order.totalPrice,
             kasirId: order.idKasir,
             paymentMethod: order.paymentMethod,
-            orderItems: orderItems
-            // .map((e) => OrderItemModel(
-            //       productId: e.product.id!,
-            //       quantity: e.quantity,
-            //       totalPrice: e.product.price * e.quantity,
-            //     ))
-            // .toList(),
-            );
+            orderItems: orderItems);
         final response = await orderRemoteDatasource.sendOrder(orderRequest);
         if (response) {
-          await ProductLocalDatasource.instance
-              .updateIsSyncOrderById(order.id!);
+          await OrderLocalDatasource.instance.updateIsSyncOrderById(order.id!);
         }
       }
 
-      emit(const SyncOrderState.success());
-
-      // if (response) {
-      //   emit(const SyncOrderState.success());
-      // } else {
-      //   emit(const SyncOrderState.error('Failed to send order'));
-      // }
+      // emit(const SyncOrderState.success());
+      final cekLagi = await OrderLocalDatasource.instance.getOrderByIsSync();
+      if (cekLagi.isEmpty) {
+        emit(const SyncOrderState.success());
+      } else {
+        emit(const SyncOrderState.error('Failed to send order'));
+      }
     });
   }
 }

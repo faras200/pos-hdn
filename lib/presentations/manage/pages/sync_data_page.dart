@@ -74,6 +74,11 @@ class _SyncDataPageState extends State<SyncDataPage> {
             listener: (context, state) {
               state.maybeMap(
                 orElse: () {},
+                error: (value) =>
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  backgroundColor: AppColors.red,
+                  content: Text('Sync data orders failed'),
+                )),
                 success: (_) async {
                   // await ProductLocalDatasource.instance.removeAllProduct();
                   // await ProductLocalDatasource.instance

@@ -52,14 +52,14 @@ class ManageMenuPage extends StatelessWidget {
             child: Row(
               children: [
                 MenuButton(
-                  iconPath: Assets.images.manageProduct.path,
+                  iconPath: Assets.images.managePrinterx.path,
                   label: 'Kelola Setoran',
                   onPressed: () => context.push(const SaveServerKeyPage()),
                   isImage: true,
                 ),
                 const SpaceWidth(15.0),
                 MenuButton(
-                  iconPath: Assets.images.managePrinter.path,
+                  iconPath: Assets.images.syncCloud.path,
                   label: 'Kelola Sync Data',
                   onPressed: () {
                     Navigator.push(

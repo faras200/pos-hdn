@@ -2,10 +2,15 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/core/extensions/string_ext.dart';
+import 'package:pos_hdn/data/datasources/order_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/order_remote_datasource.dart';
 import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
+import 'package:pos_hdn/data/models/request/order_request_model.dart';
+import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
@@ -150,9 +155,15 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
             listener: (context, state) {
               state.maybeWhen(
                 orElse: () {},
-                success:
-                    (data, qty, total, payment, nominal, idKasir, namaKasir) {
+                success: (data, qty, total, payment, nominal, idKasir,
+                    namaKasir) async {
+                  Logger().d(total);
+                  final timeNow =
+                      DateFormat('yyyy-MM-ddTHH:mm:ss').format(DateTime.now());
+                  final uuid = 'INV${DateTime.now().millisecondsSinceEpoch}';
                   final orderModel = OrderModel(
+                      uuid: uuid,
+                      qris: '',
                       paymentMethod: payment,
                       nominalBayar: nominal,
                       orders: data,
@@ -160,11 +171,39 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                       totalPrice: total,
                       idKasir: idKasir,
                       namaKasir: namaKasir,
-                      transactionTime: DateFormat('yyyy-MM-ddTHH:mm:ss')
-                          .format(DateTime.now()),
+                      transactionTime: timeNow,
                       isSync: false);
-                  ProductLocalDatasource.instance.saveOrder(orderModel);
+
+                  final saveDbLocal = await OrderLocalDatasource.instance
+                      .saveOrder(orderModel); //return id order
+
+                  final orderItems = data
+                      .map((e) => OrderItemModel(
+                          productId: e.product.id!,
+                          quantity: e.quantity,
+                          totalPrice: (e.quantity * e.product.harga)))
+                      .toList();
+
+                  final orderRequestModel = OrderRequestModel(
+                      transactionTime: timeNow,
+                      kasirId: idKasir,
+                      totalPrice: total,
+                      totalItem: qty,
+                      orderItems: orderItems,
+                      uuid: uuid);
+
+                  final saveDbRemote = await OrderRemoteDatasource.instance
+                      .sendOrder(orderRequestModel);
+
+                  if (saveDbRemote) {
+                    //Update db local to isSync
+                    OrderLocalDatasource.instance
+                        .updateIsSyncOrderById(saveDbLocal);
+                  }
+
+                  // ignore: use_build_context_synchronously
                   context.pop();
+                  // ignore: use_build_context_synchronously
                   showDialog(
                     context: context,
                     builder: (context) => const PaymentSuccessDialog(),
@@ -196,6 +235,11 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                     context.read<OrderBloc>().add(OrderEvent.addNominalBayar(
                           priceController!.text.toIntegerFromText,
                         ));
+                    // var datachekout = CheckoutBloc().state;
+
+                    // context
+                    //     .read<OrderBloc>()
+                    //     .add(OrderEvent.processOrder(data));
                   },
                   label: 'Proses',
                 );

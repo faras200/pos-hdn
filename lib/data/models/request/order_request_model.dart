@@ -8,6 +8,7 @@ class OrderRequestModel {
   final int totalItem;
   final String paymentMethod;
   final List<OrderItemModel> orderItems;
+  final String uuid;
 
   OrderRequestModel({
     required this.transactionTime,
@@ -15,7 +16,8 @@ class OrderRequestModel {
     required this.totalPrice,
     required this.totalItem,
     required this.orderItems,
-    this.paymentMethod = 'cash',
+    this.paymentMethod = 'tunai',
+    required this.uuid,
   });
 
   factory OrderRequestModel.fromJson(String str) =>
@@ -25,6 +27,7 @@ class OrderRequestModel {
 
   factory OrderRequestModel.fromMap(Map<String, dynamic> json) =>
       OrderRequestModel(
+        uuid: json['uuid'],
         transactionTime: json["transaction_time"],
         kasirId: json["kasir_id"],
         totalPrice: json["total_price"],
@@ -35,6 +38,7 @@ class OrderRequestModel {
       );
 
   Map<String, dynamic> toMap() => {
+        "uuid": uuid,
         "transaction_time": transactionTime,
         "kasir_id": kasirId,
         "total_price": totalPrice,

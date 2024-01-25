@@ -147,6 +147,10 @@ class $AssetsImagesGen {
   AssetGenImage get posLogo =>
       const AssetGenImage('assets/images/pos_logo.png');
 
+  /// File path: assets/images/sync_cloud.png
+  AssetGenImage get syncCloud =>
+      const AssetGenImage('assets/images/sync_cloud.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         f1,
@@ -161,7 +165,8 @@ class $AssetsImagesGen {
         managePrinter,
         managePrinterx,
         manageProduct,
-        posLogo
+        posLogo,
+        syncCloud
       ];
 }
 

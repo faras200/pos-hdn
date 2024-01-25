@@ -19,47 +19,47 @@ mixin _$OrderEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String paymentMethod, List<OrderItem> orders)
-        addPaymentMethod,
     required TResult Function(int nominal) addNominalBayar,
+    required TResult Function(String paymentMethod, List<OrderItem> orders)
+        processOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String paymentMethod, List<OrderItem> orders)?
-        addPaymentMethod,
     TResult? Function(int nominal)? addNominalBayar,
+    TResult? Function(String paymentMethod, List<OrderItem> orders)?
+        processOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String paymentMethod, List<OrderItem> orders)?
-        addPaymentMethod,
     TResult Function(int nominal)? addNominalBayar,
+    TResult Function(String paymentMethod, List<OrderItem> orders)?
+        processOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_AddPaymentMethod value) addPaymentMethod,
     required TResult Function(_AddNominalBayar value) addNominalBayar,
+    required TResult Function(_ProcessOrder value) processOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_AddPaymentMethod value)? addPaymentMethod,
     TResult? Function(_AddNominalBayar value)? addNominalBayar,
+    TResult? Function(_ProcessOrder value)? processOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_AddPaymentMethod value)? addPaymentMethod,
     TResult Function(_AddNominalBayar value)? addNominalBayar,
+    TResult Function(_ProcessOrder value)? processOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,9 +128,9 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String paymentMethod, List<OrderItem> orders)
-        addPaymentMethod,
     required TResult Function(int nominal) addNominalBayar,
+    required TResult Function(String paymentMethod, List<OrderItem> orders)
+        processOrder,
   }) {
     return started();
   }
@@ -139,9 +139,9 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String paymentMethod, List<OrderItem> orders)?
-        addPaymentMethod,
     TResult? Function(int nominal)? addNominalBayar,
+    TResult? Function(String paymentMethod, List<OrderItem> orders)?
+        processOrder,
   }) {
     return started?.call();
   }
@@ -150,9 +150,9 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String paymentMethod, List<OrderItem> orders)?
-        addPaymentMethod,
     TResult Function(int nominal)? addNominalBayar,
+    TResult Function(String paymentMethod, List<OrderItem> orders)?
+        processOrder,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -165,8 +165,8 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_AddPaymentMethod value) addPaymentMethod,
     required TResult Function(_AddNominalBayar value) addNominalBayar,
+    required TResult Function(_ProcessOrder value) processOrder,
   }) {
     return started(this);
   }
@@ -175,8 +175,8 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_AddPaymentMethod value)? addPaymentMethod,
     TResult? Function(_AddNominalBayar value)? addNominalBayar,
+    TResult? Function(_ProcessOrder value)? processOrder,
   }) {
     return started?.call(this);
   }
@@ -185,8 +185,8 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_AddPaymentMethod value)? addPaymentMethod,
     TResult Function(_AddNominalBayar value)? addNominalBayar,
+    TResult Function(_ProcessOrder value)? processOrder,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -198,179 +198,6 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
 
 abstract class _Started implements OrderEvent {
   const factory _Started() = _$StartedImpl;
-}
-
-/// @nodoc
-abstract class _$$AddPaymentMethodImplCopyWith<$Res> {
-  factory _$$AddPaymentMethodImplCopyWith(_$AddPaymentMethodImpl value,
-          $Res Function(_$AddPaymentMethodImpl) then) =
-      __$$AddPaymentMethodImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String paymentMethod, List<OrderItem> orders});
-}
-
-/// @nodoc
-class __$$AddPaymentMethodImplCopyWithImpl<$Res>
-    extends _$OrderEventCopyWithImpl<$Res, _$AddPaymentMethodImpl>
-    implements _$$AddPaymentMethodImplCopyWith<$Res> {
-  __$$AddPaymentMethodImplCopyWithImpl(_$AddPaymentMethodImpl _value,
-      $Res Function(_$AddPaymentMethodImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? paymentMethod = null,
-    Object? orders = null,
-  }) {
-    return _then(_$AddPaymentMethodImpl(
-      null == paymentMethod
-          ? _value.paymentMethod
-          : paymentMethod // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == orders
-          ? _value._orders
-          : orders // ignore: cast_nullable_to_non_nullable
-              as List<OrderItem>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AddPaymentMethodImpl
-    with DiagnosticableTreeMixin
-    implements _AddPaymentMethod {
-  const _$AddPaymentMethodImpl(this.paymentMethod, final List<OrderItem> orders)
-      : _orders = orders;
-
-  @override
-  final String paymentMethod;
-  final List<OrderItem> _orders;
-  @override
-  List<OrderItem> get orders {
-    if (_orders is EqualUnmodifiableListView) return _orders;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_orders);
-  }
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'OrderEvent.addPaymentMethod(paymentMethod: $paymentMethod, orders: $orders)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'OrderEvent.addPaymentMethod'))
-      ..add(DiagnosticsProperty('paymentMethod', paymentMethod))
-      ..add(DiagnosticsProperty('orders', orders));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddPaymentMethodImpl &&
-            (identical(other.paymentMethod, paymentMethod) ||
-                other.paymentMethod == paymentMethod) &&
-            const DeepCollectionEquality().equals(other._orders, _orders));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, paymentMethod, const DeepCollectionEquality().hash(_orders));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddPaymentMethodImplCopyWith<_$AddPaymentMethodImpl> get copyWith =>
-      __$$AddPaymentMethodImplCopyWithImpl<_$AddPaymentMethodImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function(String paymentMethod, List<OrderItem> orders)
-        addPaymentMethod,
-    required TResult Function(int nominal) addNominalBayar,
-  }) {
-    return addPaymentMethod(paymentMethod, orders);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function(String paymentMethod, List<OrderItem> orders)?
-        addPaymentMethod,
-    TResult? Function(int nominal)? addNominalBayar,
-  }) {
-    return addPaymentMethod?.call(paymentMethod, orders);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function(String paymentMethod, List<OrderItem> orders)?
-        addPaymentMethod,
-    TResult Function(int nominal)? addNominalBayar,
-    required TResult orElse(),
-  }) {
-    if (addPaymentMethod != null) {
-      return addPaymentMethod(paymentMethod, orders);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_AddPaymentMethod value) addPaymentMethod,
-    required TResult Function(_AddNominalBayar value) addNominalBayar,
-  }) {
-    return addPaymentMethod(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_AddPaymentMethod value)? addPaymentMethod,
-    TResult? Function(_AddNominalBayar value)? addNominalBayar,
-  }) {
-    return addPaymentMethod?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_AddPaymentMethod value)? addPaymentMethod,
-    TResult Function(_AddNominalBayar value)? addNominalBayar,
-    required TResult orElse(),
-  }) {
-    if (addPaymentMethod != null) {
-      return addPaymentMethod(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AddPaymentMethod implements OrderEvent {
-  const factory _AddPaymentMethod(
-          final String paymentMethod, final List<OrderItem> orders) =
-      _$AddPaymentMethodImpl;
-
-  String get paymentMethod;
-  List<OrderItem> get orders;
-  @JsonKey(ignore: true)
-  _$$AddPaymentMethodImplCopyWith<_$AddPaymentMethodImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -449,9 +276,9 @@ class _$AddNominalBayarImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String paymentMethod, List<OrderItem> orders)
-        addPaymentMethod,
     required TResult Function(int nominal) addNominalBayar,
+    required TResult Function(String paymentMethod, List<OrderItem> orders)
+        processOrder,
   }) {
     return addNominalBayar(nominal);
   }
@@ -460,9 +287,9 @@ class _$AddNominalBayarImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String paymentMethod, List<OrderItem> orders)?
-        addPaymentMethod,
     TResult? Function(int nominal)? addNominalBayar,
+    TResult? Function(String paymentMethod, List<OrderItem> orders)?
+        processOrder,
   }) {
     return addNominalBayar?.call(nominal);
   }
@@ -471,9 +298,9 @@ class _$AddNominalBayarImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String paymentMethod, List<OrderItem> orders)?
-        addPaymentMethod,
     TResult Function(int nominal)? addNominalBayar,
+    TResult Function(String paymentMethod, List<OrderItem> orders)?
+        processOrder,
     required TResult orElse(),
   }) {
     if (addNominalBayar != null) {
@@ -486,8 +313,8 @@ class _$AddNominalBayarImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_AddPaymentMethod value) addPaymentMethod,
     required TResult Function(_AddNominalBayar value) addNominalBayar,
+    required TResult Function(_ProcessOrder value) processOrder,
   }) {
     return addNominalBayar(this);
   }
@@ -496,8 +323,8 @@ class _$AddNominalBayarImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_AddPaymentMethod value)? addPaymentMethod,
     TResult? Function(_AddNominalBayar value)? addNominalBayar,
+    TResult? Function(_ProcessOrder value)? processOrder,
   }) {
     return addNominalBayar?.call(this);
   }
@@ -506,8 +333,8 @@ class _$AddNominalBayarImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_AddPaymentMethod value)? addPaymentMethod,
     TResult Function(_AddNominalBayar value)? addNominalBayar,
+    TResult Function(_ProcessOrder value)? processOrder,
     required TResult orElse(),
   }) {
     if (addNominalBayar != null) {
@@ -523,6 +350,176 @@ abstract class _AddNominalBayar implements OrderEvent {
   int get nominal;
   @JsonKey(ignore: true)
   _$$AddNominalBayarImplCopyWith<_$AddNominalBayarImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ProcessOrderImplCopyWith<$Res> {
+  factory _$$ProcessOrderImplCopyWith(
+          _$ProcessOrderImpl value, $Res Function(_$ProcessOrderImpl) then) =
+      __$$ProcessOrderImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String paymentMethod, List<OrderItem> orders});
+}
+
+/// @nodoc
+class __$$ProcessOrderImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$ProcessOrderImpl>
+    implements _$$ProcessOrderImplCopyWith<$Res> {
+  __$$ProcessOrderImplCopyWithImpl(
+      _$ProcessOrderImpl _value, $Res Function(_$ProcessOrderImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? paymentMethod = null,
+    Object? orders = null,
+  }) {
+    return _then(_$ProcessOrderImpl(
+      null == paymentMethod
+          ? _value.paymentMethod
+          : paymentMethod // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == orders
+          ? _value._orders
+          : orders // ignore: cast_nullable_to_non_nullable
+              as List<OrderItem>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ProcessOrderImpl with DiagnosticableTreeMixin implements _ProcessOrder {
+  const _$ProcessOrderImpl(this.paymentMethod, final List<OrderItem> orders)
+      : _orders = orders;
+
+  @override
+  final String paymentMethod;
+  final List<OrderItem> _orders;
+  @override
+  List<OrderItem> get orders {
+    if (_orders is EqualUnmodifiableListView) return _orders;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_orders);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'OrderEvent.processOrder(paymentMethod: $paymentMethod, orders: $orders)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'OrderEvent.processOrder'))
+      ..add(DiagnosticsProperty('paymentMethod', paymentMethod))
+      ..add(DiagnosticsProperty('orders', orders));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProcessOrderImpl &&
+            (identical(other.paymentMethod, paymentMethod) ||
+                other.paymentMethod == paymentMethod) &&
+            const DeepCollectionEquality().equals(other._orders, _orders));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, paymentMethod, const DeepCollectionEquality().hash(_orders));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProcessOrderImplCopyWith<_$ProcessOrderImpl> get copyWith =>
+      __$$ProcessOrderImplCopyWithImpl<_$ProcessOrderImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(int nominal) addNominalBayar,
+    required TResult Function(String paymentMethod, List<OrderItem> orders)
+        processOrder,
+  }) {
+    return processOrder(paymentMethod, orders);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(int nominal)? addNominalBayar,
+    TResult? Function(String paymentMethod, List<OrderItem> orders)?
+        processOrder,
+  }) {
+    return processOrder?.call(paymentMethod, orders);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(int nominal)? addNominalBayar,
+    TResult Function(String paymentMethod, List<OrderItem> orders)?
+        processOrder,
+    required TResult orElse(),
+  }) {
+    if (processOrder != null) {
+      return processOrder(paymentMethod, orders);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_AddNominalBayar value) addNominalBayar,
+    required TResult Function(_ProcessOrder value) processOrder,
+  }) {
+    return processOrder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_AddNominalBayar value)? addNominalBayar,
+    TResult? Function(_ProcessOrder value)? processOrder,
+  }) {
+    return processOrder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_AddNominalBayar value)? addNominalBayar,
+    TResult Function(_ProcessOrder value)? processOrder,
+    required TResult orElse(),
+  }) {
+    if (processOrder != null) {
+      return processOrder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ProcessOrder implements OrderEvent {
+  const factory _ProcessOrder(
+          final String paymentMethod, final List<OrderItem> orders) =
+      _$ProcessOrderImpl;
+
+  String get paymentMethod;
+  List<OrderItem> get orders;
+  @JsonKey(ignore: true)
+  _$$ProcessOrderImplCopyWith<_$ProcessOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

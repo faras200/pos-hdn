@@ -45,9 +45,14 @@ class HistoryTransactionCard extends StatelessWidget {
             builder: (context) => TransactionDetailDialoge(dataDetail: data),
           );
         },
-        leading: Assets.icons.payments.svg(),
-        title: Text('${data.paymentMethod}, ${data.id}'),
-        subtitle: Text('${data.totalQuantity} items'),
+        leading: Assets.icons.payments.svg(
+          colorFilter: ColorFilter.mode(
+            data.isSync ? AppColors.green : AppColors.orange,
+            BlendMode.srcIn,
+          ),
+        ),
+        title: Text(data.uuid),
+        subtitle: Text('${data.paymentMethod}, ${data.totalQuantity} items'),
         trailing: Text(
           data.totalPrice.currencyFormatRp,
           style: const TextStyle(

@@ -38,7 +38,8 @@ class CwbPrint {
     //       width: PosTextSize.size1,
     //     ));
 
-    bytes += generator.text('Jl. Peta Barat No.9a',
+    bytes += generator.text(
+        'Jl. Peta Barat No.9a, Kec. Kalideres, Kota Jakarta Barat 11830',
         styles: const PosStyles(bold: true, align: PosAlign.center));
     bytes += generator.text(
         'Date : ${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.now())}',
@@ -46,7 +47,7 @@ class CwbPrint {
     // bytes += generator.text('Start 12 Desember 2023',
     //     styles: const PosStyles(bold: false, align: PosAlign.center));
 
-    bytes += generator.feed(1);
+    bytes += generator.hr();
     bytes += generator.text('Pesanan:',
         styles: const PosStyles(bold: false, align: PosAlign.center));
     //for from data
@@ -71,19 +72,20 @@ class CwbPrint {
 
       bytes += generator.row([
         PosColumn(
-          text: '${product.product.harga} x ${product.quantity}',
+          text:
+              '${product.quantity} x  @${product.product.harga.currencyFormat}',
           width: 8,
           styles: const PosStyles(align: PosAlign.left),
         ),
         PosColumn(
-          text: '${product.product.harga * product.quantity}',
+          text: (product.product.harga * product.quantity).currencyFormat,
           width: 4,
           styles: const PosStyles(align: PosAlign.right),
         ),
       ]);
     }
 
-    bytes += generator.feed(1);
+    bytes += generator.hr();
 
     bytes += generator.row([
       PosColumn(
@@ -100,7 +102,7 @@ class CwbPrint {
 
     bytes += generator.row([
       PosColumn(
-        text: 'Bayar',
+        text: 'Bayar $paymentMethod',
         width: 6,
         styles: const PosStyles(align: PosAlign.left),
       ),
@@ -111,20 +113,23 @@ class CwbPrint {
       ),
     ]);
 
-    bytes += generator.row([
-      PosColumn(
-        text: 'Pembayaran',
-        width: 8,
-        styles: const PosStyles(align: PosAlign.left),
-      ),
-      PosColumn(
-        text: paymentMethod,
-        width: 4,
-        styles: const PosStyles(align: PosAlign.right),
-      ),
-    ]);
+    if ((nominalBayar - totalPrice) > 0) {
+      bytes += generator.row([
+        PosColumn(
+          text: 'Kembalian',
+          width: 8,
+          styles: const PosStyles(align: PosAlign.left),
+        ),
+        PosColumn(
+          text: (nominalBayar - totalPrice).currencyFormatRp,
+          width: 4,
+          styles: const PosStyles(align: PosAlign.right),
+        ),
+      ]);
+    }
 
-    bytes += generator.feed(1);
+    bytes += generator.hr();
+
     bytes += generator.text('Terima kasih',
         styles: const PosStyles(bold: false, align: PosAlign.center));
     bytes += generator.feed(3);

@@ -10,7 +10,22 @@ part 'order_bloc.freezed.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc() : super(const _Success([], 0, 0, '', 0, 0, '')) {
-    on<_AddPaymentMethod>((event, emit) async {
+    on<_AddNominalBayar>((event, emit) {
+      var currentStates = state as _Success;
+      emit(const _Loading());
+
+      emit(_Success(
+        currentStates.products,
+        currentStates.totalQuantity,
+        currentStates.totalPrice,
+        currentStates.paymentMethod,
+        event.nominal,
+        currentStates.idKasir,
+        currentStates.namaKasir,
+      ));
+    });
+
+    on<_ProcessOrder>((event, emit) async {
       emit(const _Loading());
 
       final userData = await AuthLocalDatasource().getAuthData();
@@ -26,21 +41,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         0,
         userData!.data.user.id,
         userData.data.user.name,
-      ));
-    });
-
-    on<_AddNominalBayar>((event, emit) {
-      var currentStates = state as _Success;
-      emit(const _Loading());
-
-      emit(_Success(
-        currentStates.products,
-        currentStates.totalQuantity,
-        currentStates.totalPrice,
-        currentStates.paymentMethod,
-        event.nominal,
-        currentStates.idKasir,
-        currentStates.namaKasir,
       ));
     });
 

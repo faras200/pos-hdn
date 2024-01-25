@@ -53,21 +53,22 @@ class TransactionDetailDialoge extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SpaceHeight(12.0),
-          _LabelValue(
-            label: 'METODE PEMBAYARAN',
-            value: dataDetail.paymentMethod,
-          ),
-          const Divider(height: 30.0),
+          // const SpaceHeight(12.0),
+          // _LabelValue(
+          //   label: 'METODE PEMBAYARAN',
+          //   value: dataDetail.paymentMethod,
+          // ),
+          // const Divider(height: 30.0),
           _LabelValue(
             label: 'TOTAL PEMBELIAN',
+            value:
+                '${dataDetail.totalPrice.currencyFormatRp}   ( ${dataDetail.paymentMethod} )',
+          ),
+          const Divider(height: 36.0),
+          _LabelValue(
+            label: 'NOMINAL BAYAR',
             value: dataDetail.nominalBayar.currencyFormatRp,
           ),
-          // const Divider(height: 36.0),
-          // _LabelValue(
-          //   label: 'NOMINAL BAYAR',
-          //   value: 123000.currencyFormatRp,
-          // ),
           const Divider(height: 30.0),
           _LabelValue(
             label: 'WAKTU PEMBAYARAN',
@@ -106,11 +107,11 @@ class TransactionDetailDialoge extends StatelessWidget {
                           itemBuilder: (context, index) => ItemProductCard(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 4.0),
-                            data: product[index],
+                            data: orders[index],
                           ),
                         ),
                       ),
-                      const SpaceHeight(40.0),
+                      const SpaceHeight(30.0),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

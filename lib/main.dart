@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
           create: (context) => HistoryDetailBloc(),
         ),
         BlocProvider(
-          create: (context) => SyncOrderBloc(OrderRemoteDatasource()),
+          create: (context) => SyncOrderBloc(OrderRemoteDatasource.instance),
         ),
       ],
       child: MaterialApp(

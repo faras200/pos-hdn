@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/models/order_item.dart';
@@ -24,7 +25,7 @@ class OrderPage extends StatefulWidget {
 
 class _OrderPageState extends State<OrderPage> {
   var indexValue = ValueNotifier(0);
-
+  String payment = '';
   int totalPrice = 0;
   int cekItem = 0;
   List<OrderItem> orders = [];
@@ -87,129 +88,128 @@ class _OrderPageState extends State<OrderPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            BlocBuilder<CheckoutBloc, CheckoutState>(
-              builder: (context, state) {
-                return state.maybeWhen(
-                  orElse: () {
-                    return const SizedBox.shrink();
-                  },
-                  success: (data, qty, total) {
-                    return ValueListenableBuilder(
-                      valueListenable: indexValue,
-                      builder: (context, value, _) => Row(
-                        children: [
-                          const SpaceWidth(10.0),
-                          MenuButton(
-                            iconPath: Assets.icons.cash.path,
-                            label: 'Tunai',
-                            isActive: value == 1,
-                            onPressed: () {
-                              if (cekItem != 0) {
-                                indexValue.value = 1;
-                                context.read<OrderBloc>().add(
-                                    OrderEvent.addPaymentMethod('Tunai', data));
-                              } else {
-                                AwesomeDialog(
-                                        context: context,
-                                        dialogType: DialogType.warning,
-                                        headerAnimationLoop: false,
-                                        animType: AnimType.bottomSlide,
-                                        title: 'Peringatan!',
-                                        desc: 'Produk tidak boleh kosong!!',
-                                        buttonsTextStyle: const TextStyle(
-                                            color: Colors.white),
-                                        showCloseIcon: true,
-                                        btnOkOnPress: () {},
-                                        btnOkColor: AppColors.primary)
-                                    .show();
-                              }
-                            },
-                          ),
-                          const SpaceWidth(10.0),
-                          MenuButton(
-                            iconPath: Assets.icons.qrCode.path,
-                            label: 'QRIS',
-                            isActive: value == 2,
-                            onPressed: () {
-                              if (cekItem != 0) {
-                                indexValue.value = 2;
-                                context.read<OrderBloc>().add(
-                                    OrderEvent.addPaymentMethod('QRIS', data));
-                              } else {
-                                AwesomeDialog(
-                                        context: context,
-                                        dialogType: DialogType.warning,
-                                        headerAnimationLoop: false,
-                                        animType: AnimType.bottomSlide,
-                                        title: 'Peringatan!',
-                                        desc: 'Produk tidak boleh kosong!!',
-                                        buttonsTextStyle: const TextStyle(
-                                            color: Colors.white),
-                                        showCloseIcon: true,
-                                        btnOkOnPress: () {},
-                                        btnOkColor: AppColors.primary)
-                                    .show();
-                              }
-                            },
-                          ),
-                          const SpaceWidth(10.0),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
+            ValueListenableBuilder(
+              valueListenable: indexValue,
+              builder: (context, value, _) => Row(
+                children: [
+                  const SpaceWidth(10.0),
+                  MenuButton(
+                    iconPath: Assets.icons.cash.path,
+                    label: 'Tunai',
+                    isActive: value == 1,
+                    onPressed: () {
+                      if (cekItem != 0) {
+                        indexValue.value = 1;
+                        payment = 'Tunai';
+                      } else {
+                        AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                headerAnimationLoop: false,
+                                animType: AnimType.bottomSlide,
+                                title: 'Peringatan!',
+                                desc: 'Produk tidak boleh kosong!!',
+                                buttonsTextStyle:
+                                    const TextStyle(color: Colors.white),
+                                showCloseIcon: true,
+                                btnOkOnPress: () {},
+                                btnOkColor: AppColors.primary)
+                            .show();
+                      }
+                    },
+                  ),
+                  const SpaceWidth(10.0),
+                  MenuButton(
+                    iconPath: Assets.icons.qrCode.path,
+                    label: 'QRIS',
+                    isActive: value == 2,
+                    onPressed: () {
+                      if (cekItem != 0) {
+                        indexValue.value = 2;
+                        payment = 'QRIS';
+                      } else {
+                        AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                headerAnimationLoop: false,
+                                animType: AnimType.bottomSlide,
+                                title: 'Peringatan!',
+                                desc: 'Produk tidak boleh kosong!!',
+                                buttonsTextStyle:
+                                    const TextStyle(color: Colors.white),
+                                showCloseIcon: true,
+                                btnOkOnPress: () {},
+                                btnOkColor: AppColors.primary)
+                            .show();
+                      }
+                    },
+                  ),
+                  const SpaceWidth(10.0),
+                ],
+              ),
             ),
             const SpaceHeight(20.0),
-            ProcessButton(
-              price: 0,
-              onPressed: () async {
-                if (indexValue.value == 0) {
-                  if (cekItem == 0) {
-                    AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.warning,
-                            headerAnimationLoop: false,
-                            animType: AnimType.bottomSlide,
-                            title: 'Peringatan!',
-                            desc: 'Produk tidak boleh kosong!!',
-                            buttonsTextStyle:
-                                const TextStyle(color: Colors.white),
-                            showCloseIcon: true,
-                            btnOkOnPress: () {},
-                            btnOkColor: AppColors.primary)
-                        .show();
-                  } else {
-                    AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.warning,
-                            headerAnimationLoop: false,
-                            animType: AnimType.bottomSlide,
-                            title: 'Peringatan!',
-                            desc: 'Metode pembayaran wajib dipilih',
-                            buttonsTextStyle:
-                                const TextStyle(color: Colors.white),
-                            showCloseIcon: true,
-                            btnOkOnPress: () {},
-                            btnOkColor: AppColors.primary)
-                        .show();
-                  }
-                } else if (indexValue.value == 1) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => PaymentCashDialog(
-                      price: totalPrice,
-                    ),
+            BlocBuilder<CheckoutBloc, CheckoutState>(
+              builder: (context, state) {
+                return state.maybeWhen(orElse: () {
+                  return const SizedBox.shrink();
+                }, success: (data, qty, total) {
+                  return ProcessButton(
+                    price: 0,
+                    onPressed: () async {
+                      context
+                          .read<OrderBloc>()
+                          .add(OrderEvent.processOrder(payment, data));
+
+                      if (indexValue.value == 0) {
+                        if (cekItem == 0) {
+                          AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.warning,
+                                  headerAnimationLoop: false,
+                                  animType: AnimType.bottomSlide,
+                                  title: 'Peringatan!',
+                                  desc: 'Produk tidak boleh kosong!!',
+                                  buttonsTextStyle:
+                                      const TextStyle(color: Colors.white),
+                                  showCloseIcon: true,
+                                  btnOkOnPress: () {},
+                                  btnOkColor: AppColors.primary)
+                              .show();
+                        } else {
+                          AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.warning,
+                                  headerAnimationLoop: false,
+                                  animType: AnimType.bottomSlide,
+                                  title: 'Peringatan!',
+                                  desc: 'Metode pembayaran wajib dipilih',
+                                  buttonsTextStyle:
+                                      const TextStyle(color: Colors.white),
+                                  showCloseIcon: true,
+                                  btnOkOnPress: () {},
+                                  btnOkColor: AppColors.primary)
+                              .show();
+                        }
+                      } else if (indexValue.value == 1) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => PaymentCashDialog(
+                            price: totalPrice,
+                          ),
+                        );
+                      } else if (indexValue.value == 2) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => PaymentQrisDialog(
+                            price: totalPrice,
+                          ),
+                        );
+                      }
+                    },
                   );
-                } else if (indexValue.value == 2) {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (context) => PaymentQrisDialog(
-                      price: totalPrice,
-                    ),
-                  );
-                }
+                });
               },
             ),
           ],
