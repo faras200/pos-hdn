@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/presentations/manage/pages/manage_product_page.dart';
 import 'package:pos_hdn/presentations/manage/pages/save_server_key_page.dart';
@@ -20,7 +21,10 @@ class ManageMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kelola Menu'),
+        title: const Text(
+          'Kelola Menu',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: Column(
@@ -72,7 +76,7 @@ class ManageMenuPage extends StatelessWidget {
               ],
             ),
           ),
-          const SpaceHeight(60),
+          const SpaceHeight(100),
           const Divider(),
           BlocConsumer<LogoutBloc, LogoutState>(
             listener: (context, state) {
@@ -89,10 +93,18 @@ class ManageMenuPage extends StatelessWidget {
             },
             builder: (context, state) {
               return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.red,
+                    maximumSize: const Size(200, 100),
+                    fixedSize: const Size(180, 50)),
                 onPressed: () {
                   context.read<LogoutBloc>().add(const LogoutEvent.logout());
                 },
-                child: const Text('Logout'),
+                child: const Text(
+                  'Logout',
+                  style: TextStyle(
+                      color: AppColors.white, fontWeight: FontWeight.w900),
+                ), //color: AppColors.red),
               );
             },
           ),

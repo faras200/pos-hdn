@@ -29,7 +29,7 @@ class ProductCard extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 1, color: AppColors.card),
+              side: const BorderSide(width: 1, color: Color(0xff31b1a4)),
               borderRadius: BorderRadius.circular(19),
             ),
           ),
@@ -133,7 +133,7 @@ class ProductCard extends StatelessWidget {
                             top: 8,
                             right: 8,
                             child: CircleAvatar(
-                              backgroundColor: AppColors.primary,
+                              backgroundColor: AppColors.red,
                               child: Text(
                                 products
                                     .firstWhere(

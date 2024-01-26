@@ -15,37 +15,6 @@ class ManageProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<ProductModel> products = [
-      ProductModel(
-        image: Assets.images.f1.path,
-        name: 'Vanila Late Vanila itu',
-        category: ProductCategory.drink,
-        price: 200000,
-        stock: 10,
-      ),
-      ProductModel(
-        image: Assets.images.f2.path,
-        name: 'V60',
-        category: ProductCategory.drink,
-        price: 1200000,
-        stock: 10,
-      ),
-      ProductModel(
-        image: Assets.images.f3.path,
-        name: 'Americano',
-        category: ProductCategory.drink,
-        price: 2100000,
-        stock: 10,
-      ),
-      ProductModel(
-        image: Assets.images.f4.path,
-        name: 'Coklat',
-        category: ProductCategory.food,
-        price: 200000,
-        stock: 10,
-      ),
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kelola Produk'),

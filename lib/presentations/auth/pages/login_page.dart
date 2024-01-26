@@ -37,32 +37,32 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50.0),
               child: Image.asset(
-                Assets.images.logo.path,
+                Assets.images.logoSplash.path,
                 width: 150,
                 height: 150,
               )),
           const SpaceHeight(24.0),
           const Center(
             child: Text(
-              "Login Pos HDN",
+              "LOGIN",
               style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
+                fontSize: 18,
+                fontWeight: FontWeight.w900,
                 color: Colors.black,
               ),
             ),
           ),
           const SpaceHeight(8.0),
-          const Center(
-            child: Text(
-              "Masuk untuk kasir",
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey,
-              ),
-            ),
-          ),
+          // const Center(
+          //   child: Text(
+          //     "",
+          //     style: TextStyle(
+          //       fontSize: 12,
+          //       fontWeight: FontWeight.w400,
+          //       color: Colors.grey,
+          //     ),
+          //   ),
+          // ),
           const SpaceHeight(40.0),
           CustomTextField(
             controller: usernameController,

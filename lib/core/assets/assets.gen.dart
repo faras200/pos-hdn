@@ -104,32 +104,13 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/f1.jpeg
-  AssetGenImage get f1 => const AssetGenImage('assets/images/f1.jpeg');
+  /// File path: assets/images/logo_icon.png
+  AssetGenImage get logoIcon =>
+      const AssetGenImage('assets/images/logo_icon.png');
 
-  /// File path: assets/images/f2.jpeg
-  AssetGenImage get f2 => const AssetGenImage('assets/images/f2.jpeg');
-
-  /// File path: assets/images/f3.jpeg
-  AssetGenImage get f3 => const AssetGenImage('assets/images/f3.jpeg');
-
-  /// File path: assets/images/f4.jpeg
-  AssetGenImage get f4 => const AssetGenImage('assets/images/f4.jpeg');
-
-  /// File path: assets/images/f5.jpeg
-  AssetGenImage get f5 => const AssetGenImage('assets/images/f5.jpeg');
-
-  /// File path: assets/images/f6.jpeg
-  AssetGenImage get f6 => const AssetGenImage('assets/images/f6.jpeg');
-
-  /// File path: assets/images/f7.jpeg
-  AssetGenImage get f7 => const AssetGenImage('assets/images/f7.jpeg');
-
-  /// File path: assets/images/f8.jpeg
-  AssetGenImage get f8 => const AssetGenImage('assets/images/f8.jpeg');
-
-  /// File path: assets/images/logo.png
-  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+  /// File path: assets/images/logo_splash.png
+  AssetGenImage get logoSplash =>
+      const AssetGenImage('assets/images/logo_splash.png');
 
   /// File path: assets/images/manage_printer.png
   AssetGenImage get managePrinter =>
@@ -143,29 +124,17 @@ class $AssetsImagesGen {
   AssetGenImage get manageProduct =>
       const AssetGenImage('assets/images/manage_product.png');
 
-  /// File path: assets/images/pos_logo.png
-  AssetGenImage get posLogo =>
-      const AssetGenImage('assets/images/pos_logo.png');
-
   /// File path: assets/images/sync_cloud.png
   AssetGenImage get syncCloud =>
       const AssetGenImage('assets/images/sync_cloud.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        f1,
-        f2,
-        f3,
-        f4,
-        f5,
-        f6,
-        f7,
-        f8,
-        logo,
+        logoIcon,
+        logoSplash,
         managePrinter,
         managePrinterx,
         manageProduct,
-        posLogo,
         syncCloud
       ];
 }

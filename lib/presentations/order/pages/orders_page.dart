@@ -42,14 +42,16 @@ class _OrderPageState extends State<OrderPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Order Detail'),
+        title: const Text('Order Detail',
+            style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
               context.read<CheckoutBloc>().add(const CheckoutEvent.started());
             },
-            icon: Assets.icons.delete.svg(),
+            // ignore: deprecated_member_use_from_same_package
+            icon: Assets.icons.delete.svg(color: Colors.red),
           ),
         ],
       ),
