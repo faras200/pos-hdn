@@ -8,9 +8,7 @@ import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/core/extensions/string_ext.dart';
 import 'package:pos_hdn/data/datasources/order_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/order_remote_datasource.dart';
-import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
 import 'package:pos_hdn/data/models/request/order_request_model.dart';
-import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 

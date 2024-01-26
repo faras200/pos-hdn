@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:pos_hdn/core/assets/assets.gen.dart';
 import 'package:pos_hdn/core/components/buttons.dart';
 import 'package:pos_hdn/core/components/spaces.dart';
+import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/date_time_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/data/dataoutputs/cwb_print.dart';
-import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
 import 'package:pos_hdn/presentations/history/bloc/history_detail/history_detail_bloc.dart';
 import 'package:pos_hdn/presentations/history/widgets/item_product_card.dart';
-import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
-import 'package:pos_hdn/presentations/home/models/order_item.dart';
-import 'package:pos_hdn/presentations/home/pages/dashboard_page.dart';
-import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
-import 'package:pos_hdn/presentations/order/widgets/order_card.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
 class TransactionDetailDialoge extends StatelessWidget {
@@ -53,12 +47,6 @@ class TransactionDetailDialoge extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // const SpaceHeight(12.0),
-          // _LabelValue(
-          //   label: 'METODE PEMBAYARAN',
-          //   value: dataDetail.paymentMethod,
-          // ),
-          // const Divider(height: 30.0),
           _LabelValue(
             label: 'TOTAL PEMBELIAN',
             value:
@@ -141,7 +129,9 @@ class TransactionDetailDialoge extends StatelessWidget {
                                     printValue);
                               },
                               label: 'Print',
-                              icon: Assets.icons.print.svg(),
+                              icon: Assets.icons.print
+                                  // ignore: deprecated_member_use_from_same_package
+                                  .svg(color: AppColors.primary),
                               fontSize: 13,
                             ),
                           ),
@@ -149,25 +139,6 @@ class TransactionDetailDialoge extends StatelessWidget {
                       ),
                     ],
                   );
-                  // return Column(
-                  //   children: [
-                  //     SizedBox(
-                  //       width: double.maxFinite,
-                  //       height: 200,
-                  //       child: ListView.builder(
-                  //         itemBuilder: (context, index) {
-                  //           return ListTile(
-                  //             title: Text('${data[index].productId}'),
-                  //             subtitle: Text(
-                  //               product[index].name,
-                  //             ),
-                  //           );
-                  //         },
-                  //         itemCount: data.length,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // );
                 },
               );
             },

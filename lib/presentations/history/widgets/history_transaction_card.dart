@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/presentations/history/bloc/history_detail/history_detail_bloc.dart';
 import 'package:pos_hdn/presentations/history/widgets/transction_detail_dialoge.dart';
@@ -8,7 +7,6 @@ import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/constants/colors.dart';
-import '../models/history_transaction_model.dart';
 
 class HistoryTransactionCard extends StatelessWidget {
   final OrderModel data;

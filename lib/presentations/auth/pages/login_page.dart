@@ -7,7 +7,6 @@ import 'package:pos_hdn/presentations/auth/bloc/login/login_bloc.dart';
 import '../../../core/components/buttons.dart';
 import '../../../core/components/custom_text_field.dart';
 import '../../../core/components/spaces.dart';
-import '../../home/pages/dashboard_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

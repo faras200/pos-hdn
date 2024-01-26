@@ -1,7 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/models/order_item.dart';
@@ -10,7 +9,6 @@ import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/menu_button.dart';
 import '../../../core/components/spaces.dart';
-import '../models/order_model.dart';
 import '../widgets/order_card.dart';
 import '../widgets/payment_cash_dialog.dart';
 import '../widgets/payment_qris_dialog.dart';

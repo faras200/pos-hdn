@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/data/datasources/order_local_datasource.dart';
-import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:pos_hdn/presentations/order/bloc/qris/qris_bloc.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';

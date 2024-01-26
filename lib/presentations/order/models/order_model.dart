@@ -1,25 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:pos_hdn/core/extensions/int_ext.dart';
-
 import '../../home/models/order_item.dart';
-
-// class OrderModel {
-//   final String image;
-//   final String name;
-//   final int price;
-//   int quantity;
-
-//   OrderModel({
-//     required this.image,
-//     required this.name,
-//     required this.price,
-//     this.quantity = 1,
-//   });
-
-//   String get priceFormat => price.currencyFormatRp;
-// }
 
 class OrderModel {
   final int? id;
@@ -65,13 +47,6 @@ class OrderModel {
       'qris': qris,
     };
   }
-
-  //  mominal INTEGER,
-  //       payment_method TEXT
-  //       total_item INTEGER,
-  //       id_kasir INTEGER,
-  //       nama_kasir TEXT,
-  //       is_sync INTEGER DEFAULT 0
 
   Map<String, dynamic> toMapForLocal() {
     return {

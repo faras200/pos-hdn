@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pos_hdn/data/datasources/auth_local_datasource.dart';
-import 'package:pos_hdn/presentations/auth/pages/login_page.dart';
-import 'package:pos_hdn/presentations/home/bloc/logout/logout_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/menu_button.dart';
 import '../../../core/components/search_input.dart';
 import '../../../core/components/spaces.dart';
-import '../models/product_category.dart';
-import '../models/product_model.dart';
 import '../widgets/product_card.dart';
 import '../widgets/product_empty.dart';
 

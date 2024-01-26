@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/date_time_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
@@ -104,7 +105,9 @@ class PaymentSuccessDialog extends StatelessWidget {
                             //     await PrintBluetoothThermal.writeBytes(ticket);
                           },
                           label: 'Print',
-                          icon: Assets.icons.print.svg(),
+                          icon:
+                              // ignore: deprecated_member_use_from_same_package
+                              Assets.icons.print.svg(color: AppColors.primary),
                           fontSize: 13,
                         ),
                       ),

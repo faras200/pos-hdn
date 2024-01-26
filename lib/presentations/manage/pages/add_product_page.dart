@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/core/extensions/string_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:pos_hdn/data/models/response/product_response_model.dart';
@@ -129,7 +126,7 @@ class _AddProductPageState extends State<AddProductPage> {
                     onPressed: () {
                       final String name = nameController!.text;
                       final int price = priceController!.text.toIntegerFromText;
-                      final int stock = stockController!.text.toIntegerFromText;
+                      // final int stock = stockController!.text.toIntegerFromText;
                       final Product product = Product(
                         name: name,
                         harga: price,

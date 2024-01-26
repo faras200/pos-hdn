@@ -8,7 +8,6 @@ import 'package:pos_hdn/presentations/home/models/order_item.dart';
 import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/variabels.dart';
-import '../models/order_model.dart';
 
 class OrderCard extends StatelessWidget {
   final OrderItem data;
