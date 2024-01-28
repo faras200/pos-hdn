@@ -212,6 +212,10 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
             builder: (context, state) {
               return state.maybeWhen(orElse: () {
                 return const SizedBox();
+              }, loading: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               }, success: (data, qty, total, payment, _, idKasir, namaKasir) {
                 return Button.filled(
                   onPressed: () {

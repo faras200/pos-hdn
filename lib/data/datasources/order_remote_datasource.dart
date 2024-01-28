@@ -19,13 +19,16 @@ class OrderRemoteDatasource {
     final log = Logger();
     log.d(requestModel.toJson());
     try {
-      final response = await http.post(
-        url,
-        headers: headers,
-        body: requestModel.toJson(),
-      );
+      final response = await http
+          .post(
+            url,
+            headers: headers,
+            body: requestModel.toJson(),
+          )
+          .timeout(const Duration(seconds: 5))
+          .then((value) => null);
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 201 || response != null) {
         return true;
       } else {
         return false;

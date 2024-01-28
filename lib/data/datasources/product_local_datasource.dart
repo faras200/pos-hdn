@@ -35,7 +35,7 @@ class ProductLocalDatasource {
     final db = await instanceDb.database;
     final result = await db.query(tableProducts);
 
-    return result.map((e) => Product.fromMap(e)).toList();
+    return result.map((e) => Product.fromMapLocal(e)).toList();
   }
 
   //get product by id

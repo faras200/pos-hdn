@@ -70,10 +70,10 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme,
           ),
           appBarTheme: AppBarTheme(
-            color: AppColors.white,
+            color: AppColors.primary,
             elevation: 0,
             titleTextStyle: GoogleFonts.quicksand(
-              color: AppColors.primary,
+              color: AppColors.white,
               fontSize: 16.0,
               fontWeight: FontWeight.w500,
             ),
