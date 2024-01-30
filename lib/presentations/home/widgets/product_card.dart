@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
+import 'package:units_converter/units_converter.dart';
 
 import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
@@ -36,31 +37,59 @@ class ProductCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(5.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.disabled.withOpacity(0.4),
-                ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(50.0)),
-                  child: CachedNetworkImage(
-                    imageUrl: "${Variables.imageBaseUrl}${data.image}",
-                    placeholder: (context, url) => Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.all(5.0),
-                        width: 80,
-                        height: 80,
-                        constraints: const BoxConstraints(maxWidth: 90.0),
-                        child: const CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => const Icon(
-                      Icons.food_bank_outlined,
-                      size: 90,
+              Stack(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.light,
                     ),
-                    width: 90,
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(50.0)),
+                      child: CachedNetworkImage(
+                        imageUrl: "${Variables.imageBaseUrl}${data.image}",
+                        placeholder: (context, url) => Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(5.0),
+                            width: 80,
+                            height: 80,
+                            constraints: const BoxConstraints(maxWidth: 90.0),
+                            child: const CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.food_bank_outlined,
+                          size: 90,
+                        ),
+                        width: 90,
+                      ),
+                    ),
                   ),
-                ),
+                  Positioned(
+                    bottom: 0.0,
+                    left: 10.0,
+                    child: data.berat != 0
+                        ? Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.light,
+                            ),
+                            child: Text(
+                              data.berat >= 1000
+                                  ? '${data.berat.convertFromTo(MASS.grams, MASS.kilograms)?.toInt()}Kg'
+                                  : '${data.berat}Gr',
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        : const SizedBox(),
+                  )
+                ],
               ),
               const Spacer(),
               Text(

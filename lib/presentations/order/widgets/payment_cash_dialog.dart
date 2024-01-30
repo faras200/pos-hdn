@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
+import 'package:pos_hdn/core/controller/conectivity_controller.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/core/extensions/string_ext.dart';
@@ -28,10 +29,15 @@ class PaymentCashDialog extends StatefulWidget {
 
 class _PaymentCashDialogState extends State<PaymentCashDialog> {
   TextEditingController? priceController;
+  ConnectivityController connectivityController = ConnectivityController();
 
   @override
   void initState() {
     priceController = TextEditingController(text: '0');
+    connectivityController.init();
+    // if (connectivityController.isConnected.value == false) {
+
+    // }
     super.initState();
   }
 
@@ -155,7 +161,7 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                 orElse: () {},
                 success: (data, qty, total, payment, nominal, idKasir,
                     namaKasir) async {
-                  Logger().d(total);
+                  // Logger().d(total);
                   final timeNow =
                       DateFormat('yyyy-MM-ddTHH:mm:ss').format(DateTime.now());
                   final uuid = 'INV${DateTime.now().millisecondsSinceEpoch}';
@@ -175,28 +181,30 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                   final saveDbLocal = await OrderLocalDatasource.instance
                       .saveOrder(orderModel); //return id order
 
-                  final orderItems = data
-                      .map((e) => OrderItemModel(
-                          productId: e.product.id!,
-                          quantity: e.quantity,
-                          totalPrice: (e.quantity * e.product.harga)))
-                      .toList();
+                  if (connectivityController.isConnected.value) {
+                    final orderItems = data
+                        .map((e) => OrderItemModel(
+                            productId: e.product.id!,
+                            quantity: e.quantity,
+                            totalPrice: (e.quantity * e.product.harga)))
+                        .toList();
 
-                  final orderRequestModel = OrderRequestModel(
-                      transactionTime: timeNow,
-                      kasirId: idKasir,
-                      totalPrice: total,
-                      totalItem: qty,
-                      orderItems: orderItems,
-                      uuid: uuid);
+                    final orderRequestModel = OrderRequestModel(
+                        transactionTime: timeNow,
+                        kasirId: idKasir,
+                        totalPrice: total,
+                        totalItem: qty,
+                        orderItems: orderItems,
+                        uuid: uuid);
 
-                  final saveDbRemote = await OrderRemoteDatasource.instance
-                      .sendOrder(orderRequestModel);
+                    final saveDbRemote = await OrderRemoteDatasource.instance
+                        .sendOrder(orderRequestModel);
 
-                  if (saveDbRemote) {
-                    //Update db local to isSync
-                    OrderLocalDatasource.instance
-                        .updateIsSyncOrderById(saveDbLocal);
+                    if (saveDbRemote) {
+                      //Update db local to isSync
+                      OrderLocalDatasource.instance
+                          .updateIsSyncOrderById(saveDbLocal);
+                    }
                   }
 
                   // ignore: use_build_context_synchronously

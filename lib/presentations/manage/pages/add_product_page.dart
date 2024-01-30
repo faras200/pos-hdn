@@ -133,6 +133,7 @@ class _AddProductPageState extends State<AddProductPage> {
                         typeId: int.parse(category),
                         image: imageFile!.path,
                         isBestSeller: isBestSeller,
+                        berat: 0,
                       );
                       context
                           .read<ProductBloc>()

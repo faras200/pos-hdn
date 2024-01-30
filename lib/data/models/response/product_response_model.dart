@@ -39,6 +39,7 @@ class Product {
   final String name;
   final String image;
   final int harga;
+  final int berat;
   final String? type;
 
   Product({
@@ -49,6 +50,7 @@ class Product {
     required this.name,
     required this.image,
     required this.harga,
+    required this.berat,
     this.type,
   });
 
@@ -63,18 +65,20 @@ class Product {
         isBestSeller: json["is_best_seller"] == 1 ? true : false,
         name: json["short_name"] ?? json["name"],
         image: json["image"] ?? "",
+        berat: json["berat"] == null ? 0 : int.parse(json["berat"]),
         harga: json["harga"] == null ? 0 : int.parse(json["harga"]),
         type: json["type"] ?? "",
       );
 
   factory Product.fromMapLocal(Map<String, dynamic> json) => Product(
         id: json["id"] ?? 0,
-        productId: json["id"] ?? 0,
-        typeId: json["type_id"] ?? 0,
+        productId: json["product_id"] ?? 0,
+        typeId: int.parse(json["category"]),
         isBestSeller: json["is_best_seller"] == 1 ? true : false,
         name: json["short_name"] ?? json["name"],
         image: json["image"] ?? "",
         harga: json["harga"] ?? 0,
+        berat: json["berat"] ?? 0,
         type: json["type"] ?? "",
       );
 
@@ -82,6 +86,7 @@ class Product {
         "name": name,
         "image": image,
         "harga": harga,
+        "berat": berat,
         "category": type,
         "is_best_seller": isBestSeller ? 1 : 0,
       };
@@ -90,8 +95,10 @@ class Product {
         "name": name,
         "image": image,
         "harga": harga,
+        "berat": berat,
         "is_best_seller": isBestSeller ? 1 : 0,
         "product_id": id,
+        "category": typeId
       };
 
   @override
@@ -126,6 +133,7 @@ class Product {
     String? name,
     String? image,
     int? harga,
+    int? berat,
     String? type,
   }) {
     return Product(
@@ -136,6 +144,7 @@ class Product {
       name: name ?? this.name,
       image: image ?? this.image,
       harga: harga ?? this.harga,
+      berat: berat ?? this.berat,
       type: type ?? this.type,
     );
   }

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
+import 'package:pos_hdn/core/components/network_alert.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
+import 'package:pos_hdn/core/controller/conectivity_controller.dart';
 import 'package:pos_hdn/data/datasources/auth_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
 import 'package:pos_hdn/data/models/response/auth_response_model.dart';
+import 'package:pos_hdn/data/models/response/product_response_model.dart';
 import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
 import 'package:pos_hdn/presentations/manage/pages/settings_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/menu_button.dart';
@@ -22,6 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ConnectivityController connectivityController = ConnectivityController();
   final searchController = TextEditingController();
   final indexValue = ValueNotifier(0);
   dynamic dataUser = false;
@@ -32,13 +38,47 @@ class _HomePageState extends State<HomePage> {
     getData = (await AuthLocalDatasource().getAuthData())!;
   }
 
+  Future<bool> isfirsttime() async {
+    final prefs = await SharedPreferences.getInstance();
+    var isfirsttime = prefs.getBool('first_time');
+    if (isfirsttime != null && !isfirsttime) {
+      prefs.setBool('first_time', false);
+      return false;
+    } else {
+      prefs.setBool('first_time', false);
+      return true;
+    }
+  }
+
   late int category = 0;
   @override
   void initState() {
     super.initState();
-    context.read<ProductBloc>().add(const ProductEvent.fetchLocal());
+    connectivityController.init();
+    if (connectivityController.isConnected.value == false) {
+      context.read<ProductBloc>().add(const ProductEvent.fetchLocal());
+    }
+
     getDataUser();
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 2), () {
+      isfirsttime().then((isfirsttime) async {
+        if (isfirsttime) {
+          List<Product> fetchProduct =
+              // ignore: use_build_context_synchronously
+              BlocProvider.of<ProductBloc>(context).state.maybeWhen(
+                    orElse: () => [],
+                    success: (products) {
+                      return products;
+                    },
+                  );
+
+          await ProductLocalDatasource.instance.insertAllProduct(fetchProduct);
+          log.d(fetchProduct);
+          log.d("first time");
+        } else {
+          log.d("not first time");
+        }
+      });
       setState(() {
         dataUser = getData;
       });
@@ -67,7 +107,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50.0),
+        preferredSize: const Size.fromHeight(56.0),
         child: Container(
           decoration: const BoxDecoration(
             color: AppColors.primary,
@@ -199,17 +239,9 @@ class AppBarContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
             children: <Widget>[
-              IconButton(
-                icon: const Icon(
-                  Icons.face,
-                  size: 20,
-                ),
-                color: Colors.white,
-                onPressed: () {},
-              ),
               Text(
                 'Hi, $username',
                 style: const TextStyle(
@@ -218,10 +250,11 @@ class AppBarContent extends StatelessWidget {
                 ),
               ),
               const Spacer(),
+              const ConnectionAlert(),
               IconButton(
                 icon: const Icon(
                   Icons.manage_accounts,
-                  size: 30,
+                  size: 25,
                 ),
                 color: Colors.white,
                 onPressed: () {

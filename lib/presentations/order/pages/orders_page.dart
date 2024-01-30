@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
+import 'package:pos_hdn/core/controller/conectivity_controller.dart';
 import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/models/order_item.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
@@ -34,6 +35,17 @@ class _OrderPageState extends State<OrderPage> {
             previousValue + element.product.harga * element.quantity);
   }
 
+  ConnectivityController connectivityController = ConnectivityController();
+
+  @override
+  void initState() {
+    connectivityController.init();
+    // if (connectivityController.isConnected.value == false) {
+
+    // }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     const paddingHorizontal = EdgeInsets.symmetric(horizontal: 16.0);
@@ -49,7 +61,7 @@ class _OrderPageState extends State<OrderPage> {
               context.read<CheckoutBloc>().add(const CheckoutEvent.started());
             },
             // ignore: deprecated_member_use_from_same_package
-            icon: Assets.icons.delete.svg(color: Colors.red),
+            icon: Assets.icons.delete.svg(color: Colors.white),
           ),
         ],
       ),
@@ -124,7 +136,22 @@ class _OrderPageState extends State<OrderPage> {
                     label: 'QRIS',
                     isActive: value == 2,
                     onPressed: () {
-                      if (cekItem != 0) {
+                      if (connectivityController.isConnected.value == false) {
+                        AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                headerAnimationLoop: false,
+                                animType: AnimType.bottomSlide,
+                                title: 'Peringatan!',
+                                desc:
+                                    'Hidupkan internet untuk menggunakan QRIS',
+                                buttonsTextStyle:
+                                    const TextStyle(color: Colors.white),
+                                showCloseIcon: true,
+                                btnOkOnPress: () {},
+                                btnOkColor: AppColors.primary)
+                            .show();
+                      } else if (cekItem != 0) {
                         indexValue.value = 2;
                         payment = 'QRIS';
                       } else {

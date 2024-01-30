@@ -14,7 +14,7 @@ class QrisDbsRemoteDatasource {
     return authHeader;
   }
 
-  Future<QrisDbsResponseModel> generateQRCode(
+  Future<Result<QrisDbsResponseModel, Exception>> generateQRCode(
       String orderId, int grossAmount) async {
     final headers = {
       'Accept': 'application/json',
@@ -26,17 +26,23 @@ class QrisDbsRemoteDatasource {
       'uuid': orderId,
       'total': grossAmount,
     });
-
-    final response = await http.post(
-      Uri.parse('${Variables.baseUrl}/create/qr'),
-      headers: headers,
-      body: body,
-    );
-
-    if (response.statusCode == 200) {
-      return QrisDbsResponseModel.fromJson(response.body);
-    } else {
-      throw Exception('Failed to generate QR Code');
+    try {
+      final response = await http.post(
+        Uri.parse('${Variables.baseUrl}/create/qr'),
+        headers: headers,
+        body: body,
+      );
+      switch (response.statusCode) {
+        case 200:
+          // 2. return Success with the desired value
+          return Success(QrisDbsResponseModel.fromJson(response.body));
+        default:
+          // 3. return Failure with the desired exception
+          return Failure(Exception(response.reasonPhrase));
+      }
+    } on Exception catch (e) {
+      // 4. return Failure here too
+      return Failure(e);
     }
   }
 
@@ -65,4 +71,21 @@ class QrisDbsRemoteDatasource {
       throw Exception('Failed to check payment status');
     }
   }
+}
+
+/// Base Result class
+/// [S] represents the type of the success value
+/// [E] should be [Exception] or a subclass of it
+sealed class Result<S, E extends Exception> {
+  const Result();
+}
+
+final class Success<S, E extends Exception> extends Result<S, E> {
+  const Success(this.value);
+  final S value;
+}
+
+final class Failure<S, E extends Exception> extends Result<S, E> {
+  const Failure(this.exception);
+  final E exception;
 }

@@ -15,7 +15,9 @@ import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/logout/logout_bloc.dart';
 import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
 import 'package:pos_hdn/presentations/home/pages/dashboard_page.dart';
+import 'package:pos_hdn/presentations/manage/bloc/setoran/setoran_bloc.dart';
 import 'package:pos_hdn/presentations/manage/bloc/sync_order/sync_order_bloc.dart';
+import 'package:pos_hdn/presentations/manage/pages/setoran/setoran_page.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:pos_hdn/presentations/order/bloc/qris/qris_bloc.dart';
 
@@ -59,6 +61,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SyncOrderBloc(OrderRemoteDatasource.instance),
         ),
+        BlocProvider(
+          create: (context) => SetoranBloc(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -78,7 +83,7 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
             iconTheme: const IconThemeData(
-              color: AppColors.primary,
+              color: AppColors.white,
             ),
           ),
         ),
@@ -93,6 +98,7 @@ class MyApp extends StatelessWidget {
             }),
         routes: {
           "/dashboard": (_) => const DashboardPage(),
+          "/setoran": (_) => const SetoranPage(),
         },
       ),
     );

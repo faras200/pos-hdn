@@ -4,6 +4,7 @@ import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/presentations/manage/pages/manage_product_page.dart';
 import 'package:pos_hdn/presentations/manage/pages/save_server_key_page.dart';
+import 'package:pos_hdn/presentations/manage/pages/setoran/setoran_page.dart';
 import 'package:pos_hdn/presentations/manage/pages/sync_data_page.dart';
 
 import '../../../core/assets/assets.gen.dart';
@@ -58,7 +59,10 @@ class ManageMenuPage extends StatelessWidget {
                 MenuButton(
                   iconPath: Assets.images.managePrinterx.path,
                   label: 'Kelola Setoran',
-                  onPressed: () => context.push(const SaveServerKeyPage()),
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SetoranPage())),
                   isImage: true,
                 ),
                 const SpaceWidth(15.0),

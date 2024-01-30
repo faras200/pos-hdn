@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/data/datasources/order_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/order_remote_datasource.dart';
+import 'package:pos_hdn/data/models/request/order_request_model.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:pos_hdn/presentations/order/bloc/qris/qris_bloc.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
@@ -94,10 +96,13 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                                     orderId,
                                   ));
                             });
-                          }, success: (message) {
+                          }, success: (message) async {
                             timer?.cancel();
+                            final timeNow = DateFormat('yyyy-MM-ddTHH:mm:ss')
+                                .format(DateTime.now());
+                            final uuid = orderId;
                             final orderModel = OrderModel(
-                                uuid: orderId,
+                                uuid: uuid,
                                 qris: qris,
                                 paymentMethod: paymentMethod,
                                 nominalBayar: total,
@@ -106,17 +111,48 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                                 totalPrice: total,
                                 idKasir: idKasir,
                                 namaKasir: namaKasir,
-                                transactionTime:
-                                    DateFormat('yyyy-MM-ddTHH:mm:ss')
-                                        .format(DateTime.now()),
+                                transactionTime: timeNow,
                                 isSync: false);
-                            OrderLocalDatasource.instance.saveOrder(orderModel);
+
+                            final saveDbLocal = await OrderLocalDatasource
+                                .instance
+                                .saveOrder(orderModel); //return id order
+
+                            final orderItems = data
+                                .map((e) => OrderItemModel(
+                                    productId: e.product.id!,
+                                    quantity: e.quantity,
+                                    totalPrice: (e.quantity * e.product.harga)))
+                                .toList();
+
+                            final orderRequestModel = OrderRequestModel(
+                                paymentMethod: paymentMethod,
+                                transactionTime: timeNow,
+                                kasirId: idKasir,
+                                totalPrice: total,
+                                totalItem: qty,
+                                orderItems: orderItems,
+                                uuid: uuid);
+
+                            final saveDbRemote = await OrderRemoteDatasource
+                                .instance
+                                .sendOrder(orderRequestModel);
+
+                            if (saveDbRemote) {
+                              //Update db local to isSync
+                              OrderLocalDatasource.instance
+                                  .updateIsSyncOrderById(saveDbLocal);
+                            }
+
+                            // ignore: use_build_context_synchronously
                             context
                                 .read<OrderBloc>()
                                 .add(OrderEvent.addNominalBayar(
                                   total,
                                 ));
+                            // ignore: use_build_context_synchronously
                             context.pop();
+                            // ignore: use_build_context_synchronously
                             showDialog(
                               context: context,
                               builder: (context) =>
@@ -151,6 +187,17 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                                   ),
                                 );
                               },
+                              error: (message) => Container(
+                                width: 256.0,
+                                height: 256.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: Colors.white,
+                                ),
+                                child: Center(
+                                  child: Text(message),
+                                ),
+                              ),
                               loading: () {
                                 return Container(
                                   width: 256.0,

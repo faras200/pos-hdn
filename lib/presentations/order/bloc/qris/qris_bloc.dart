@@ -18,7 +18,12 @@ class QrisBloc extends Bloc<QrisEvent, QrisState> {
       final response = await qrisDbsRemoteDatasource.generateQRCode(
           event.orderId, event.grossAmount);
 
-      emit(QrisState.qrisResponse(response));
+      final value = switch (response) {
+        Success(value: final result) => emit(QrisState.qrisResponse(result)),
+        Failure(exception: final exception) => emit(
+            QrisState.error('Something went wrong: $exception'),
+          ),
+      };
     });
 
     on<_CheckPaymentStatus>((event, emit) async {
