@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pos_hdn/data/datasources/auth_remote_datasource.dart';
+import 'package:pos_hdn/data/datasources/remote/auth_remote_datasource.dart';
 
 part 'logout_event.dart';
 part 'logout_state.dart';

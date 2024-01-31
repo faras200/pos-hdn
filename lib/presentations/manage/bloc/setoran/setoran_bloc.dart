@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pos_hdn/data/datasources/order_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/local/order_local_datasource.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
 part 'setoran_event.dart';

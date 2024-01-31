@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/local/product_local_datasource.dart';
 import 'package:pos_hdn/data/models/request/product_request_model.dart';
 import 'package:pos_hdn/data/models/response/product_response_model.dart';
 
-import '../../../../data/datasources/product_remote_datasource.dart';
+import '../../../../data/datasources/remote/product_remote_datasource.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';

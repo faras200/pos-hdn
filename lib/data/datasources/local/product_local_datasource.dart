@@ -1,4 +1,4 @@
-import 'package:pos_hdn/data/datasources/config_db_local.dart';
+import 'package:pos_hdn/data/datasources/db/config_db_local.dart';
 import 'package:pos_hdn/data/models/response/product_response_model.dart';
 
 class ProductLocalDatasource {

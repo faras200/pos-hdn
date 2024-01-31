@@ -5,7 +5,7 @@ import 'package:pos_hdn/data/models/request/product_request_model.dart';
 import 'package:pos_hdn/data/models/response/add_product_response_model.dart';
 import 'package:pos_hdn/data/models/response/product_response_model.dart';
 
-import 'auth_local_datasource.dart';
+import '../local/auth_local_datasource.dart';
 
 class ProductRemoteDatasource {
   Future<Either<String, ProductResponseModel>> getProducts() async {

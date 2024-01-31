@@ -2,9 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/components/spaces.dart';
-import '../../home/bloc/product/product_bloc.dart';
-import '../widgets/menu_product_item.dart';
+import '../../../../core/components/spaces.dart';
+import '../../../home/bloc/product/product_bloc.dart';
+import '../../widgets/menu_product_item.dart';
 import 'add_product_page.dart';
 
 class ManageProductPage extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/assets/assets.gen.dart';
-import 'package:pos_hdn/data/datasources/auth_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/local/auth_local_datasource.dart';
 import 'package:pos_hdn/presentations/auth/bloc/login/login_bloc.dart';
 
 import '../../../core/components/buttons.dart';

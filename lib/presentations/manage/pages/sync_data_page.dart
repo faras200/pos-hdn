@@ -5,7 +5,7 @@ import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
 import 'package:pos_hdn/presentations/manage/bloc/sync_order/sync_order_bloc.dart';
 
 import '../../../core/constants/colors.dart';
-import '../../../data/datasources/product_local_datasource.dart';
+import '../../../data/datasources/local/product_local_datasource.dart';
 
 class SyncDataPage extends StatefulWidget {
   const SyncDataPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pos_hdn/data/datasources/qris_dbs_remote_datasource.dart';
+import 'package:pos_hdn/data/datasources/remote/qris_dbs_remote_datasource.dart';
 import 'package:pos_hdn/data/models/response/qris_dbs_response.dart';
 import 'package:pos_hdn/data/models/response/qris_dbs_status_response.dart';
 

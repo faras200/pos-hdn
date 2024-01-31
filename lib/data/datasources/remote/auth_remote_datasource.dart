@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:pos_hdn/core/constants/variabels.dart';
-import 'package:pos_hdn/data/datasources/auth_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/local/auth_local_datasource.dart';
 import 'package:pos_hdn/data/models/response/auth_response_model.dart';
 
 class AuthRemoteDataSource {

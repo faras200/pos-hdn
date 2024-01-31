@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
-import 'package:pos_hdn/data/datasources/order_local_datasource.dart';
-import 'package:pos_hdn/data/datasources/product_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/local/order_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/local/product_local_datasource.dart';
 import 'package:pos_hdn/data/models/request/order_request_model.dart';
 import 'package:pos_hdn/data/models/response/product_response_model.dart';
 import 'package:pos_hdn/presentations/home/models/order_item.dart';

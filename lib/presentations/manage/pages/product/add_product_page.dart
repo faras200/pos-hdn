@@ -6,11 +6,11 @@ import 'package:pos_hdn/data/models/response/product_response_model.dart';
 import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
 import 'package:pos_hdn/presentations/manage/models/category_product.dart';
 
-import '../../../core/components/buttons.dart';
-import '../../../core/components/custom_dropdown.dart';
-import '../../../core/components/custom_text_field.dart';
-import '../../../core/components/image_picker_widget.dart';
-import '../../../core/components/spaces.dart';
+import '../../../../core/components/buttons.dart';
+import '../../../../core/components/custom_dropdown.dart';
+import '../../../../core/components/custom_text_field.dart';
+import '../../../../core/components/image_picker_widget.dart';
+import '../../../../core/components/spaces.dart';
 
 class AddProductPage extends StatefulWidget {
   const AddProductPage({super.key});

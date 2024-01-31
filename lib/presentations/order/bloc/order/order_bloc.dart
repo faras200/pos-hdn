@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pos_hdn/data/datasources/auth_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/local/auth_local_datasource.dart';
 import 'package:pos_hdn/presentations/home/models/order_item.dart';
 
 part 'order_event.dart';

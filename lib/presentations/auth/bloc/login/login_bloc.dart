@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pos_hdn/data/datasources/auth_remote_datasource.dart';
+import 'package:pos_hdn/data/datasources/remote/auth_remote_datasource.dart';
 import 'package:pos_hdn/data/models/response/auth_response_model.dart';
 
 part 'login_event.dart';

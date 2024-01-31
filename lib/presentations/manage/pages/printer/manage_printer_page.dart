@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
-import '../../../core/components/spaces.dart';
-import '../../../core/constants/colors.dart';
-import '../widgets/menu_printer_button.dart';
-import '../widgets/menu_printer_content.dart';
+import '../../../../core/components/spaces.dart';
+import '../../../../core/constants/colors.dart';
+import '../../widgets/menu_printer_button.dart';
+import '../../widgets/menu_printer_content.dart';
 
 class ManagePrinterPage extends StatefulWidget {
   const ManagePrinterPage({super.key});
