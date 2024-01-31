@@ -4,17 +4,17 @@ import 'package:logger/logger.dart';
 import 'package:pos_hdn/core/assets/assets.gen.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
-import 'package:pos_hdn/presentations/manage/bloc/setoran/setoran_bloc.dart';
+import 'package:pos_hdn/presentations/manage/bloc/deposit/deposit_bloc.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
-class SetoranPage extends StatefulWidget {
-  const SetoranPage({super.key});
+class DepositPage extends StatefulWidget {
+  const DepositPage({super.key});
 
   @override
-  State<SetoranPage> createState() => _SetoranPageState();
+  State<DepositPage> createState() => _DepositPageState();
 }
 
-class _SetoranPageState extends State<SetoranPage> {
+class _DepositPageState extends State<DepositPage> {
   bool isSelectItem = false;
   Map<int, bool> selectedItem = {};
   int totalPrice = 0;
@@ -22,7 +22,7 @@ class _SetoranPageState extends State<SetoranPage> {
   @override
   void initState() {
     super.initState();
-    context.read<SetoranBloc>().add(const SetoranEvent.fetch());
+    context.read<DepositBloc>().add(const DepositEvent.fetch());
   }
 
   @override
@@ -35,7 +35,7 @@ class _SetoranPageState extends State<SetoranPage> {
         ),
         centerTitle: true,
       ),
-      body: BlocBuilder<SetoranBloc, SetoranState>(
+      body: BlocBuilder<DepositBloc, DepositState>(
         builder: (context, state) {
           return state.maybeWhen(orElse: () {
             return const Center(

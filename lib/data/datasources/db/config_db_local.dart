@@ -6,7 +6,7 @@ class ConfigDbLocal {
   final String tableProducts = 'products';
   final String tableOrders = 'orders';
   final String tableOrderItems = 'order_items';
-  final String tableSetorans = 'setorans';
+  final String tableDeposits = 'deposits';
   static Database? _database;
 
   Future<Database> _initDB(String filePath) async {
@@ -58,12 +58,12 @@ class ConfigDbLocal {
     ''');
 
     await db.execute('''
-      CREATE TABLE $tableSetorans (
+      CREATE TABLE $tableDeposits (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        id_order INTEGER,
-        id_product INTEGER,
-        quantity INTEGER,
-        price INTEGER
+        uuid TEXT,
+        qris TEXT,
+        total_price INTEGER,
+        created_at TEXT,
       )
     ''');
   }

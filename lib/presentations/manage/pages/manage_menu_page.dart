@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/presentations/manage/pages/product/manage_product_page.dart';
-import 'package:pos_hdn/presentations/manage/pages/setoran/setoran_page.dart';
+import 'package:pos_hdn/presentations/manage/pages/deposit/deposit_page.dart';
 import 'package:pos_hdn/presentations/manage/pages/sync_data_page.dart';
 
 import '../../../core/assets/assets.gen.dart';
@@ -61,7 +61,7 @@ class ManageMenuPage extends StatelessWidget {
                   onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SetoranPage())),
+                          builder: (context) => const DepositPage())),
                   isImage: true,
                 ),
                 const SpaceWidth(15.0),
