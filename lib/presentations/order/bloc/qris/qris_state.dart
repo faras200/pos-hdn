@@ -7,6 +7,9 @@ class QrisState with _$QrisState {
   //qrisResponse
   const factory QrisState.qrisResponse(
       QrisDbsResponseModel qrisDbsResponseModel) = _QrisResponse;
+  //qrisResponseDeposit
+  const factory QrisState.qrisResponseDeposit(
+      QrisResponseModel qrisResponseModel) = _QrisResponseDeposit;
   //success
   const factory QrisState.success(String message) = _Success;
   //error

@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
@@ -5,6 +6,7 @@ import 'package:pos_hdn/core/assets/assets.gen.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/presentations/manage/bloc/deposit/deposit_bloc.dart';
+import 'package:pos_hdn/presentations/manage/pages/deposit/payment_dialog.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
 class DepositPage extends StatefulWidget {
@@ -129,7 +131,30 @@ class _DepositPageState extends State<DepositPage> {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     icon: const Icon(Icons.payment, color: Colors.white),
-                    onPressed: () {},
+                    onPressed: () {
+                      AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.question,
+                              headerAnimationLoop: false,
+                              animType: AnimType.bottomSlide,
+                              title: 'Peringatan!',
+                              desc: 'Yakin ingin melanjutkan proses setoran?',
+                              buttonsTextStyle:
+                                  const TextStyle(color: Colors.white),
+                              showCloseIcon: true,
+                              btnOkOnPress: () {
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (context) => PaymentDialog(
+                                    price: totalPrice,
+                                  ),
+                                );
+                              },
+                              btnCancelOnPress: () {},
+                              btnOkColor: AppColors.primary)
+                          .show();
+                    },
                   )
                 : const SizedBox(),
             Expanded(child: Container()),

@@ -40,7 +40,7 @@ class ConfigDbLocal {
         payment_method TEXT,
         total_item INTEGER,
         id_kasir INTEGER,
-        setoran_id INTEGER,
+        deposit_id INTEGER,
         nama_kasir TEXT,
         transaction_time TEXT,
         is_sync INTEGER DEFAULT 0
@@ -62,8 +62,8 @@ class ConfigDbLocal {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         uuid TEXT,
         qris TEXT,
-        total_price INTEGER,
-        created_at TEXT,
+        amount INTEGER,
+        created_at TEXT
       )
     ''');
   }

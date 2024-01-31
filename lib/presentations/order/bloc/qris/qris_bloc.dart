@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pos_hdn/data/datasources/remote/qris_dbs_remote_datasource.dart';
+import 'package:pos_hdn/data/datasources/remote/result_response_api.dart';
 import 'package:pos_hdn/data/models/response/qris_dbs_response.dart';
 import 'package:pos_hdn/data/models/response/qris_dbs_status_response.dart';
+import 'package:pos_hdn/data/models/response/qris_response_model.dart';
 
 part 'qris_event.dart';
 part 'qris_state.dart';
@@ -20,6 +22,20 @@ class QrisBloc extends Bloc<QrisEvent, QrisState> {
 
       final value = switch (response) {
         Success(value: final result) => emit(QrisState.qrisResponse(result)),
+        Failure(exception: final exception) => emit(
+            QrisState.error('Something went wrong: $exception'),
+          ),
+      };
+    });
+
+    on<_GenerateQRCodeDeposit>((event, emit) async {
+      emit(const QrisState.loading());
+      final response = await qrisDbsRemoteDatasource.generateQRCodeDeposit(
+          event.orderId, event.grossAmount);
+
+      final value = switch (response) {
+        Success(value: final result) =>
+          emit(QrisState.qrisResponseDeposit(result)),
         Failure(exception: final exception) => emit(
             QrisState.error('Something went wrong: $exception'),
           ),

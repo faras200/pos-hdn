@@ -226,9 +226,9 @@ class _HomePageState extends State<HomePage> {
 }
 
 class AppBarContent extends StatelessWidget {
-  final String username;
+  String username = '';
   final String location;
-  const AppBarContent({
+  AppBarContent({
     super.key,
     required this.username,
     required this.location,
@@ -242,13 +242,19 @@ class AppBarContent extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
             children: <Widget>[
-              Text(
-                'Hi, $username',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              username == ''
+                  ? const SizedBox(
+                      height: 20.0,
+                      width: 22.0,
+                      child: CircularProgressIndicator(),
+                    )
+                  : Text(
+                      'Hi, $username',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
               const Spacer(),
               const ConnectionAlert(),
               IconButton(

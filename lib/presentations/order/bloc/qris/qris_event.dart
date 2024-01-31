@@ -7,6 +7,10 @@ class QrisEvent with _$QrisEvent {
   const factory QrisEvent.generateQRCode(String orderId, int grossAmount) =
       _GenerateQRCode;
 
+  //generateQRCodeSetoran
+  const factory QrisEvent.generateQRCodeDeposit(
+      String orderId, int grossAmount) = _GenerateQRCodeDeposit;
+
   //checkPaymentStatus
   const factory QrisEvent.checkPaymentStatus(String orderId) =
       _CheckPaymentStatus;

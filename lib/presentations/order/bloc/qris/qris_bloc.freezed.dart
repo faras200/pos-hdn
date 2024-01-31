@@ -20,6 +20,8 @@ mixin _$QrisEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String orderId, int grossAmount) generateQRCode,
+    required TResult Function(String orderId, int grossAmount)
+        generateQRCodeDeposit,
     required TResult Function(String orderId) checkPaymentStatus,
   }) =>
       throw _privateConstructorUsedError;
@@ -27,6 +29,7 @@ mixin _$QrisEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(String orderId, int grossAmount)? generateQRCode,
+    TResult? Function(String orderId, int grossAmount)? generateQRCodeDeposit,
     TResult? Function(String orderId)? checkPaymentStatus,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,6 +37,7 @@ mixin _$QrisEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String orderId, int grossAmount)? generateQRCode,
+    TResult Function(String orderId, int grossAmount)? generateQRCodeDeposit,
     TResult Function(String orderId)? checkPaymentStatus,
     required TResult orElse(),
   }) =>
@@ -42,6 +46,8 @@ mixin _$QrisEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GenerateQRCode value) generateQRCode,
+    required TResult Function(_GenerateQRCodeDeposit value)
+        generateQRCodeDeposit,
     required TResult Function(_CheckPaymentStatus value) checkPaymentStatus,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +55,7 @@ mixin _$QrisEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GenerateQRCode value)? generateQRCode,
+    TResult? Function(_GenerateQRCodeDeposit value)? generateQRCodeDeposit,
     TResult? Function(_CheckPaymentStatus value)? checkPaymentStatus,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +63,7 @@ mixin _$QrisEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GenerateQRCode value)? generateQRCode,
+    TResult Function(_GenerateQRCodeDeposit value)? generateQRCodeDeposit,
     TResult Function(_CheckPaymentStatus value)? checkPaymentStatus,
     required TResult orElse(),
   }) =>
@@ -119,6 +127,8 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String orderId, int grossAmount) generateQRCode,
+    required TResult Function(String orderId, int grossAmount)
+        generateQRCodeDeposit,
     required TResult Function(String orderId) checkPaymentStatus,
   }) {
     return started();
@@ -129,6 +139,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(String orderId, int grossAmount)? generateQRCode,
+    TResult? Function(String orderId, int grossAmount)? generateQRCodeDeposit,
     TResult? Function(String orderId)? checkPaymentStatus,
   }) {
     return started?.call();
@@ -139,6 +150,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String orderId, int grossAmount)? generateQRCode,
+    TResult Function(String orderId, int grossAmount)? generateQRCodeDeposit,
     TResult Function(String orderId)? checkPaymentStatus,
     required TResult orElse(),
   }) {
@@ -153,6 +165,8 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GenerateQRCode value) generateQRCode,
+    required TResult Function(_GenerateQRCodeDeposit value)
+        generateQRCodeDeposit,
     required TResult Function(_CheckPaymentStatus value) checkPaymentStatus,
   }) {
     return started(this);
@@ -163,6 +177,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GenerateQRCode value)? generateQRCode,
+    TResult? Function(_GenerateQRCodeDeposit value)? generateQRCodeDeposit,
     TResult? Function(_CheckPaymentStatus value)? checkPaymentStatus,
   }) {
     return started?.call(this);
@@ -173,6 +188,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GenerateQRCode value)? generateQRCode,
+    TResult Function(_GenerateQRCodeDeposit value)? generateQRCodeDeposit,
     TResult Function(_CheckPaymentStatus value)? checkPaymentStatus,
     required TResult orElse(),
   }) {
@@ -263,6 +279,8 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String orderId, int grossAmount) generateQRCode,
+    required TResult Function(String orderId, int grossAmount)
+        generateQRCodeDeposit,
     required TResult Function(String orderId) checkPaymentStatus,
   }) {
     return generateQRCode(orderId, grossAmount);
@@ -273,6 +291,7 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(String orderId, int grossAmount)? generateQRCode,
+    TResult? Function(String orderId, int grossAmount)? generateQRCodeDeposit,
     TResult? Function(String orderId)? checkPaymentStatus,
   }) {
     return generateQRCode?.call(orderId, grossAmount);
@@ -283,6 +302,7 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String orderId, int grossAmount)? generateQRCode,
+    TResult Function(String orderId, int grossAmount)? generateQRCodeDeposit,
     TResult Function(String orderId)? checkPaymentStatus,
     required TResult orElse(),
   }) {
@@ -297,6 +317,8 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GenerateQRCode value) generateQRCode,
+    required TResult Function(_GenerateQRCodeDeposit value)
+        generateQRCodeDeposit,
     required TResult Function(_CheckPaymentStatus value) checkPaymentStatus,
   }) {
     return generateQRCode(this);
@@ -307,6 +329,7 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GenerateQRCode value)? generateQRCode,
+    TResult? Function(_GenerateQRCodeDeposit value)? generateQRCodeDeposit,
     TResult? Function(_CheckPaymentStatus value)? checkPaymentStatus,
   }) {
     return generateQRCode?.call(this);
@@ -317,6 +340,7 @@ class _$GenerateQRCodeImpl implements _GenerateQRCode {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GenerateQRCode value)? generateQRCode,
+    TResult Function(_GenerateQRCodeDeposit value)? generateQRCodeDeposit,
     TResult Function(_CheckPaymentStatus value)? checkPaymentStatus,
     required TResult orElse(),
   }) {
@@ -336,6 +360,167 @@ abstract class _GenerateQRCode implements QrisEvent {
   @JsonKey(ignore: true)
   _$$GenerateQRCodeImplCopyWith<_$GenerateQRCodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GenerateQRCodeDepositImplCopyWith<$Res> {
+  factory _$$GenerateQRCodeDepositImplCopyWith(
+          _$GenerateQRCodeDepositImpl value,
+          $Res Function(_$GenerateQRCodeDepositImpl) then) =
+      __$$GenerateQRCodeDepositImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String orderId, int grossAmount});
+}
+
+/// @nodoc
+class __$$GenerateQRCodeDepositImplCopyWithImpl<$Res>
+    extends _$QrisEventCopyWithImpl<$Res, _$GenerateQRCodeDepositImpl>
+    implements _$$GenerateQRCodeDepositImplCopyWith<$Res> {
+  __$$GenerateQRCodeDepositImplCopyWithImpl(_$GenerateQRCodeDepositImpl _value,
+      $Res Function(_$GenerateQRCodeDepositImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? orderId = null,
+    Object? grossAmount = null,
+  }) {
+    return _then(_$GenerateQRCodeDepositImpl(
+      null == orderId
+          ? _value.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == grossAmount
+          ? _value.grossAmount
+          : grossAmount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GenerateQRCodeDepositImpl implements _GenerateQRCodeDeposit {
+  const _$GenerateQRCodeDepositImpl(this.orderId, this.grossAmount);
+
+  @override
+  final String orderId;
+  @override
+  final int grossAmount;
+
+  @override
+  String toString() {
+    return 'QrisEvent.generateQRCodeDeposit(orderId: $orderId, grossAmount: $grossAmount)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GenerateQRCodeDepositImpl &&
+            (identical(other.orderId, orderId) || other.orderId == orderId) &&
+            (identical(other.grossAmount, grossAmount) ||
+                other.grossAmount == grossAmount));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, orderId, grossAmount);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GenerateQRCodeDepositImplCopyWith<_$GenerateQRCodeDepositImpl>
+      get copyWith => __$$GenerateQRCodeDepositImplCopyWithImpl<
+          _$GenerateQRCodeDepositImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String orderId, int grossAmount) generateQRCode,
+    required TResult Function(String orderId, int grossAmount)
+        generateQRCodeDeposit,
+    required TResult Function(String orderId) checkPaymentStatus,
+  }) {
+    return generateQRCodeDeposit(orderId, grossAmount);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String orderId, int grossAmount)? generateQRCode,
+    TResult? Function(String orderId, int grossAmount)? generateQRCodeDeposit,
+    TResult? Function(String orderId)? checkPaymentStatus,
+  }) {
+    return generateQRCodeDeposit?.call(orderId, grossAmount);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String orderId, int grossAmount)? generateQRCode,
+    TResult Function(String orderId, int grossAmount)? generateQRCodeDeposit,
+    TResult Function(String orderId)? checkPaymentStatus,
+    required TResult orElse(),
+  }) {
+    if (generateQRCodeDeposit != null) {
+      return generateQRCodeDeposit(orderId, grossAmount);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_GenerateQRCode value) generateQRCode,
+    required TResult Function(_GenerateQRCodeDeposit value)
+        generateQRCodeDeposit,
+    required TResult Function(_CheckPaymentStatus value) checkPaymentStatus,
+  }) {
+    return generateQRCodeDeposit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_GenerateQRCode value)? generateQRCode,
+    TResult? Function(_GenerateQRCodeDeposit value)? generateQRCodeDeposit,
+    TResult? Function(_CheckPaymentStatus value)? checkPaymentStatus,
+  }) {
+    return generateQRCodeDeposit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_GenerateQRCode value)? generateQRCode,
+    TResult Function(_GenerateQRCodeDeposit value)? generateQRCodeDeposit,
+    TResult Function(_CheckPaymentStatus value)? checkPaymentStatus,
+    required TResult orElse(),
+  }) {
+    if (generateQRCodeDeposit != null) {
+      return generateQRCodeDeposit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GenerateQRCodeDeposit implements QrisEvent {
+  const factory _GenerateQRCodeDeposit(
+          final String orderId, final int grossAmount) =
+      _$GenerateQRCodeDepositImpl;
+
+  String get orderId;
+  int get grossAmount;
+  @JsonKey(ignore: true)
+  _$$GenerateQRCodeDepositImplCopyWith<_$GenerateQRCodeDepositImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -405,6 +590,8 @@ class _$CheckPaymentStatusImpl implements _CheckPaymentStatus {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String orderId, int grossAmount) generateQRCode,
+    required TResult Function(String orderId, int grossAmount)
+        generateQRCodeDeposit,
     required TResult Function(String orderId) checkPaymentStatus,
   }) {
     return checkPaymentStatus(orderId);
@@ -415,6 +602,7 @@ class _$CheckPaymentStatusImpl implements _CheckPaymentStatus {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(String orderId, int grossAmount)? generateQRCode,
+    TResult? Function(String orderId, int grossAmount)? generateQRCodeDeposit,
     TResult? Function(String orderId)? checkPaymentStatus,
   }) {
     return checkPaymentStatus?.call(orderId);
@@ -425,6 +613,7 @@ class _$CheckPaymentStatusImpl implements _CheckPaymentStatus {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String orderId, int grossAmount)? generateQRCode,
+    TResult Function(String orderId, int grossAmount)? generateQRCodeDeposit,
     TResult Function(String orderId)? checkPaymentStatus,
     required TResult orElse(),
   }) {
@@ -439,6 +628,8 @@ class _$CheckPaymentStatusImpl implements _CheckPaymentStatus {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_GenerateQRCode value) generateQRCode,
+    required TResult Function(_GenerateQRCodeDeposit value)
+        generateQRCodeDeposit,
     required TResult Function(_CheckPaymentStatus value) checkPaymentStatus,
   }) {
     return checkPaymentStatus(this);
@@ -449,6 +640,7 @@ class _$CheckPaymentStatusImpl implements _CheckPaymentStatus {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_GenerateQRCode value)? generateQRCode,
+    TResult? Function(_GenerateQRCodeDeposit value)? generateQRCodeDeposit,
     TResult? Function(_CheckPaymentStatus value)? checkPaymentStatus,
   }) {
     return checkPaymentStatus?.call(this);
@@ -459,6 +651,7 @@ class _$CheckPaymentStatusImpl implements _CheckPaymentStatus {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_GenerateQRCode value)? generateQRCode,
+    TResult Function(_GenerateQRCodeDeposit value)? generateQRCodeDeposit,
     TResult Function(_CheckPaymentStatus value)? checkPaymentStatus,
     required TResult orElse(),
   }) {
@@ -487,6 +680,8 @@ mixin _$QrisState {
     required TResult Function() loading,
     required TResult Function(QrisDbsResponseModel qrisDbsResponseModel)
         qrisResponse,
+    required TResult Function(QrisResponseModel qrisResponseModel)
+        qrisResponseDeposit,
     required TResult Function(String message) success,
     required TResult Function(String message) error,
     required TResult Function(
@@ -499,6 +694,7 @@ mixin _$QrisState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult? Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult? Function(String message)? success,
     TResult? Function(String message)? error,
     TResult? Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -510,6 +706,7 @@ mixin _$QrisState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult Function(String message)? success,
     TResult Function(String message)? error,
     TResult Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -522,6 +719,7 @@ mixin _$QrisState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_QrisResponse value) qrisResponse,
+    required TResult Function(_QrisResponseDeposit value) qrisResponseDeposit,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_StatusCheck value) statusCheck,
@@ -532,6 +730,7 @@ mixin _$QrisState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_QrisResponse value)? qrisResponse,
+    TResult? Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_StatusCheck value)? statusCheck,
@@ -542,6 +741,7 @@ mixin _$QrisState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_QrisResponse value)? qrisResponse,
+    TResult Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_StatusCheck value)? statusCheck,
@@ -609,6 +809,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(QrisDbsResponseModel qrisDbsResponseModel)
         qrisResponse,
+    required TResult Function(QrisResponseModel qrisResponseModel)
+        qrisResponseDeposit,
     required TResult Function(String message) success,
     required TResult Function(String message) error,
     required TResult Function(
@@ -624,6 +826,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult? Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult? Function(String message)? success,
     TResult? Function(String message)? error,
     TResult? Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -638,6 +841,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult Function(String message)? success,
     TResult Function(String message)? error,
     TResult Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -656,6 +860,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_QrisResponse value) qrisResponse,
+    required TResult Function(_QrisResponseDeposit value) qrisResponseDeposit,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_StatusCheck value) statusCheck,
@@ -669,6 +874,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_QrisResponse value)? qrisResponse,
+    TResult? Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_StatusCheck value)? statusCheck,
@@ -682,6 +888,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_QrisResponse value)? qrisResponse,
+    TResult Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_StatusCheck value)? statusCheck,
@@ -740,6 +947,8 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(QrisDbsResponseModel qrisDbsResponseModel)
         qrisResponse,
+    required TResult Function(QrisResponseModel qrisResponseModel)
+        qrisResponseDeposit,
     required TResult Function(String message) success,
     required TResult Function(String message) error,
     required TResult Function(
@@ -755,6 +964,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult? Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult? Function(String message)? success,
     TResult? Function(String message)? error,
     TResult? Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -769,6 +979,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult Function(String message)? success,
     TResult Function(String message)? error,
     TResult Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -787,6 +998,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_QrisResponse value) qrisResponse,
+    required TResult Function(_QrisResponseDeposit value) qrisResponseDeposit,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_StatusCheck value) statusCheck,
@@ -800,6 +1012,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_QrisResponse value)? qrisResponse,
+    TResult? Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_StatusCheck value)? statusCheck,
@@ -813,6 +1026,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_QrisResponse value)? qrisResponse,
+    TResult Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_StatusCheck value)? statusCheck,
@@ -898,6 +1112,8 @@ class _$QrisResponseImpl implements _QrisResponse {
     required TResult Function() loading,
     required TResult Function(QrisDbsResponseModel qrisDbsResponseModel)
         qrisResponse,
+    required TResult Function(QrisResponseModel qrisResponseModel)
+        qrisResponseDeposit,
     required TResult Function(String message) success,
     required TResult Function(String message) error,
     required TResult Function(
@@ -913,6 +1129,7 @@ class _$QrisResponseImpl implements _QrisResponse {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult? Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult? Function(String message)? success,
     TResult? Function(String message)? error,
     TResult? Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -927,6 +1144,7 @@ class _$QrisResponseImpl implements _QrisResponse {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult Function(String message)? success,
     TResult Function(String message)? error,
     TResult Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -945,6 +1163,7 @@ class _$QrisResponseImpl implements _QrisResponse {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_QrisResponse value) qrisResponse,
+    required TResult Function(_QrisResponseDeposit value) qrisResponseDeposit,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_StatusCheck value) statusCheck,
@@ -958,6 +1177,7 @@ class _$QrisResponseImpl implements _QrisResponse {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_QrisResponse value)? qrisResponse,
+    TResult? Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_StatusCheck value)? statusCheck,
@@ -971,6 +1191,7 @@ class _$QrisResponseImpl implements _QrisResponse {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_QrisResponse value)? qrisResponse,
+    TResult Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_StatusCheck value)? statusCheck,
@@ -990,6 +1211,179 @@ abstract class _QrisResponse implements QrisState {
   QrisDbsResponseModel get qrisDbsResponseModel;
   @JsonKey(ignore: true)
   _$$QrisResponseImplCopyWith<_$QrisResponseImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$QrisResponseDepositImplCopyWith<$Res> {
+  factory _$$QrisResponseDepositImplCopyWith(_$QrisResponseDepositImpl value,
+          $Res Function(_$QrisResponseDepositImpl) then) =
+      __$$QrisResponseDepositImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({QrisResponseModel qrisResponseModel});
+}
+
+/// @nodoc
+class __$$QrisResponseDepositImplCopyWithImpl<$Res>
+    extends _$QrisStateCopyWithImpl<$Res, _$QrisResponseDepositImpl>
+    implements _$$QrisResponseDepositImplCopyWith<$Res> {
+  __$$QrisResponseDepositImplCopyWithImpl(_$QrisResponseDepositImpl _value,
+      $Res Function(_$QrisResponseDepositImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? qrisResponseModel = freezed,
+  }) {
+    return _then(_$QrisResponseDepositImpl(
+      freezed == qrisResponseModel
+          ? _value.qrisResponseModel
+          : qrisResponseModel // ignore: cast_nullable_to_non_nullable
+              as QrisResponseModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$QrisResponseDepositImpl implements _QrisResponseDeposit {
+  const _$QrisResponseDepositImpl(this.qrisResponseModel);
+
+  @override
+  final QrisResponseModel qrisResponseModel;
+
+  @override
+  String toString() {
+    return 'QrisState.qrisResponseDeposit(qrisResponseModel: $qrisResponseModel)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QrisResponseDepositImpl &&
+            const DeepCollectionEquality()
+                .equals(other.qrisResponseModel, qrisResponseModel));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(qrisResponseModel));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$QrisResponseDepositImplCopyWith<_$QrisResponseDepositImpl> get copyWith =>
+      __$$QrisResponseDepositImplCopyWithImpl<_$QrisResponseDepositImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(QrisDbsResponseModel qrisDbsResponseModel)
+        qrisResponse,
+    required TResult Function(QrisResponseModel qrisResponseModel)
+        qrisResponseDeposit,
+    required TResult Function(String message) success,
+    required TResult Function(String message) error,
+    required TResult Function(
+            QrisDbsStatusResponseModel qrisDbsStatusResponseModel)
+        statusCheck,
+  }) {
+    return qrisResponseDeposit(qrisResponseModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult? Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
+    TResult? Function(String message)? success,
+    TResult? Function(String message)? error,
+    TResult? Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
+        statusCheck,
+  }) {
+    return qrisResponseDeposit?.call(qrisResponseModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
+    TResult Function(String message)? success,
+    TResult Function(String message)? error,
+    TResult Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
+        statusCheck,
+    required TResult orElse(),
+  }) {
+    if (qrisResponseDeposit != null) {
+      return qrisResponseDeposit(qrisResponseModel);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_QrisResponse value) qrisResponse,
+    required TResult Function(_QrisResponseDeposit value) qrisResponseDeposit,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_StatusCheck value) statusCheck,
+  }) {
+    return qrisResponseDeposit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_QrisResponse value)? qrisResponse,
+    TResult? Function(_QrisResponseDeposit value)? qrisResponseDeposit,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_StatusCheck value)? statusCheck,
+  }) {
+    return qrisResponseDeposit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_QrisResponse value)? qrisResponse,
+    TResult Function(_QrisResponseDeposit value)? qrisResponseDeposit,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_StatusCheck value)? statusCheck,
+    required TResult orElse(),
+  }) {
+    if (qrisResponseDeposit != null) {
+      return qrisResponseDeposit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _QrisResponseDeposit implements QrisState {
+  const factory _QrisResponseDeposit(
+      final QrisResponseModel qrisResponseModel) = _$QrisResponseDepositImpl;
+
+  QrisResponseModel get qrisResponseModel;
+  @JsonKey(ignore: true)
+  _$$QrisResponseDepositImplCopyWith<_$QrisResponseDepositImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1061,6 +1455,8 @@ class _$SuccessImpl implements _Success {
     required TResult Function() loading,
     required TResult Function(QrisDbsResponseModel qrisDbsResponseModel)
         qrisResponse,
+    required TResult Function(QrisResponseModel qrisResponseModel)
+        qrisResponseDeposit,
     required TResult Function(String message) success,
     required TResult Function(String message) error,
     required TResult Function(
@@ -1076,6 +1472,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult? Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult? Function(String message)? success,
     TResult? Function(String message)? error,
     TResult? Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -1090,6 +1487,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult Function(String message)? success,
     TResult Function(String message)? error,
     TResult Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -1108,6 +1506,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_QrisResponse value) qrisResponse,
+    required TResult Function(_QrisResponseDeposit value) qrisResponseDeposit,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_StatusCheck value) statusCheck,
@@ -1121,6 +1520,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_QrisResponse value)? qrisResponse,
+    TResult? Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_StatusCheck value)? statusCheck,
@@ -1134,6 +1534,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_QrisResponse value)? qrisResponse,
+    TResult Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_StatusCheck value)? statusCheck,
@@ -1223,6 +1624,8 @@ class _$ErrorImpl implements _Error {
     required TResult Function() loading,
     required TResult Function(QrisDbsResponseModel qrisDbsResponseModel)
         qrisResponse,
+    required TResult Function(QrisResponseModel qrisResponseModel)
+        qrisResponseDeposit,
     required TResult Function(String message) success,
     required TResult Function(String message) error,
     required TResult Function(
@@ -1238,6 +1641,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult? Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult? Function(String message)? success,
     TResult? Function(String message)? error,
     TResult? Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -1252,6 +1656,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult Function(String message)? success,
     TResult Function(String message)? error,
     TResult Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -1270,6 +1675,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_QrisResponse value) qrisResponse,
+    required TResult Function(_QrisResponseDeposit value) qrisResponseDeposit,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_StatusCheck value) statusCheck,
@@ -1283,6 +1689,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_QrisResponse value)? qrisResponse,
+    TResult? Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_StatusCheck value)? statusCheck,
@@ -1296,6 +1703,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_QrisResponse value)? qrisResponse,
+    TResult Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_StatusCheck value)? statusCheck,
@@ -1388,6 +1796,8 @@ class _$StatusCheckImpl implements _StatusCheck {
     required TResult Function() loading,
     required TResult Function(QrisDbsResponseModel qrisDbsResponseModel)
         qrisResponse,
+    required TResult Function(QrisResponseModel qrisResponseModel)
+        qrisResponseDeposit,
     required TResult Function(String message) success,
     required TResult Function(String message) error,
     required TResult Function(
@@ -1403,6 +1813,7 @@ class _$StatusCheckImpl implements _StatusCheck {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult? Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult? Function(String message)? success,
     TResult? Function(String message)? error,
     TResult? Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -1417,6 +1828,7 @@ class _$StatusCheckImpl implements _StatusCheck {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(QrisDbsResponseModel qrisDbsResponseModel)? qrisResponse,
+    TResult Function(QrisResponseModel qrisResponseModel)? qrisResponseDeposit,
     TResult Function(String message)? success,
     TResult Function(String message)? error,
     TResult Function(QrisDbsStatusResponseModel qrisDbsStatusResponseModel)?
@@ -1435,6 +1847,7 @@ class _$StatusCheckImpl implements _StatusCheck {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_QrisResponse value) qrisResponse,
+    required TResult Function(_QrisResponseDeposit value) qrisResponseDeposit,
     required TResult Function(_Success value) success,
     required TResult Function(_Error value) error,
     required TResult Function(_StatusCheck value) statusCheck,
@@ -1448,6 +1861,7 @@ class _$StatusCheckImpl implements _StatusCheck {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_QrisResponse value)? qrisResponse,
+    TResult? Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult? Function(_Success value)? success,
     TResult? Function(_Error value)? error,
     TResult? Function(_StatusCheck value)? statusCheck,
@@ -1461,6 +1875,7 @@ class _$StatusCheckImpl implements _StatusCheck {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_QrisResponse value)? qrisResponse,
+    TResult Function(_QrisResponseDeposit value)? qrisResponseDeposit,
     TResult Function(_Success value)? success,
     TResult Function(_Error value)? error,
     TResult Function(_StatusCheck value)? statusCheck,
