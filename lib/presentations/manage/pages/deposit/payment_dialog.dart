@@ -11,7 +11,9 @@ import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/data/datasources/local/deposit_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/local/order_local_datasource.dart';
+import 'package:pos_hdn/data/datasources/remote/deposit_remote_datasource.dart';
 import 'package:pos_hdn/data/datasources/remote/order_remote_datasource.dart';
+import 'package:pos_hdn/data/models/request/deposit_request_model.dart';
 import 'package:pos_hdn/data/models/request/order_request_model.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/models/deposit_model.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
@@ -37,6 +39,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
   String orderId = 'DPS${DateTime.now().millisecondsSinceEpoch}';
   Timer? timer;
   String qris = '';
+  String qris_id = '';
   @override
   void initState() {
     context.read<QrisBloc>().add(QrisEvent.generateQRCodeDeposit(
@@ -98,13 +101,28 @@ class _PaymentDialogState extends State<PaymentDialog> {
                       final timeNow = DateFormat('yyyy-MM-ddTHH:mm:ss')
                           .format(DateTime.now());
                       final uuid = orderId;
-                      final depositModel = DepositModel(
-                        uuid: uuid,
-                        qris: qris,
-                        orders: widget.data,
-                        amount: widget.price,
-                        createdAt: timeNow,
-                      );
+                      // final depositModel = DepositModel(
+                      //   uuid: uuid,
+                      //   qris: qris,
+                      //   orders: widget.data,
+                      //   amount: widget.price,
+                      //   createdAt: timeNow,
+                      // );
+                      final depositRequestModel = DepositRequestModel(
+                          qrisId: qris_id,
+                          amount: widget.price,
+                          orders: widget.data,
+                          uuid: uuid);
+                      final saveDbRemote = await DepositRemoteDatasource
+                          .instance
+                          .storeDeposit(depositRequestModel);
+
+                      // if (saveDbRemote) {
+                      //   //Update db local to isSync
+                      //   OrderLocalDatasource.instance
+                      //       .updateIsSyncOrderById(saveDbLocal);
+                      // }
+                      // Logger().d(selectedData);
 
                       // final saveDbLocal = await DepositLocalDatasource.instance
                       //     .saveOrder(orderModel); //return id order
@@ -125,8 +143,9 @@ class _PaymentDialogState extends State<PaymentDialog> {
                       //     orderItems: orderItems,
                       //     uuid: uuid);
 
-                      // final saveDbRemote = await OrderRemoteDatasource.instance
-                      //     .sendOrder(orderRequestModel);
+                      // final saveDbRemote =
+                      //     await DepositRemoteDatasource.instance.storeDeposit(
+                      //         uuid, widget.price, qris_id, widget.data);
 
                       // if (saveDbRemote) {
                       //   //Update db local to isSync
@@ -155,6 +174,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
                         },
                         qrisResponseDeposit: (data) {
                           qris = data.qris!;
+                          qris_id = data.id.toString();
                           return Container(
                             width: 256.0,
                             height: 256.0,

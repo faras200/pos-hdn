@@ -2,42 +2,47 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 import 'package:pos_hdn/core/constants/variabels.dart';
 import 'package:pos_hdn/data/datasources/local/auth_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/remote/result_response_api.dart';
+import 'package:pos_hdn/data/models/request/deposit_request_model.dart';
 import 'package:pos_hdn/data/models/response/auth_response_model.dart';
 import 'package:pos_hdn/data/models/response/qris_dbs_response.dart';
+import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
 class DepositRemoteDatasource {
-  Future<Result<QrisDbsResponseModel, Exception>> storeDeposit(
-      String orderId, int grossAmount) async {
+  DepositRemoteDatasource._init();
+  static final DepositRemoteDatasource instance =
+      DepositRemoteDatasource._init();
+  Future<bool> storeDeposit(DepositRequestModel requestModel) async {
+    final authData = await AuthLocalDatasource().getAuthData();
     final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      // 'Authorization': generateBasicAuthHeader('Mid-server-Yourkey'),
+      'Authorization': 'Bearer ${authData?.data.token}',
     };
 
-    final body = jsonEncode({
-      'uuid': orderId,
-      'total': grossAmount,
-    });
+    final body = requestModel.toJson();
+
+    Logger().d(body);
     try {
       final response = await http.post(
-        Uri.parse('${Variables.baseUrl}/create/qr'),
+        Uri.parse('${Variables.baseUrl}/pos/deposits/store'),
         headers: headers,
         body: body,
       );
       switch (response.statusCode) {
         case 200:
           // 2. return Success with the desired value
-          return Success(QrisDbsResponseModel.fromJson(response.body));
+          return true;
         default:
           // 3. return Failure with the desired exception
-          return Failure(Exception(response.reasonPhrase));
+          return false;
       }
     } on Exception catch (e) {
       // 4. return Failure here too
-      return Failure(e);
+      return false;
     }
   }
 }

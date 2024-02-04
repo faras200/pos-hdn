@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:pos_hdn/data/dataoutputs/cwb_print.dart';
 import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/pages/dashboard_page.dart';
+import 'package:pos_hdn/presentations/manage/pages/deposit/deposit_page.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
@@ -47,9 +48,9 @@ class PaymentSuccessDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SpaceHeight(12.0),
-                  _LabelValue(
+                  const _LabelValue(
                     label: 'METODE PEMBAYARAN',
-                    value: paymentType,
+                    value: 'Qris',
                   ),
                   const Divider(height: 36.0),
                   _LabelValue(
@@ -78,10 +79,7 @@ class PaymentSuccessDialog extends StatelessWidget {
                       Flexible(
                         child: Button.filled(
                           onPressed: () {
-                            context
-                                .read<OrderBloc>()
-                                .add(const OrderEvent.started());
-                            context.pushReplacement(const DashboardPage());
+                            context.pushReplacement(const DepositPage());
                           },
                           label: 'Selesai',
                           fontSize: 13,

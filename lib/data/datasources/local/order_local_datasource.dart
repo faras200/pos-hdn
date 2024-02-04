@@ -69,4 +69,11 @@ class OrderLocalDatasource {
 
     return result.map((e) => OrderItem.fromMap(e)).toList();
   }
+
+  //update isDeposit order by id
+  Future<int> updateIsDepositOrderById(int id) async {
+    final db = await instanceDb.database;
+    return await db.update(tableOrders, {'is_sync': 1},
+        where: 'id = ?', whereArgs: [id]);
+  }
 }

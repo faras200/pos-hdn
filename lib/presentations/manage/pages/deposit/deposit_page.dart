@@ -8,6 +8,8 @@ import 'package:pos_hdn/core/components/spaces.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
+import 'package:pos_hdn/data/datasources/remote/deposit_remote_datasource.dart';
+import 'package:pos_hdn/data/models/request/deposit_request_model.dart';
 import 'package:pos_hdn/presentations/manage/bloc/deposit/deposit_bloc.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/detail_dialog.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/payment_dialog.dart';
@@ -170,7 +172,6 @@ class _DepositPageState extends State<DepositPage> {
                       ),
                       icon: const Icon(Icons.payment, color: Colors.white),
                       onPressed: () {
-                        Logger().d(selectedData);
                         showDialog(
                           context: context,
                           builder: (context) => DetailDialog(
