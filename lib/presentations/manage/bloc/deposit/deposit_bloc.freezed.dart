@@ -20,21 +20,18 @@ mixin _$DepositEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
-    required TResult Function(List<OrderModel> deposit) addDeposit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
-    TResult? Function(List<OrderModel> deposit)? addDeposit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
-    TResult Function(List<OrderModel> deposit)? addDeposit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +39,18 @@ mixin _$DepositEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AddDeposit value) addDeposit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AddDeposit value)? addDeposit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_AddDeposit value)? addDeposit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,7 +114,6 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
-    required TResult Function(List<OrderModel> deposit) addDeposit,
   }) {
     return started();
   }
@@ -130,7 +123,6 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
-    TResult? Function(List<OrderModel> deposit)? addDeposit,
   }) {
     return started?.call();
   }
@@ -140,7 +132,6 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
-    TResult Function(List<OrderModel> deposit)? addDeposit,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -154,7 +145,6 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AddDeposit value) addDeposit,
   }) {
     return started(this);
   }
@@ -164,7 +154,6 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AddDeposit value)? addDeposit,
   }) {
     return started?.call(this);
   }
@@ -174,7 +163,6 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_AddDeposit value)? addDeposit,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -228,7 +216,6 @@ class _$FetchImpl implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
-    required TResult Function(List<OrderModel> deposit) addDeposit,
   }) {
     return fetch();
   }
@@ -238,7 +225,6 @@ class _$FetchImpl implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
-    TResult? Function(List<OrderModel> deposit)? addDeposit,
   }) {
     return fetch?.call();
   }
@@ -248,7 +234,6 @@ class _$FetchImpl implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
-    TResult Function(List<OrderModel> deposit)? addDeposit,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -262,7 +247,6 @@ class _$FetchImpl implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AddDeposit value) addDeposit,
   }) {
     return fetch(this);
   }
@@ -272,7 +256,6 @@ class _$FetchImpl implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AddDeposit value)? addDeposit,
   }) {
     return fetch?.call(this);
   }
@@ -282,7 +265,6 @@ class _$FetchImpl implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_AddDeposit value)? addDeposit,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -297,157 +279,12 @@ abstract class _Fetch implements DepositEvent {
 }
 
 /// @nodoc
-abstract class _$$AddDepositImplCopyWith<$Res> {
-  factory _$$AddDepositImplCopyWith(
-          _$AddDepositImpl value, $Res Function(_$AddDepositImpl) then) =
-      __$$AddDepositImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<OrderModel> deposit});
-}
-
-/// @nodoc
-class __$$AddDepositImplCopyWithImpl<$Res>
-    extends _$DepositEventCopyWithImpl<$Res, _$AddDepositImpl>
-    implements _$$AddDepositImplCopyWith<$Res> {
-  __$$AddDepositImplCopyWithImpl(
-      _$AddDepositImpl _value, $Res Function(_$AddDepositImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? deposit = null,
-  }) {
-    return _then(_$AddDepositImpl(
-      null == deposit
-          ? _value._deposit
-          : deposit // ignore: cast_nullable_to_non_nullable
-              as List<OrderModel>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AddDepositImpl implements _AddDeposit {
-  const _$AddDepositImpl(final List<OrderModel> deposit) : _deposit = deposit;
-
-  final List<OrderModel> _deposit;
-  @override
-  List<OrderModel> get deposit {
-    if (_deposit is EqualUnmodifiableListView) return _deposit;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_deposit);
-  }
-
-  @override
-  String toString() {
-    return 'DepositEvent.addDeposit(deposit: $deposit)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddDepositImpl &&
-            const DeepCollectionEquality().equals(other._deposit, _deposit));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_deposit));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddDepositImplCopyWith<_$AddDepositImpl> get copyWith =>
-      __$$AddDepositImplCopyWithImpl<_$AddDepositImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() fetch,
-    required TResult Function(List<OrderModel> deposit) addDeposit,
-  }) {
-    return addDeposit(deposit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? fetch,
-    TResult? Function(List<OrderModel> deposit)? addDeposit,
-  }) {
-    return addDeposit?.call(deposit);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? fetch,
-    TResult Function(List<OrderModel> deposit)? addDeposit,
-    required TResult orElse(),
-  }) {
-    if (addDeposit != null) {
-      return addDeposit(deposit);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_AddDeposit value) addDeposit,
-  }) {
-    return addDeposit(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_AddDeposit value)? addDeposit,
-  }) {
-    return addDeposit?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_AddDeposit value)? addDeposit,
-    required TResult orElse(),
-  }) {
-    if (addDeposit != null) {
-      return addDeposit(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AddDeposit implements DepositEvent {
-  const factory _AddDeposit(final List<OrderModel> deposit) = _$AddDepositImpl;
-
-  List<OrderModel> get deposit;
-  @JsonKey(ignore: true)
-  _$$AddDepositImplCopyWith<_$AddDepositImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$DepositState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<OrderModel> deposit) success,
+    required TResult Function(List<OrderModel> orders) success,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -455,7 +292,7 @@ mixin _$DepositState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> deposit)? success,
+    TResult? Function(List<OrderModel> orders)? success,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -463,7 +300,7 @@ mixin _$DepositState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> deposit)? success,
+    TResult Function(List<OrderModel> orders)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -553,7 +390,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<OrderModel> deposit) success,
+    required TResult Function(List<OrderModel> orders) success,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -564,7 +401,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> deposit)? success,
+    TResult? Function(List<OrderModel> orders)? success,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -575,7 +412,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> deposit)? success,
+    TResult Function(List<OrderModel> orders)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -667,7 +504,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<OrderModel> deposit) success,
+    required TResult Function(List<OrderModel> orders) success,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -678,7 +515,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> deposit)? success,
+    TResult? Function(List<OrderModel> orders)? success,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -689,7 +526,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> deposit)? success,
+    TResult Function(List<OrderModel> orders)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -747,7 +584,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<OrderModel> deposit});
+  $Res call({List<OrderModel> orders});
 }
 
 /// @nodoc
@@ -761,12 +598,12 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? deposit = null,
+    Object? orders = null,
   }) {
     return _then(_$SuccessImpl(
-      null == deposit
-          ? _value._deposit
-          : deposit // ignore: cast_nullable_to_non_nullable
+      null == orders
+          ? _value._orders
+          : orders // ignore: cast_nullable_to_non_nullable
               as List<OrderModel>,
     ));
   }
@@ -775,19 +612,19 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(final List<OrderModel> deposit) : _deposit = deposit;
+  const _$SuccessImpl(final List<OrderModel> orders) : _orders = orders;
 
-  final List<OrderModel> _deposit;
+  final List<OrderModel> _orders;
   @override
-  List<OrderModel> get deposit {
-    if (_deposit is EqualUnmodifiableListView) return _deposit;
+  List<OrderModel> get orders {
+    if (_orders is EqualUnmodifiableListView) return _orders;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_deposit);
+    return EqualUnmodifiableListView(_orders);
   }
 
   @override
   String toString() {
-    return 'DepositState.success(deposit: $deposit)';
+    return 'DepositState.success(orders: $orders)';
   }
 
   @override
@@ -795,12 +632,12 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            const DeepCollectionEquality().equals(other._deposit, _deposit));
+            const DeepCollectionEquality().equals(other._orders, _orders));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_deposit));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_orders));
 
   @JsonKey(ignore: true)
   @override
@@ -813,10 +650,10 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<OrderModel> deposit) success,
+    required TResult Function(List<OrderModel> orders) success,
     required TResult Function(String message) error,
   }) {
-    return success(deposit);
+    return success(orders);
   }
 
   @override
@@ -824,10 +661,10 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> deposit)? success,
+    TResult? Function(List<OrderModel> orders)? success,
     TResult? Function(String message)? error,
   }) {
-    return success?.call(deposit);
+    return success?.call(orders);
   }
 
   @override
@@ -835,12 +672,12 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> deposit)? success,
+    TResult Function(List<OrderModel> orders)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(deposit);
+      return success(orders);
     }
     return orElse();
   }
@@ -884,9 +721,9 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements DepositState {
-  const factory _Success(final List<OrderModel> deposit) = _$SuccessImpl;
+  const factory _Success(final List<OrderModel> orders) = _$SuccessImpl;
 
-  List<OrderModel> get deposit;
+  List<OrderModel> get orders;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -958,7 +795,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<OrderModel> deposit) success,
+    required TResult Function(List<OrderModel> orders) success,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -969,7 +806,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<OrderModel> deposit)? success,
+    TResult? Function(List<OrderModel> orders)? success,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -980,7 +817,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<OrderModel> deposit)? success,
+    TResult Function(List<OrderModel> orders)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

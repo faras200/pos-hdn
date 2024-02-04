@@ -56,8 +56,8 @@ class OrderLocalDatasource {
   //get all orders tunai
   Future<List<OrderModel>> getOrderTunai() async {
     final db = await instanceDb.database;
-    final result =
-        await db.query(tableOrders, where: "payment_method = 'Tunai'");
+    final result = await db.query(tableOrders,
+        where: "payment_method = 'Tunai' AND is_sync = 1");
 
     return result.map((e) => OrderModel.fromLocalMap(e)).toList();
   }

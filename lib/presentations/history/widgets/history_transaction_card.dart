@@ -45,7 +45,7 @@ class HistoryTransactionCard extends StatelessWidget {
         },
         leading: Assets.icons.payments.svg(
           colorFilter: ColorFilter.mode(
-            data.isSync ? AppColors.green : AppColors.orange,
+            data.isSync ? AppColors.green : AppColors.disabled,
             BlendMode.srcIn,
           ),
         ),

@@ -141,11 +141,11 @@ class OrderCard extends StatelessWidget {
             onPressed: () {
               context
                   .read<CheckoutBloc>()
-                  .add(CheckoutEvent.removeCheckout(data.product));
+                  .add(CheckoutEvent.removeItemCheckout(data.product));
             },
             icon: const Icon(
               Icons.highlight_off,
-              color: AppColors.primary,
+              color: AppColors.red,
             ),
           ),
         ),

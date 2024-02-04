@@ -22,15 +22,9 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         newCheckout.add(OrderItem(product: event.product, quantity: 1));
       }
 
-      int totalQuantity = 0;
-      int totalPrice = 0;
+      final hitung = calculate(newCheckout);
 
-      newCheckout.forEach((element) {
-        totalQuantity += element.quantity;
-        totalPrice += element.product.harga * element.quantity;
-      });
-
-      emit(_Success(newCheckout, totalQuantity, totalPrice));
+      emit(_Success(newCheckout, hitung.totalQuantity, hitung.totalPrice));
     });
 
     on<_RemoveCheckout>((event, emit) {
@@ -48,15 +42,25 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         }
       }
 
-      int totalQuantity = 0;
-      int totalPrice = 0;
+      final hitung = calculate(newCheckout);
 
-      newCheckout.forEach((element) {
-        totalQuantity += element.quantity;
-        totalPrice += element.product.harga * element.quantity;
-      });
+      emit(_Success(newCheckout, hitung.totalQuantity, hitung.totalPrice));
+    });
 
-      emit(_Success(newCheckout, totalQuantity, totalPrice));
+    on<_RemoveItemCheckout>((event, emit) {
+      var currentState = state as _Success;
+      List<OrderItem> newCheckout = [...currentState.products];
+      emit(const _Loading());
+      if (newCheckout.any((element) => element.product == event.product)) {
+        var index = newCheckout
+            .indexWhere((element) => element.product == event.product);
+
+        newCheckout.removeAt(index);
+      }
+
+      final hitung = calculate(newCheckout);
+
+      emit(_Success(newCheckout, hitung.totalQuantity, hitung.totalPrice));
     });
 
     on<_Started>((event, emit) {
@@ -64,4 +68,26 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       emit(const _Success([], 0, 0));
     });
   }
+}
+
+CalculateResult calculate(List<OrderItem> newCheckout) {
+  int totalQuantity = 0;
+  int totalPrice = 0;
+
+  newCheckout.forEach((element) {
+    totalQuantity += element.quantity;
+    totalPrice += element.product.harga * element.quantity;
+  });
+
+  return CalculateResult(
+    totalQuantity: totalQuantity,
+    totalPrice: totalPrice,
+  );
+}
+
+class CalculateResult {
+  int totalQuantity;
+  int totalPrice;
+
+  CalculateResult({required this.totalQuantity, required this.totalPrice});
 }
