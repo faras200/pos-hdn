@@ -20,18 +20,21 @@ mixin _$DepositEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
+    required TResult Function() fetchRemote,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
+    TResult? Function()? fetchRemote,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
+    TResult Function()? fetchRemote,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$DepositEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchRemote value) fetchRemote,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchRemote value)? fetchRemote,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchRemote value)? fetchRemote,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +120,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
+    required TResult Function() fetchRemote,
   }) {
     return started();
   }
@@ -123,6 +130,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
+    TResult? Function()? fetchRemote,
   }) {
     return started?.call();
   }
@@ -132,6 +140,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
+    TResult Function()? fetchRemote,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -145,6 +154,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchRemote value) fetchRemote,
   }) {
     return started(this);
   }
@@ -154,6 +164,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchRemote value)? fetchRemote,
   }) {
     return started?.call(this);
   }
@@ -163,6 +174,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchRemote value)? fetchRemote,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -216,6 +228,7 @@ class _$FetchImpl implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
+    required TResult Function() fetchRemote,
   }) {
     return fetch();
   }
@@ -225,6 +238,7 @@ class _$FetchImpl implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
+    TResult? Function()? fetchRemote,
   }) {
     return fetch?.call();
   }
@@ -234,6 +248,7 @@ class _$FetchImpl implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
+    TResult Function()? fetchRemote,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -247,6 +262,7 @@ class _$FetchImpl implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchRemote value) fetchRemote,
   }) {
     return fetch(this);
   }
@@ -256,6 +272,7 @@ class _$FetchImpl implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchRemote value)? fetchRemote,
   }) {
     return fetch?.call(this);
   }
@@ -265,6 +282,7 @@ class _$FetchImpl implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchRemote value)? fetchRemote,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -279,12 +297,121 @@ abstract class _Fetch implements DepositEvent {
 }
 
 /// @nodoc
+abstract class _$$FetchRemoteImplCopyWith<$Res> {
+  factory _$$FetchRemoteImplCopyWith(
+          _$FetchRemoteImpl value, $Res Function(_$FetchRemoteImpl) then) =
+      __$$FetchRemoteImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FetchRemoteImplCopyWithImpl<$Res>
+    extends _$DepositEventCopyWithImpl<$Res, _$FetchRemoteImpl>
+    implements _$$FetchRemoteImplCopyWith<$Res> {
+  __$$FetchRemoteImplCopyWithImpl(
+      _$FetchRemoteImpl _value, $Res Function(_$FetchRemoteImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FetchRemoteImpl implements _FetchRemote {
+  const _$FetchRemoteImpl();
+
+  @override
+  String toString() {
+    return 'DepositEvent.fetchRemote()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FetchRemoteImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() fetch,
+    required TResult Function() fetchRemote,
+  }) {
+    return fetchRemote();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? fetch,
+    TResult? Function()? fetchRemote,
+  }) {
+    return fetchRemote?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? fetch,
+    TResult Function()? fetchRemote,
+    required TResult orElse(),
+  }) {
+    if (fetchRemote != null) {
+      return fetchRemote();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchRemote value) fetchRemote,
+  }) {
+    return fetchRemote(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchRemote value)? fetchRemote,
+  }) {
+    return fetchRemote?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchRemote value)? fetchRemote,
+    required TResult orElse(),
+  }) {
+    if (fetchRemote != null) {
+      return fetchRemote(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchRemote implements DepositEvent {
+  const factory _FetchRemote() = _$FetchRemoteImpl;
+}
+
+/// @nodoc
 mixin _$DepositState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(List<DepositModel> deposits) remotesuccess,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -293,6 +420,7 @@ mixin _$DepositState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<DepositModel> deposits)? remotesuccess,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -301,6 +429,7 @@ mixin _$DepositState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<DepositModel> deposits)? remotesuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -310,6 +439,7 @@ mixin _$DepositState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_RemoteSuccess value) remotesuccess,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -318,6 +448,7 @@ mixin _$DepositState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_RemoteSuccess value)? remotesuccess,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -326,6 +457,7 @@ mixin _$DepositState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_RemoteSuccess value)? remotesuccess,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -391,6 +523,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(List<DepositModel> deposits) remotesuccess,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -402,6 +535,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<DepositModel> deposits)? remotesuccess,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -413,6 +547,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<DepositModel> deposits)? remotesuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -428,6 +563,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_RemoteSuccess value) remotesuccess,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -439,6 +575,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_RemoteSuccess value)? remotesuccess,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -450,6 +587,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_RemoteSuccess value)? remotesuccess,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -505,6 +643,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(List<DepositModel> deposits) remotesuccess,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -516,6 +655,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<DepositModel> deposits)? remotesuccess,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -527,6 +667,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<DepositModel> deposits)? remotesuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -542,6 +683,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_RemoteSuccess value) remotesuccess,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -553,6 +695,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_RemoteSuccess value)? remotesuccess,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -564,6 +707,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_RemoteSuccess value)? remotesuccess,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -651,6 +795,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(List<DepositModel> deposits) remotesuccess,
     required TResult Function(String message) error,
   }) {
     return success(orders);
@@ -662,6 +807,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<DepositModel> deposits)? remotesuccess,
     TResult? Function(String message)? error,
   }) {
     return success?.call(orders);
@@ -673,6 +819,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<DepositModel> deposits)? remotesuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -688,6 +835,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_RemoteSuccess value) remotesuccess,
     required TResult Function(_Error value) error,
   }) {
     return success(this);
@@ -699,6 +847,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_RemoteSuccess value)? remotesuccess,
     TResult? Function(_Error value)? error,
   }) {
     return success?.call(this);
@@ -710,6 +859,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_RemoteSuccess value)? remotesuccess,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -726,6 +876,165 @@ abstract class _Success implements DepositState {
   List<OrderModel> get orders;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RemoteSuccessImplCopyWith<$Res> {
+  factory _$$RemoteSuccessImplCopyWith(
+          _$RemoteSuccessImpl value, $Res Function(_$RemoteSuccessImpl) then) =
+      __$$RemoteSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<DepositModel> deposits});
+}
+
+/// @nodoc
+class __$$RemoteSuccessImplCopyWithImpl<$Res>
+    extends _$DepositStateCopyWithImpl<$Res, _$RemoteSuccessImpl>
+    implements _$$RemoteSuccessImplCopyWith<$Res> {
+  __$$RemoteSuccessImplCopyWithImpl(
+      _$RemoteSuccessImpl _value, $Res Function(_$RemoteSuccessImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? deposits = null,
+  }) {
+    return _then(_$RemoteSuccessImpl(
+      null == deposits
+          ? _value._deposits
+          : deposits // ignore: cast_nullable_to_non_nullable
+              as List<DepositModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RemoteSuccessImpl implements _RemoteSuccess {
+  const _$RemoteSuccessImpl(final List<DepositModel> deposits)
+      : _deposits = deposits;
+
+  final List<DepositModel> _deposits;
+  @override
+  List<DepositModel> get deposits {
+    if (_deposits is EqualUnmodifiableListView) return _deposits;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_deposits);
+  }
+
+  @override
+  String toString() {
+    return 'DepositState.remotesuccess(deposits: $deposits)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RemoteSuccessImpl &&
+            const DeepCollectionEquality().equals(other._deposits, _deposits));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_deposits));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RemoteSuccessImplCopyWith<_$RemoteSuccessImpl> get copyWith =>
+      __$$RemoteSuccessImplCopyWithImpl<_$RemoteSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(List<DepositModel> deposits) remotesuccess,
+    required TResult Function(String message) error,
+  }) {
+    return remotesuccess(deposits);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<DepositModel> deposits)? remotesuccess,
+    TResult? Function(String message)? error,
+  }) {
+    return remotesuccess?.call(deposits);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<DepositModel> deposits)? remotesuccess,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (remotesuccess != null) {
+      return remotesuccess(deposits);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_RemoteSuccess value) remotesuccess,
+    required TResult Function(_Error value) error,
+  }) {
+    return remotesuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_RemoteSuccess value)? remotesuccess,
+    TResult? Function(_Error value)? error,
+  }) {
+    return remotesuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_RemoteSuccess value)? remotesuccess,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (remotesuccess != null) {
+      return remotesuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RemoteSuccess implements DepositState {
+  const factory _RemoteSuccess(final List<DepositModel> deposits) =
+      _$RemoteSuccessImpl;
+
+  List<DepositModel> get deposits;
+  @JsonKey(ignore: true)
+  _$$RemoteSuccessImplCopyWith<_$RemoteSuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -796,6 +1105,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<OrderModel> orders) success,
+    required TResult Function(List<DepositModel> deposits) remotesuccess,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -807,6 +1117,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<OrderModel> orders)? success,
+    TResult? Function(List<DepositModel> deposits)? remotesuccess,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -818,6 +1129,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<OrderModel> orders)? success,
+    TResult Function(List<DepositModel> deposits)? remotesuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -833,6 +1145,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_RemoteSuccess value) remotesuccess,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -844,6 +1157,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_RemoteSuccess value)? remotesuccess,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -855,6 +1169,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_RemoteSuccess value)? remotesuccess,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

@@ -61,7 +61,9 @@ class ManageMenuPage extends StatelessWidget {
                   onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const DepositPage())),
+                          builder: (context) => DepositPage(
+                                selectedIndex: 0,
+                              ))),
                   isImage: true,
                 ),
                 const SpaceWidth(15.0),

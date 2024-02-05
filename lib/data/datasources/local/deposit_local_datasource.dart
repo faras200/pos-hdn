@@ -1,5 +1,6 @@
 import 'package:pos_hdn/data/datasources/db/config_db_local.dart';
 import 'package:pos_hdn/data/models/request/order_request_model.dart';
+import 'package:pos_hdn/presentations/manage/pages/deposit/models/deposit_model.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
 import '../../../presentations/home/models/order_item.dart';
@@ -12,11 +13,15 @@ class DepositLocalDatasource {
   final String tableOrders = instanceDb.tableOrders;
   final String tableOrderItems = instanceDb.tableOrderItems;
   //save order
-  Future<int> saveDeposit(OrderModel order) async {
+  Future<int> saveDeposit(DepositModel deposit) async {
     final db = await instanceDb.database;
-    int id = await db.insert(tableOrders, order.toMapForLocal());
-    for (var orderItem in order.orders) {
-      await db.insert(tableOrderItems, orderItem.toMapForLocal(id));
+    int id = await db.insert(tableOrders, deposit.toMap());
+
+    if (deposit.orders!.isEmpty) {
+      for (var order in deposit.orders!) {
+        await db.update(tableOrders, {'is_sync': '$order'},
+            where: 'id = ?', whereArgs: [id]);
+      }
     }
     return id;
   }

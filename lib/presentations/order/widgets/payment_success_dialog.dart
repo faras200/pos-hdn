@@ -48,9 +48,9 @@ class PaymentSuccessDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SpaceHeight(12.0),
-                  const _LabelValue(
+                  _LabelValue(
                     label: 'METODE PEMBAYARAN',
-                    value: 'Qris',
+                    value: paymentType,
                   ),
                   const Divider(height: 36.0),
                   _LabelValue(
@@ -79,7 +79,10 @@ class PaymentSuccessDialog extends StatelessWidget {
                       Flexible(
                         child: Button.filled(
                           onPressed: () {
-                            context.pushReplacement(const DepositPage());
+                            context
+                                .read<OrderBloc>()
+                                .add(const OrderEvent.started());
+                            context.pushReplacement(const DashboardPage());
                           },
                           label: 'Selesai',
                           fontSize: 13,

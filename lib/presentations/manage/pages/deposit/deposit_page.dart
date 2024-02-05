@@ -1,7 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
+
 import 'package:pos_hdn/core/assets/assets.gen.dart';
 import 'package:pos_hdn/core/components/buttons.dart';
 import 'package:pos_hdn/core/components/spaces.dart';
@@ -11,19 +13,39 @@ import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/data/datasources/remote/deposit_remote_datasource.dart';
 import 'package:pos_hdn/data/models/request/deposit_request_model.dart';
 import 'package:pos_hdn/presentations/manage/bloc/deposit/deposit_bloc.dart';
+import 'package:pos_hdn/presentations/manage/pages/deposit/detail_completed_dialog.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/detail_dialog.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/payment_dialog.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
 class DepositPage extends StatefulWidget {
-  const DepositPage({super.key});
+  int selectedIndex;
+  DepositPage({
+    Key? key,
+    required this.selectedIndex,
+  }) : super(key: key);
 
   @override
   State<DepositPage> createState() => _DepositPageState();
 }
 
-class _DepositPageState extends State<DepositPage> {
+class _DepositPageState extends State<DepositPage>
+    with SingleTickerProviderStateMixin {
+  late TabController _controller;
+
+  List<Widget> list = const [
+    Tab(
+      child: Text('Pending', style: TextStyle(color: AppColors.white)),
+    ),
+    Tab(
+      child: Text(
+        'Completed',
+        style: TextStyle(color: AppColors.white),
+      ),
+    ),
+  ];
   bool isSelectItem = false;
+  bool isAvailebleData = false;
   Map<int, bool> selectedItem = {};
   int totalPrice = 0;
   List<OrderModel> dataSetoran = [];
@@ -31,7 +53,31 @@ class _DepositPageState extends State<DepositPage> {
   @override
   void initState() {
     super.initState();
-    context.read<DepositBloc>().add(const DepositEvent.fetch());
+
+    // Create TabController for getting the index of current tab
+    _controller = TabController(length: list.length, vsync: this);
+
+    _controller.addListener(() {
+      setState(() {
+        widget.selectedIndex = _controller.index;
+      });
+
+      if (widget.selectedIndex == 0) {
+        context.read<DepositBloc>().add(const DepositEvent.fetch());
+      } else {
+        context.read<DepositBloc>().add(const DepositEvent.fetchRemote());
+      }
+    });
+    // Logger().d(widget.selectedIndex);
+    if (widget.selectedIndex == 0) {
+      _controller.animateTo(0);
+      context.read<DepositBloc>().add(const DepositEvent.fetch());
+    } else {
+      _controller.animateTo(1);
+      context.read<DepositBloc>().add(const DepositEvent.fetchRemote());
+    }
+
+    Future.delayed(const Duration(seconds: 2), () {});
   }
 
   @override
@@ -40,19 +86,9 @@ class _DepositPageState extends State<DepositPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          bottom: const TabBar(
-            tabs: [
-              Tab(
-                child:
-                    Text('Pending', style: TextStyle(color: AppColors.white)),
-              ),
-              Tab(
-                child: Text(
-                  'Completed',
-                  style: TextStyle(color: AppColors.white),
-                ),
-              ),
-            ],
+          bottom: TabBar(
+            tabs: list,
+            controller: _controller,
           ),
           title: const Text(
             "Setoran",
@@ -62,6 +98,7 @@ class _DepositPageState extends State<DepositPage> {
           centerTitle: true,
         ),
         body: TabBarView(
+          controller: _controller,
           children: [
             BlocBuilder<DepositBloc, DepositState>(
               builder: (context, state) {
@@ -79,6 +116,7 @@ class _DepositPageState extends State<DepositPage> {
                       child: Text('No data'),
                     );
                   }
+                  isAvailebleData = true;
                   dataSetoran = setoran;
                   return ListView.builder(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -153,44 +191,117 @@ class _DepositPageState extends State<DepositPage> {
                 });
               },
             ),
-            const Icon(Icons.directions_transit),
+            BlocBuilder<DepositBloc, DepositState>(
+              builder: (context, state) {
+                return state.maybeWhen(orElse: () {
+                  return const Center(
+                    child: Text('No data'),
+                  );
+                }, loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }, remotesuccess: (deposits) {
+                  if (deposits.isEmpty) {
+                    return const Center(
+                      child: Text('No data'),
+                    );
+                  }
+                  // dataSetoran = setoran;
+                  return ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    itemBuilder: (builder, index) {
+                      final data = deposits[index];
+                      return Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 5.0),
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              offset: const Offset(0, 2),
+                              blurRadius: 48.0,
+                              blurStyle: BlurStyle.outer,
+                              spreadRadius: 0,
+                              color: AppColors.black.withOpacity(0.06),
+                            ),
+                          ],
+                        ),
+                        child: ListTile(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => DetailCompletedDialog(
+                                  dataDetail: selectedData, amount: totalPrice),
+                            );
+                          },
+                          title: Text(data.uuid!,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              )),
+                          subtitle: Text('${data.orders!.length} orders'),
+                          trailing: Text(
+                            data.amount!.currencyFormatRp,
+                            style: const TextStyle(
+                              color: AppColors.green,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            // ignore: deprecated_member_use_from_same_package
+                            child: Assets.icons.done.svg(),
+                          ),
+                        ),
+                      );
+                    },
+                    itemCount: deposits.length,
+                  );
+                });
+              },
+            ),
           ],
         ),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(left: 30.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              isSelectItem
-                  ? FloatingActionButton.extended(
-                      heroTag: "btn2",
-                      backgroundColor: AppColors.primary,
-                      label: Text(
-                        'Proses Setoran ${totalPrice.currencyFormatRp}',
-                        style: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      icon: const Icon(Icons.payment, color: Colors.white),
+        floatingActionButton: isAvailebleData
+            ? Padding(
+                padding: const EdgeInsets.only(left: 30.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    isSelectItem
+                        ? FloatingActionButton.extended(
+                            heroTag: "btn2",
+                            backgroundColor: AppColors.primary,
+                            label: Text(
+                              'Proses Setoran ${totalPrice.currencyFormatRp}',
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            icon:
+                                const Icon(Icons.payment, color: Colors.white),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => DetailDialog(
+                                    dataDetail: selectedData,
+                                    amount: totalPrice),
+                              );
+                            },
+                          )
+                        : const SizedBox(),
+                    Expanded(child: Container()),
+                    FloatingActionButton(
+                      heroTag: "btn1",
+                      child: const Icon(Icons.check),
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => DetailDialog(
-                              dataDetail: selectedData, amount: totalPrice),
-                        );
+                        selectAllAtOnceGo();
                       },
-                    )
-                  : const SizedBox(),
-              Expanded(child: Container()),
-              FloatingActionButton(
-                heroTag: "btn1",
-                child: const Icon(Icons.check),
-                onPressed: () {
-                  selectAllAtOnceGo();
-                },
-              ),
-            ],
-          ),
-        ),
+                    ),
+                  ],
+                ),
+              )
+            : const SizedBox(),
       ),
     );
   }

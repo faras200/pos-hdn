@@ -98,7 +98,9 @@ class MyApp extends StatelessWidget {
             }),
         routes: {
           "/dashboard": (_) => const DashboardPage(),
-          "/setoran": (_) => const DepositPage(),
+          "/setoran": (_) => DepositPage(
+                selectedIndex: 0,
+              ),
         },
       ),
     );

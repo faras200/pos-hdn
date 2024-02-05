@@ -9,6 +9,7 @@ import 'package:pos_hdn/core/components/buttons.dart';
 import 'package:pos_hdn/core/components/spaces.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
+import 'package:pos_hdn/data/dataoutputs/qris_print.dart';
 import 'package:pos_hdn/data/datasources/local/deposit_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/local/order_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/remote/deposit_remote_datasource.dart';
@@ -16,10 +17,10 @@ import 'package:pos_hdn/data/datasources/remote/order_remote_datasource.dart';
 import 'package:pos_hdn/data/models/request/deposit_request_model.dart';
 import 'package:pos_hdn/data/models/request/order_request_model.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/models/deposit_model.dart';
+import 'package:pos_hdn/presentations/manage/pages/deposit/payment_success_dialog.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:pos_hdn/presentations/order/bloc/qris/qris_bloc.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
-import 'package:pos_hdn/presentations/order/widgets/payment_success_dialog.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -98,16 +99,9 @@ class _PaymentDialogState extends State<PaymentDialog> {
                       });
                     }, success: (message) async {
                       timer?.cancel();
-                      final timeNow = DateFormat('yyyy-MM-ddTHH:mm:ss')
-                          .format(DateTime.now());
+
                       final uuid = orderId;
-                      // final depositModel = DepositModel(
-                      //   uuid: uuid,
-                      //   qris: qris,
-                      //   orders: widget.data,
-                      //   amount: widget.price,
-                      //   createdAt: timeNow,
-                      // );
+
                       final depositRequestModel = DepositRequestModel(
                           qrisId: qris_id,
                           amount: widget.price,
@@ -117,52 +111,20 @@ class _PaymentDialogState extends State<PaymentDialog> {
                           .instance
                           .storeDeposit(depositRequestModel);
 
-                      // if (saveDbRemote) {
-                      //   //Update db local to isSync
-                      //   OrderLocalDatasource.instance
-                      //       .updateIsSyncOrderById(saveDbLocal);
-                      // }
-                      // Logger().d(selectedData);
-
-                      // final saveDbLocal = await DepositLocalDatasource.instance
-                      //     .saveOrder(orderModel); //return id order
-
-                      // final orderItems = data
-                      //     .map((e) => OrderItemModel(
-                      //         productId: e.product.id!,
-                      //         quantity: e.quantity,
-                      //         totalPrice: (e.quantity * e.product.harga)))
-                      //     .toList();
-
-                      // final orderRequestModel = OrderRequestModel(
-                      //     paymentMethod: paymentMethod,
-                      //     transactionTime: timeNow,
-                      //     kasirId: idKasir,
-                      //     totalPrice: total,
-                      //     totalItem: qty,
-                      //     orderItems: orderItems,
-                      //     uuid: uuid);
-
-                      // final saveDbRemote =
-                      //     await DepositRemoteDatasource.instance.storeDeposit(
-                      //         uuid, widget.price, qris_id, widget.data);
-
-                      // if (saveDbRemote) {
-                      //   //Update db local to isSync
-                      //   OrderLocalDatasource.instance
-                      //       .updateIsSyncOrderById(saveDbLocal);
-                      // }
-
-                      // // ignore: use_build_context_synchronously
-                      // context.read<OrderBloc>().add(OrderEvent.addNominalBayar(
-                      //       total,
-                      //     ));
+                      if (saveDbRemote) {
+                        //Update db local to isSync
+                        for (var depo in widget.data) {
+                          await OrderLocalDatasource.instance
+                              .updateIsDepositOrderById(depo.id!);
+                        }
+                      }
                       // ignore: use_build_context_synchronously
                       context.pop();
                       // ignore: use_build_context_synchronously
                       showDialog(
                         context: context,
-                        builder: (context) => const PaymentSuccessDialog(),
+                        builder: (context) =>
+                            PaymentSuccessDialog(amount: widget.price),
                       );
                     });
                   },
@@ -187,7 +149,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
                                 width: 256.0,
                                 height: 256.0,
                                 child: QrImageView(
-                                  data: '${data.qris}',
+                                  data: qris,
                                   version: QrVersions.auto,
                                 ),
                               ),
@@ -238,10 +200,6 @@ class _PaymentDialogState extends State<PaymentDialog> {
                       child: Button.filled(
                         onPressed: () {
                           context.pop();
-                          // context
-                          //     .read<OrderBloc>()
-                          //     .add(const OrderEvent.started());
-                          // context.pushReplacement(const DashboardPage());
                         },
                         label: 'Batalkan',
                         fontSize: 13,
@@ -251,19 +209,10 @@ class _PaymentDialogState extends State<PaymentDialog> {
                     Flexible(
                       child: Button.outlined(
                         onPressed: () async {
-                          // final printValue = printQris();
-                          //     await CwbPrint.instance.printOrder(
-                          //   data,
-                          //   qty,
-                          //   total,
-                          //   paymentType,
-                          //   nominal,
-                          //   nameKasir,
-                          // );
-                          // await PrintBluetoothThermal.writeBytes(
-                          //     printValue);
-                          // final result =
-                          //     await PrintBluetoothThermal.writeBytes(ticket);
+                          final printValue = await CwbPrint.instance.printQris(
+                            qris,
+                          );
+                          await PrintBluetoothThermal.writeBytes(printValue);
                         },
                         label: 'Print',
                         icon:
