@@ -14,7 +14,7 @@ import 'package:pos_hdn/presentations/history/widgets/item_product_card.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
-class TransactionDetailDialoge extends StatelessWidget {
+class TransactionDetailDialoge extends StatefulWidget {
   final OrderModel dataDetail;
   const TransactionDetailDialoge({
     super.key,
@@ -22,9 +22,23 @@ class TransactionDetailDialoge extends StatelessWidget {
   });
 
   @override
+  State<TransactionDetailDialoge> createState() =>
+      _TransactionDetailDialogeState();
+}
+
+class _TransactionDetailDialogeState extends State<TransactionDetailDialoge> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<HistoryDetailBloc>()
+        .add(HistoryDetailEvent.fetchDetail(widget.dataDetail.id ?? 0));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    DateTime parseDate =
-        DateFormat("yyyy-MM-ddTHH:mm:ss").parse(dataDetail.transactionTime);
+    DateTime parseDate = DateFormat("yyyy-MM-ddTHH:mm:ss")
+        .parse(widget.dataDetail.transactionTime);
     var inputDate = DateTime.parse(parseDate.toString());
     var outputDate = inputDate.toFormattedTime();
 
@@ -50,12 +64,12 @@ class TransactionDetailDialoge extends StatelessWidget {
           _LabelValue(
             label: 'TOTAL PEMBELIAN',
             value:
-                '${dataDetail.totalPrice.currencyFormatRp}   ( ${dataDetail.paymentMethod} )',
+                '${widget.dataDetail.totalPrice.currencyFormatRp}   ( ${widget.dataDetail.paymentMethod} )',
           ),
           const Divider(height: 36.0),
           _LabelValue(
             label: 'NOMINAL BAYAR',
-            value: dataDetail.nominalBayar.currencyFormatRp,
+            value: widget.dataDetail.nominalBayar.currencyFormatRp,
           ),
           const Divider(height: 30.0),
           _LabelValue(
@@ -81,7 +95,7 @@ class TransactionDetailDialoge extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 },
-                success: (data, product, orders) {
+                success: (data, orders) {
                   return Column(
                     children: [
                       SizedBox(
@@ -89,7 +103,7 @@ class TransactionDetailDialoge extends StatelessWidget {
                         height: 200,
                         child: ListView.separated(
                           padding: const EdgeInsets.symmetric(vertical: 2.0),
-                          itemCount: product.length,
+                          itemCount: orders.length,
                           separatorBuilder: (context, index) =>
                               const SpaceHeight(10.0),
                           itemBuilder: (context, index) => ItemProductCard(
@@ -119,11 +133,11 @@ class TransactionDetailDialoge extends StatelessWidget {
                                 final printValue =
                                     await CwbPrint.instance.printOrder(
                                   orders,
-                                  dataDetail.totalQuantity,
-                                  dataDetail.totalPrice,
-                                  dataDetail.paymentMethod,
-                                  dataDetail.nominalBayar,
-                                  dataDetail.namaKasir,
+                                  widget.dataDetail.totalQuantity,
+                                  widget.dataDetail.totalPrice,
+                                  widget.dataDetail.paymentMethod,
+                                  widget.dataDetail.nominalBayar,
+                                  widget.dataDetail.namaKasir,
                                 );
                                 await PrintBluetoothThermal.writeBytes(
                                     printValue);

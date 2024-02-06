@@ -35,9 +35,6 @@ class HistoryTransactionCard extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          context
-              .read<HistoryDetailBloc>()
-              .add(HistoryDetailEvent.fetchDetail(data.id ?? 0));
           showDialog(
             context: context,
             builder: (context) => TransactionDetailDialoge(dataDetail: data),

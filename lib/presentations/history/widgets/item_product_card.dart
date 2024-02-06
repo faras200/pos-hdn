@@ -28,10 +28,6 @@ class ItemProductCard extends StatelessWidget {
             shape: Border(
               bottom: BorderSide(width: 2, color: Color(0xFFC7D0EB)),
             ),
-            // shape: RoundedRectangleBorder(
-            //   side: const BorderSide(width: 2, color: Color(0xFFC7D0EB)),
-            //   borderRadius: BorderRadius.circular(10),
-            // ),
           ),
           child: Row(
             children: [

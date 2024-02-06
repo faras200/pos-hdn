@@ -59,15 +59,6 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
               );
             });
-            // return ListView.separated(
-            //   padding: const EdgeInsets.symmetric(vertical: 30.0),
-            //   itemCount: historyTransactions.length,
-            //   separatorBuilder: (context, index) => const SpaceHeight(8.0),
-            //   itemBuilder: (context, index) => HistoryTransactionCard(
-            //     padding: paddingHorizontal,
-            //     data: historyTransactions[index],
-            //   ),
-            // );
           },
         ));
   }
