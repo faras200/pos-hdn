@@ -1,23 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 
 import 'package:pos_hdn/core/assets/assets.gen.dart';
-import 'package:pos_hdn/core/components/buttons.dart';
-import 'package:pos_hdn/core/components/spaces.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
-import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
-import 'package:pos_hdn/data/datasources/remote/deposit_remote_datasource.dart';
-import 'package:pos_hdn/data/models/request/deposit_request_model.dart';
 import 'package:pos_hdn/presentations/manage/bloc/deposit/deposit_bloc.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/detail_completed_dialog.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/detail_dialog.dart';
-import 'package:pos_hdn/presentations/manage/pages/deposit/payment_dialog.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 
+// ignore: must_be_immutable
 class DepositPage extends StatefulWidget {
   int selectedIndex;
   DepositPage({
@@ -112,6 +104,7 @@ class _DepositPageState extends State<DepositPage>
                   );
                 }, success: (setoran) {
                   if (setoran.isEmpty) {
+                    isAvailebleData = false;
                     return const Center(
                       child: Text('No data'),
                     );
@@ -231,7 +224,10 @@ class _DepositPageState extends State<DepositPage>
                             showDialog(
                               context: context,
                               builder: (context) => DetailCompletedDialog(
-                                  dataDetail: selectedData, amount: totalPrice),
+                                dataDetail: deposits[index].orders!,
+                                amount: data.amount!,
+                                time: data.time!,
+                              ),
                             );
                           },
                           title: Text(data.uuid!,

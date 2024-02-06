@@ -1,13 +1,12 @@
 import 'dart:convert';
 
-import 'package:pos_hdn/presentations/order/models/order_model.dart';
-
 class DepositModel {
   final int? id;
-  final List<Transaction>? orders;
+  final List<DetailDepositModel>? orders;
   final String? uuid;
   final int? amount;
   final String? qris;
+  final String? time;
   final String? createdAt;
 
   DepositModel({
@@ -16,6 +15,7 @@ class DepositModel {
     this.uuid,
     this.amount,
     this.qris,
+    this.time,
     this.createdAt,
   });
 
@@ -28,10 +28,11 @@ class DepositModel {
         id: json["id"],
         uuid: json["uuid"],
         amount: json["amount"],
+        time: json["time"],
         orders: json["transactions"] == null
             ? []
-            : List<Transaction>.from(
-                json["transactions"]!.map((x) => Transaction.fromMap(x))),
+            : List<DetailDepositModel>.from(json["transactions"]!
+                .map((x) => DetailDepositModel.fromMap(x))),
         qris: json["qris"],
         createdAt: json["created_at"],
       );
@@ -41,6 +42,7 @@ class DepositModel {
         "uuid": uuid,
         "amount": amount,
         "qris": qris,
+        "time": time,
         "created_at": createdAt,
         "orders": orders == null
             ? []
@@ -48,27 +50,32 @@ class DepositModel {
       };
 }
 
-class Transaction {
+class DetailDepositModel {
   final String? uuid;
   final int? depositId;
+  final int? amount;
 
-  Transaction({
+  DetailDepositModel({
     this.uuid,
     this.depositId,
+    this.amount,
   });
 
-  factory Transaction.fromJson(String str) =>
-      Transaction.fromMap(json.decode(str));
+  factory DetailDepositModel.fromJson(String str) =>
+      DetailDepositModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Transaction.fromMap(Map<String, dynamic> json) => Transaction(
+  factory DetailDepositModel.fromMap(Map<String, dynamic> json) =>
+      DetailDepositModel(
         uuid: json["uuid"],
         depositId: json["deposit_id"],
+        amount: int.parse(json["amount"]),
       );
 
   Map<String, dynamic> toMap() => {
         "uuid": uuid,
         "deposit_id": depositId,
+        "amount": amount,
       };
 }

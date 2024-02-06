@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pos_hdn/core/assets/assets.gen.dart';
 import 'package:pos_hdn/core/components/buttons.dart';
 import 'package:pos_hdn/core/components/spaces.dart';
 import 'package:pos_hdn/core/constants/colors.dart';

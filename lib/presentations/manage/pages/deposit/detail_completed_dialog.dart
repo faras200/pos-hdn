@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:pos_hdn/core/assets/assets.gen.dart';
 import 'package:pos_hdn/core/components/buttons.dart';
 import 'package:pos_hdn/core/components/spaces.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
+import 'package:pos_hdn/core/extensions/date_time_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
-import 'package:pos_hdn/presentations/manage/pages/deposit/payment_dialog.dart';
-import 'package:pos_hdn/presentations/order/models/order_model.dart';
+import 'package:pos_hdn/presentations/manage/pages/deposit/models/deposit_model.dart';
 
 class DetailCompletedDialog extends StatelessWidget {
-  final List<OrderModel> dataDetail;
+  final List<DetailDepositModel> dataDetail;
   final int amount;
+  final String time;
   const DetailCompletedDialog(
-      {super.key, required this.dataDetail, required this.amount});
+      {super.key,
+      required this.dataDetail,
+      required this.amount,
+      required this.time});
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = DateTime.parse(time);
+
     return AlertDialog(
       insetPadding: const EdgeInsets.all(20),
       scrollable: true,
@@ -40,6 +45,11 @@ class DetailCompletedDialog extends StatelessWidget {
           _LabelValue(
             label: 'JUMLAH SETORAN',
             value: amount.currencyFormatRp,
+          ),
+          const SpaceHeight(20.0),
+          _LabelValue(
+            label: 'WAKTU SETOR',
+            value: dateTime.toFormattedTime(),
           ),
           const Divider(height: 30.0),
           const Column(
@@ -79,15 +89,15 @@ class DetailCompletedDialog extends StatelessWidget {
                       ),
                       child: ListTile(
                         title: Text(
-                          data.uuid,
+                          data.uuid!,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        subtitle: Text('${data.totalQuantity} items'),
+                        // subtitle: Text('${data.totalQuantity} items'),
                         trailing: Text(
-                          int.parse(data.totalPrice.toString()).currencyFormat,
+                          data.amount!.currencyFormat,
                           style: const TextStyle(
                             color: AppColors.green,
                             fontSize: 16,
@@ -119,16 +129,8 @@ class DetailCompletedDialog extends StatelessWidget {
                     child: Button.filled(
                       onPressed: () {
                         context.pop();
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => PaymentDialog(
-                            price: amount,
-                            data: dataDetail,
-                          ),
-                        );
                       },
-                      label: 'Proses',
+                      label: 'Okee',
                       fontSize: 13,
                     ),
                   ),

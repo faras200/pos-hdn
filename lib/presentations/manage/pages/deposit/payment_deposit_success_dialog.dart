@@ -1,23 +1,16 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/date_time_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:pos_hdn/data/dataoutputs/cwb_print.dart';
-import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
-import 'package:pos_hdn/presentations/home/pages/dashboard_page.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/deposit_page.dart';
-import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
-import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
 import '../../../../core/assets/assets.gen.dart';
 import '../../../../core/components/buttons.dart';
 import '../../../../core/components/spaces.dart';
 
-class PaymentSuccessDialog extends StatelessWidget {
+class PaymentDepositSuccessDialog extends StatelessWidget {
   final int amount;
-  const PaymentSuccessDialog({super.key, required this.amount});
+  const PaymentDepositSuccessDialog({super.key, required this.amount});
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +51,7 @@ class PaymentSuccessDialog extends StatelessWidget {
                 Flexible(
                   child: Button.filled(
                     onPressed: () {
+                      context.pop();
                       context.pushReplacement(DepositPage(
                         selectedIndex: 1,
                       ));
@@ -67,28 +61,6 @@ class PaymentSuccessDialog extends StatelessWidget {
                   ),
                 ),
                 const SpaceWidth(10.0),
-                // Flexible(
-                //   child: Button.outlined(
-                //     onPressed: () async {
-                //       final printValue = await CwbPrint.instance.printOrder(
-                //         data,
-                //         qty,
-                //         total,
-                //         paymentType,
-                //         nominal,
-                //         nameKasir,
-                //       );
-                //       await PrintBluetoothThermal.writeBytes(printValue);
-                //       // final result =
-                //       //     await PrintBluetoothThermal.writeBytes(ticket);
-                //     },
-                //     label: 'Print',
-                //     icon:
-                //         // ignore: deprecated_member_use_from_same_package
-                //         Assets.icons.print.svg(color: AppColors.primary),
-                //     fontSize: 13,
-                //   ),
-                // ),
               ],
             ),
           ],

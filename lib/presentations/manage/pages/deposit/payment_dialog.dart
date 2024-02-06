@@ -3,22 +3,16 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:pos_hdn/core/assets/assets.gen.dart';
 import 'package:pos_hdn/core/components/buttons.dart';
 import 'package:pos_hdn/core/components/spaces.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/data/dataoutputs/qris_print.dart';
-import 'package:pos_hdn/data/datasources/local/deposit_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/local/order_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/remote/deposit_remote_datasource.dart';
-import 'package:pos_hdn/data/datasources/remote/order_remote_datasource.dart';
 import 'package:pos_hdn/data/models/request/deposit_request_model.dart';
-import 'package:pos_hdn/data/models/request/order_request_model.dart';
-import 'package:pos_hdn/presentations/manage/pages/deposit/models/deposit_model.dart';
-import 'package:pos_hdn/presentations/manage/pages/deposit/payment_success_dialog.dart';
-import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
+import 'package:pos_hdn/presentations/manage/pages/deposit/payment_deposit_success_dialog.dart';
 import 'package:pos_hdn/presentations/order/bloc/qris/qris_bloc.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
@@ -124,7 +118,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
                       showDialog(
                         context: context,
                         builder: (context) =>
-                            PaymentSuccessDialog(amount: widget.price),
+                            PaymentDepositSuccessDialog(amount: widget.price),
                       );
                     });
                   },

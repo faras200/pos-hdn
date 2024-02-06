@@ -15,9 +15,8 @@ extension DateTimeExt on DateTime {
       'Desember'
     ];
 
-    final int hour12 = hour % 12;
     final String monthName = monthNames[month - 1];
 
-    return '$day $monthName, ${hour12.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
+    return '$day $monthName, ${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
   }
 }
