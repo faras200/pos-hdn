@@ -22,18 +22,14 @@ class _ConnectionAlertState extends State<ConnectionAlert> {
         valueListenable: connectivityController.isConnected,
         builder: (context, value, child) {
           if (value) {
-            return const Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Icon(Icons.wifi, size: 25, color: AppColors.white),
-              ],
+            return IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.wifi, size: 25, color: AppColors.white),
             );
           } else {
-            return const Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Icon(Icons.wifi_off, size: 25, color: AppColors.red),
-              ],
+            return IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.wifi_off, size: 25, color: AppColors.red),
             );
           }
         });

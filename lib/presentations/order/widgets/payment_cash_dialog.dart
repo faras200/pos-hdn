@@ -31,13 +31,26 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
   TextEditingController? priceController;
   ConnectivityController connectivityController = ConnectivityController();
 
+  late DateTime loginClickTime;
+
+  bool isRedundentClick(DateTime currentTime) {
+    if (loginClickTime == null) {
+      loginClickTime = currentTime;
+      return false;
+    }
+    if (currentTime.difference(loginClickTime).inSeconds < 10) {
+      // set this difference time in seconds
+      return true;
+    }
+
+    loginClickTime = currentTime;
+    return false;
+  }
+
   @override
   void initState() {
     priceController = TextEditingController(text: '0');
     connectivityController.init();
-    // if (connectivityController.isConnected.value == false) {
-
-    // }
     super.initState();
   }
 
@@ -225,6 +238,7 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                   child: CircularProgressIndicator(),
                 );
               }, success: (data, qty, total, payment, _, idKasir, namaKasir) {
+                bool _clicked = false;
                 return Button.filled(
                   onPressed: () {
                     if (priceController!.text.toIntegerFromText < total) {
@@ -242,9 +256,16 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                               btnOkColor: AppColors.primary)
                           .show();
                     }
-                    context.read<OrderBloc>().add(OrderEvent.addNominalBayar(
-                          priceController!.text.toIntegerFromText,
-                        ));
+                    if (_clicked) {
+                      Logger().d('clicked2');
+                    } else {
+                      setState(() => _clicked = true);
+                      Logger().d('clicked1');
+                      context.read<OrderBloc>().add(OrderEvent.addNominalBayar(
+                            priceController!.text.toIntegerFromText,
+                          )); // set it to true now
+                    }
+
                     // var datachekout = CheckoutBloc().state;
 
                     // context

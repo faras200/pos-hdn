@@ -4,6 +4,7 @@ import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/presentations/manage/pages/product/manage_product_page.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/deposit_page.dart';
+import 'package:pos_hdn/presentations/manage/pages/settings_page.dart';
 import 'package:pos_hdn/presentations/manage/pages/sync_data_page.dart';
 
 import '../../../core/assets/assets.gen.dart';
@@ -26,6 +27,21 @@ class ManageMenuPage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.manage_accounts,
+              size: 25,
+            ),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SettingsPage()));
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -82,7 +98,6 @@ class ManageMenuPage extends StatelessWidget {
             ),
           ),
           const SpaceHeight(100),
-          const Divider(),
           BlocConsumer<LogoutBloc, LogoutState>(
             listener: (context, state) {
               state.maybeMap(
@@ -97,23 +112,9 @@ class ManageMenuPage extends StatelessWidget {
               );
             },
             builder: (context, state) {
-              return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.red,
-                    maximumSize: const Size(200, 100),
-                    fixedSize: const Size(180, 50)),
-                onPressed: () {
-                  context.read<LogoutBloc>().add(const LogoutEvent.logout());
-                },
-                child: const Text(
-                  'Logout',
-                  style: TextStyle(
-                      color: AppColors.white, fontWeight: FontWeight.w900),
-                ), //color: AppColors.red),
-              );
+              return const SizedBox();
             },
           ),
-          const Divider(),
         ],
       ),
     );

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
-import 'package:pos_hdn/presentations/history/bloc/history_detail/history_detail_bloc.dart';
 import 'package:pos_hdn/presentations/history/widgets/transction_detail_dialoge.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 

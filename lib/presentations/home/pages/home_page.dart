@@ -9,7 +9,6 @@ import 'package:pos_hdn/data/datasources/local/product_local_datasource.dart';
 import 'package:pos_hdn/data/models/response/auth_response_model.dart';
 import 'package:pos_hdn/data/models/response/product_response_model.dart';
 import 'package:pos_hdn/presentations/home/bloc/product/product_bloc.dart';
-import 'package:pos_hdn/presentations/manage/pages/settings_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/assets/assets.gen.dart';
@@ -34,12 +33,14 @@ class _HomePageState extends State<HomePage> {
   late final AuthResponseModel getData;
   final log = Logger();
   String userName = '';
+  late SharedPreferences prefs;
+
   Future<void> getDataUser() async {
     getData = (await AuthLocalDatasource().getAuthData())!;
   }
 
   Future<bool> isfirsttime() async {
-    final prefs = await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
     var isfirsttime = prefs.getBool('first_time');
     if (isfirsttime != null && !isfirsttime) {
       prefs.setBool('first_time', false);
@@ -50,15 +51,21 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void checkofflinemode() async {
+    prefs = await SharedPreferences.getInstance();
+
+    if (prefs.getBool("offline_mode") ?? false) {
+      // ignore: use_build_context_synchronously
+      context.read<ProductBloc>().add(const ProductEvent.fetchLocal());
+    }
+  }
+
   late int category = 0;
   @override
   void initState() {
     super.initState();
     connectivityController.init();
-    if (connectivityController.isConnected.value == false) {
-      context.read<ProductBloc>().add(const ProductEvent.fetchLocal());
-    }
-
+    checkofflinemode();
     getDataUser();
     Future.delayed(const Duration(seconds: 2), () {
       isfirsttime().then((isfirsttime) async {
@@ -225,6 +232,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+// ignore: must_be_immutable
 class AppBarContent extends StatelessWidget {
   String username = '';
   final String location;
@@ -256,20 +264,7 @@ class AppBarContent extends StatelessWidget {
                       ),
                     ),
               const Spacer(),
-              const ConnectionAlert(),
-              IconButton(
-                icon: const Icon(
-                  Icons.manage_accounts,
-                  size: 25,
-                ),
-                color: Colors.white,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SettingsPage()));
-                },
-              ),
+              const ConnectionAlert()
             ],
           ),
         ),

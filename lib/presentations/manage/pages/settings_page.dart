@@ -1,84 +1,90 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_settings_ui/flutter_settings_ui.dart';
+import 'package:pos_hdn/core/constants/colors.dart';
+import 'package:pos_hdn/presentations/home/bloc/logout/logout_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  late SharedPreferences prefs;
+  bool valuefinger = false;
+  bool offlineMode = false;
+  @override
+  void initState() {
+    super.initState();
+    loadPreferences();
+  }
+
+  void loadPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      offlineMode = prefs.getBool("offline_mode") ?? false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Settings"),
-      ),
-      backgroundColor: const Color(0xfff6f6f6),
-      body: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: ListView(
-            children: [
-              _SingleSection(
-                title: "General",
-                children: [
-                  const _CustomListTile(
-                      title: "About Phone",
-                      icon: CupertinoIcons.device_phone_portrait),
-                  _CustomListTile(
-                      title: "Dark Mode",
-                      icon: CupertinoIcons.moon,
-                      trailing:
-                          CupertinoSwitch(value: false, onChanged: (value) {})),
-                  const _CustomListTile(
-                      title: "System Apps Updater",
-                      icon: CupertinoIcons.cloud_download),
-                  const _CustomListTile(
-                      title: "Security Status",
-                      icon: CupertinoIcons.lock_shield),
-                ],
-              ),
-              _SingleSection(
-                title: "Network",
-                children: [
-                  const _CustomListTile(
-                      title: "SIM Cards and Networks",
-                      icon: Icons.sd_card_outlined),
-                  _CustomListTile(
-                    title: "Wi-Fi",
-                    icon: CupertinoIcons.wifi,
-                    trailing: CupertinoSwitch(value: true, onChanged: (val) {}),
-                  ),
-                  _CustomListTile(
-                    title: "Bluetooth",
-                    icon: CupertinoIcons.bluetooth,
-                    trailing:
-                        CupertinoSwitch(value: false, onChanged: (val) {}),
-                  ),
-                  const _CustomListTile(
-                    title: "VPN",
-                    icon: CupertinoIcons.desktopcomputer,
-                  )
-                ],
-              ),
-              const _SingleSection(
-                title: "Privacy and Security",
-                children: [
-                  _CustomListTile(
-                      title: "Multiple Users", icon: CupertinoIcons.person_2),
-                  _CustomListTile(
-                      title: "Lock Screen", icon: CupertinoIcons.lock),
-                  _CustomListTile(
-                      title: "Display", icon: CupertinoIcons.brightness),
-                  _CustomListTile(
-                      title: "Sound and Vibration",
-                      icon: CupertinoIcons.speaker_2),
-                  _CustomListTile(
-                      title: "Themes", icon: CupertinoIcons.paintbrush)
-                ],
-              ),
-            ],
-          ),
+        appBar: AppBar(
+          title: const Text("Settings"),
         ),
-      ),
-    );
+        backgroundColor: const Color(0xfff6f6f6),
+        body: SettingsList(
+          sections: [
+            SettingsSection(
+              title: const Text('Pengaturan Umum'),
+              tiles: [
+                SettingsTile(
+                  title: const Text('Language'),
+                  description: const Text('English'),
+                  leading: const Icon(Icons.language),
+                  onPressed: (BuildContext context) {},
+                ),
+                SettingsTile(
+                  title: const Text('Language'),
+                  description: Text('English'),
+                  leading: const Icon(Icons.language),
+                  onPressed: (BuildContext context) {},
+                ),
+                SettingsTile.switchTile(
+                  title: const Text('Offline Mode'),
+                  leading: const Icon(Icons.wifi_off),
+                  initialValue: offlineMode,
+                  onToggle: (bool value) {
+                    prefs.setBool("offline_mode", value);
+                    setState(() {
+                      offlineMode = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+            SettingsSection(
+              title: const Text('Pengaturan Akun'),
+              tiles: [
+                SettingsTile(
+                  title: const Text('Logout'),
+                  description: const Text('Logout from this account'),
+                  leading: const Icon(
+                    Icons.logout,
+                    color: AppColors.red,
+                  ),
+                  onPressed: (BuildContext context) {
+                    context.read<LogoutBloc>().add(const LogoutEvent.logout());
+                  },
+                ),
+              ],
+            ),
+          ],
+        ));
   }
 }
 
