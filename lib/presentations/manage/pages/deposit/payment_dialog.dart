@@ -94,6 +94,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
                       });
                     }, success: (message) async {
                       timer?.cancel();
+                      context.pop();
                       EasyLoading.instance
                         ..displayDuration = const Duration(milliseconds: 2000)
                         ..indicatorType = EasyLoadingIndicatorType.threeBounce

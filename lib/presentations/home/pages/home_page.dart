@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
       case 0:
       case 1:
       case 2:
-      case 3:
+      case 5:
         category = index;
         break;
       default:
@@ -183,8 +183,8 @@ class _HomePageState extends State<HomePage> {
                     MenuButton(
                       iconPath: Assets.icons.snack.path,
                       label: 'Bundling',
-                      isActive: value == 3,
-                      onPressed: () => onCategoryTap(3),
+                      isActive: value == 5,
+                      onPressed: () => onCategoryTap(5),
                     ),
                   ],
                 ),

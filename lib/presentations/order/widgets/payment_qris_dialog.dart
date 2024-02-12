@@ -99,6 +99,7 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                             });
                           }, success: (message) async {
                             timer?.cancel();
+                            context.pop();
                             EasyLoading.instance
                               ..displayDuration =
                                   const Duration(milliseconds: 2000)

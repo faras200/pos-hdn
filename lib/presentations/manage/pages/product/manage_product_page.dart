@@ -7,8 +7,19 @@ import '../../../home/bloc/product/product_bloc.dart';
 import '../../widgets/menu_product_item.dart';
 import 'add_product_page.dart';
 
-class ManageProductPage extends StatelessWidget {
+class ManageProductPage extends StatefulWidget {
   const ManageProductPage({super.key});
+
+  @override
+  State<ManageProductPage> createState() => _ManageProductPageState();
+}
+
+class _ManageProductPageState extends State<ManageProductPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProductBloc>().add(const ProductEvent.fetch());
+  }
 
   @override
   Widget build(BuildContext context) {

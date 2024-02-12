@@ -5,6 +5,7 @@ import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/presentations/home/bloc/logout/logout_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wakelock/wakelock.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -49,9 +50,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   leading: const Icon(Icons.visibility),
                   initialValue: alwaysWakeup,
                   onToggle: (bool value) {
-                    prefs.setBool("always_wakeup", value);
+                    prefs.setBool("allways_wakeup", value);
                     setState(() {
                       alwaysWakeup = value;
+                      Wakelock.toggle(enable: value);
                     });
                   },
                 ),

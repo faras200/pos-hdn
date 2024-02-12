@@ -21,11 +21,14 @@ import 'package:pos_hdn/presentations/manage/bloc/sync_order/sync_order_bloc.dar
 import 'package:pos_hdn/presentations/manage/pages/deposit/deposit_page.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:pos_hdn/presentations/order/bloc/qris/qris_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakelock/wakelock.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Wakelock.enable();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  final value = prefs.getBool("allways_wakeup") ?? false;
+  Wakelock.toggle(enable: value);
   runApp(const MyApp());
 }
 
