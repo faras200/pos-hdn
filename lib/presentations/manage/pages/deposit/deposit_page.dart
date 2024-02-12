@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:pos_hdn/core/assets/assets.gen.dart';
+import 'package:pos_hdn/core/components/spaces.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/presentations/manage/bloc/deposit/deposit_bloc.dart';
@@ -119,8 +120,11 @@ class _DepositPageState extends State<DepositPage>
                       bool? isSelectedData = selectedItem[index];
 
                       return Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 5.0),
+                        margin: EdgeInsets.only(
+                            left: 15,
+                            bottom: setoran.length - 1 == index ? 80 : 5,
+                            right: 15,
+                            top: 5),
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -206,8 +210,11 @@ class _DepositPageState extends State<DepositPage>
                     itemBuilder: (builder, index) {
                       final data = deposits[index];
                       return Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 5.0),
+                        margin: EdgeInsets.only(
+                            left: 15,
+                            bottom: deposits.length - 1 == index ? 80 : 5,
+                            right: 15,
+                            top: 5),
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(

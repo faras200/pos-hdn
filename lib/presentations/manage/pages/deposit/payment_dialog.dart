@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pos_hdn/core/assets/assets.gen.dart';
 import 'package:pos_hdn/core/components/buttons.dart';
 import 'package:pos_hdn/core/components/spaces.dart';
@@ -93,7 +94,19 @@ class _PaymentDialogState extends State<PaymentDialog> {
                       });
                     }, success: (message) async {
                       timer?.cancel();
-
+                      EasyLoading.instance
+                        ..displayDuration = const Duration(milliseconds: 2000)
+                        ..indicatorType = EasyLoadingIndicatorType.threeBounce
+                        ..loadingStyle = EasyLoadingStyle.custom
+                        ..indicatorSize = 40.0
+                        ..radius = 10.0
+                        ..backgroundColor = AppColors.primary
+                        ..indicatorColor = AppColors.white
+                        ..textColor = AppColors.white
+                        ..maskType = EasyLoadingMaskType.black
+                        ..userInteractions = false
+                        ..dismissOnTap = false;
+                      EasyLoading.show(status: 'loading...');
                       final uuid = orderId;
 
                       final depositRequestModel = DepositRequestModel(
@@ -112,6 +125,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
                               .updateIsDepositOrderById(depo.id!);
                         }
                       }
+                      EasyLoading.dismiss();
                       // ignore: use_build_context_synchronously
                       context.pop();
                       // ignore: use_build_context_synchronously

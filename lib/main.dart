@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/data/datasources/local/auth_local_datasource.dart';
@@ -20,8 +21,11 @@ import 'package:pos_hdn/presentations/manage/bloc/sync_order/sync_order_bloc.dar
 import 'package:pos_hdn/presentations/manage/pages/deposit/deposit_page.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:pos_hdn/presentations/order/bloc/qris/qris_bloc.dart';
+import 'package:wakelock/wakelock.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Wakelock.enable();
   runApp(const MyApp());
 }
 
@@ -40,9 +44,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LogoutBloc(AuthRemoteDataSource()),
         ),
         BlocProvider(
-          create: (context) => ProductBloc(ProductRemoteDatasource())
-            ..add(const ProductEvent.fetch()),
-        ),
+            create: (context) => ProductBloc(ProductRemoteDatasource())),
         BlocProvider(
           create: (context) => CheckoutBloc(),
         ),
@@ -102,6 +104,7 @@ class MyApp extends StatelessWidget {
                 selectedIndex: 0,
               ),
         },
+        builder: EasyLoading.init(),
       ),
     );
   }

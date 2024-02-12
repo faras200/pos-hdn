@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:pos_hdn/core/controller/conectivity_controller.dart';
@@ -175,6 +176,19 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                 success: (data, qty, total, payment, nominal, idKasir,
                     namaKasir) async {
                   // Logger().d(total);
+                  EasyLoading.instance
+                    ..displayDuration = const Duration(milliseconds: 2000)
+                    ..indicatorType = EasyLoadingIndicatorType.threeBounce
+                    ..loadingStyle = EasyLoadingStyle.custom
+                    ..indicatorSize = 40.0
+                    ..radius = 10.0
+                    ..backgroundColor = AppColors.primary
+                    ..indicatorColor = AppColors.white
+                    ..textColor = AppColors.white
+                    ..maskType = EasyLoadingMaskType.black
+                    ..userInteractions = false
+                    ..dismissOnTap = false;
+                  EasyLoading.show(status: 'loading...');
                   final timeNow =
                       DateFormat('yyyy-MM-ddTHH:mm:ss').format(DateTime.now());
                   final uuid = 'INV${DateTime.now().millisecondsSinceEpoch}';
@@ -219,7 +233,7 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                           .updateIsSyncOrderById(saveDbLocal);
                     }
                   }
-
+                  EasyLoading.dismiss();
                   // ignore: use_build_context_synchronously
                   context.pop();
                   // ignore: use_build_context_synchronously
@@ -238,7 +252,6 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                   child: CircularProgressIndicator(),
                 );
               }, success: (data, qty, total, payment, _, idKasir, namaKasir) {
-                bool _clicked = false;
                 return Button.filled(
                   onPressed: () {
                     if (priceController!.text.toIntegerFromText < total) {
@@ -256,15 +269,10 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                               btnOkColor: AppColors.primary)
                           .show();
                     }
-                    if (_clicked) {
-                      Logger().d('clicked2');
-                    } else {
-                      setState(() => _clicked = true);
-                      Logger().d('clicked1');
-                      context.read<OrderBloc>().add(OrderEvent.addNominalBayar(
-                            priceController!.text.toIntegerFromText,
-                          )); // set it to true now
-                    }
+
+                    context.read<OrderBloc>().add(OrderEvent.addNominalBayar(
+                          priceController!.text.toIntegerFromText,
+                        )); // set it to true now
 
                     // var datachekout = CheckoutBloc().state;
 

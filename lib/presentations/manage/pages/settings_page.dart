@@ -17,6 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
   late SharedPreferences prefs;
   bool valuefinger = false;
   bool offlineMode = false;
+  bool alwaysWakeup = false;
   @override
   void initState() {
     super.initState();
@@ -27,6 +28,7 @@ class _SettingsPageState extends State<SettingsPage> {
     prefs = await SharedPreferences.getInstance();
     setState(() {
       offlineMode = prefs.getBool("offline_mode") ?? false;
+      alwaysWakeup = prefs.getBool("allways_wakeup") ?? false;
     });
   }
 
@@ -42,11 +44,16 @@ class _SettingsPageState extends State<SettingsPage> {
             SettingsSection(
               title: const Text('Pengaturan Umum'),
               tiles: [
-                SettingsTile(
-                  title: const Text('Language'),
-                  description: const Text('English'),
-                  leading: const Icon(Icons.language),
-                  onPressed: (BuildContext context) {},
+                SettingsTile.switchTile(
+                  title: const Text('Always WakeUp'),
+                  leading: const Icon(Icons.visibility),
+                  initialValue: alwaysWakeup,
+                  onToggle: (bool value) {
+                    prefs.setBool("always_wakeup", value);
+                    setState(() {
+                      alwaysWakeup = value;
+                    });
+                  },
                 ),
                 SettingsTile(
                   title: const Text('Language'),

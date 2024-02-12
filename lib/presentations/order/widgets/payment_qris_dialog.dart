@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/data/datasources/local/order_local_datasource.dart';
@@ -98,6 +99,21 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                             });
                           }, success: (message) async {
                             timer?.cancel();
+                            EasyLoading.instance
+                              ..displayDuration =
+                                  const Duration(milliseconds: 2000)
+                              ..indicatorType =
+                                  EasyLoadingIndicatorType.threeBounce
+                              ..loadingStyle = EasyLoadingStyle.custom
+                              ..indicatorSize = 40.0
+                              ..radius = 10.0
+                              ..backgroundColor = AppColors.primary
+                              ..indicatorColor = AppColors.white
+                              ..textColor = AppColors.white
+                              ..maskType = EasyLoadingMaskType.black
+                              ..userInteractions = false
+                              ..dismissOnTap = false;
+                            EasyLoading.show(status: 'loading...');
                             final timeNow = DateFormat('yyyy-MM-ddTHH:mm:ss')
                                 .format(DateTime.now());
                             final uuid = orderId;
@@ -150,6 +166,7 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                                 .add(OrderEvent.addNominalBayar(
                                   total,
                                 ));
+                            EasyLoading.dismiss();
                             // ignore: use_build_context_synchronously
                             context.pop();
                             // ignore: use_build_context_synchronously

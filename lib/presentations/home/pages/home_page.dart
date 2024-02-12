@@ -57,6 +57,9 @@ class _HomePageState extends State<HomePage> {
     if (prefs.getBool("offline_mode") ?? false) {
       // ignore: use_build_context_synchronously
       context.read<ProductBloc>().add(const ProductEvent.fetchLocal());
+    } else {
+      // ignore: use_build_context_synchronously
+      context.read<ProductBloc>().add(const ProductEvent.fetch());
     }
   }
 
@@ -80,7 +83,6 @@ class _HomePageState extends State<HomePage> {
                   );
 
           await ProductLocalDatasource.instance.insertAllProduct(fetchProduct);
-          log.d(fetchProduct);
           log.d("first time");
         } else {
           log.d("not first time");

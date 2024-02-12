@@ -40,9 +40,9 @@ class ConfigDbLocal {
         payment_method TEXT,
         total_item INTEGER,
         id_kasir INTEGER,
-        deposit_id INTEGER,
         nama_kasir TEXT,
         transaction_time TEXT,
+        is_deposit INTEGER DEFAULT 0,
         is_sync INTEGER DEFAULT 0
       )
     ''');
@@ -54,16 +54,6 @@ class ConfigDbLocal {
         id_product INTEGER,
         quantity INTEGER,
         price INTEGER
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE $tableDeposits (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        uuid TEXT,
-        qris TEXT,
-        amount INTEGER,
-        created_at TEXT
       )
     ''');
   }
