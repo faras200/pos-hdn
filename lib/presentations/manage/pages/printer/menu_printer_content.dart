@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
-import '../../../core/constants/colors.dart';
+import '../../../../core/constants/colors.dart';
 
 class MenuPrinterContent extends StatelessWidget {
   final BluetoothInfo data;
@@ -19,7 +19,9 @@ class MenuPrinterContent extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
             width: isSelected ? 4.0 : 1.0,
-            color: isSelected ? AppColors.blueLight : AppColors.card),
+            color: isSelected
+                ? Color.fromARGB(255, 137, 178, 174)
+                : AppColors.card),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,7 +1,7 @@
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/colors.dart';
+import '../../../../core/constants/colors.dart';
 
 class MenuPrinterButton extends StatelessWidget {
   final String label;

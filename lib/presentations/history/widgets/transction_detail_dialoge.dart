@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -11,8 +12,10 @@ import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/data/dataoutputs/cwb_print.dart';
 import 'package:pos_hdn/presentations/history/bloc/history_detail/history_detail_bloc.dart';
 import 'package:pos_hdn/presentations/history/widgets/item_product_card.dart';
+import 'package:pos_hdn/presentations/manage/pages/printer/manage_printer_page.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TransactionDetailDialoge extends StatefulWidget {
   final OrderModel dataDetail;
@@ -27,12 +30,22 @@ class TransactionDetailDialoge extends StatefulWidget {
 }
 
 class _TransactionDetailDialogeState extends State<TransactionDetailDialoge> {
+  late SharedPreferences prefs;
+  late String? macName = '';
+
+  Future<void> loadPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    macName = prefs.getString("mac_print_name") ?? '';
+  }
+
   @override
   void initState() {
     super.initState();
     context
         .read<HistoryDetailBloc>()
         .add(HistoryDetailEvent.fetchDetail(widget.dataDetail.id ?? 0));
+
+    loadPreferences();
   }
 
   @override
@@ -130,6 +143,33 @@ class _TransactionDetailDialogeState extends State<TransactionDetailDialoge> {
                           Flexible(
                             child: Button.outlined(
                               onPressed: () async {
+                                if (macName == '') {
+                                  setState(() {
+                                    macName = '0';
+                                  });
+                                  return AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.error,
+                                          headerAnimationLoop: false,
+                                          animType: AnimType.bottomSlide,
+                                          title: 'Error!',
+                                          desc: 'Printer tidak terdeteksi',
+                                          buttonsTextStyle: const TextStyle(
+                                              color: Colors.white),
+                                          showCloseIcon: true,
+                                          btnOkText: 'Setting Printer',
+                                          btnOkOnPress: () {
+                                            // context.pop();
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const ManagePrinterPage()));
+                                          },
+                                          btnOkColor: AppColors.primary)
+                                      .show();
+                                }
                                 final printValue =
                                     await CwbPrint.instance.printOrder(
                                   orders,

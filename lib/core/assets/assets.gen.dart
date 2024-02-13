@@ -67,11 +67,23 @@ class $AssetsIconsGen {
   /// File path: assets/icons/print.svg
   SvgGenImage get print => const SvgGenImage('assets/icons/print.svg');
 
+  /// File path: assets/icons/printer.svg
+  SvgGenImage get printer => const SvgGenImage('assets/icons/printer.svg');
+
+  /// File path: assets/icons/product.svg
+  SvgGenImage get product => const SvgGenImage('assets/icons/product.svg');
+
   /// File path: assets/icons/qr_code.svg
   SvgGenImage get qrCode => const SvgGenImage('assets/icons/qr_code.svg');
 
+  /// File path: assets/icons/setoran.svg
+  SvgGenImage get setoran => const SvgGenImage('assets/icons/setoran.svg');
+
   /// File path: assets/icons/snack.svg
   SvgGenImage get snack => const SvgGenImage('assets/icons/snack.svg');
+
+  /// File path: assets/icons/sync.svg
+  SvgGenImage get sync => const SvgGenImage('assets/icons/sync.svg');
 
   /// File path: assets/icons/topikoki.svg
   SvgGenImage get topikoki => const SvgGenImage('assets/icons/topikoki.svg');
@@ -95,8 +107,12 @@ class $AssetsIconsGen {
         payments,
         posLogo,
         print,
+        printer,
+        product,
         qrCode,
+        setoran,
         snack,
+        sync,
         topikoki
       ];
 }
@@ -112,31 +128,8 @@ class $AssetsImagesGen {
   AssetGenImage get logoSplash =>
       const AssetGenImage('assets/images/logo_splash.png');
 
-  /// File path: assets/images/manage_printer.png
-  AssetGenImage get managePrinter =>
-      const AssetGenImage('assets/images/manage_printer.png');
-
-  /// File path: assets/images/manage_printerx.png
-  AssetGenImage get managePrinterx =>
-      const AssetGenImage('assets/images/manage_printerx.png');
-
-  /// File path: assets/images/manage_product.png
-  AssetGenImage get manageProduct =>
-      const AssetGenImage('assets/images/manage_product.png');
-
-  /// File path: assets/images/sync_cloud.png
-  AssetGenImage get syncCloud =>
-      const AssetGenImage('assets/images/sync_cloud.png');
-
   /// List of all assets
-  List<AssetGenImage> get values => [
-        logoIcon,
-        logoSplash,
-        managePrinter,
-        managePrinterx,
-        manageProduct,
-        syncCloud
-      ];
+  List<AssetGenImage> get values => [logoIcon, logoSplash];
 }
 
 class Assets {

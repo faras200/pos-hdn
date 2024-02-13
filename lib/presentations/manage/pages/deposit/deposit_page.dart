@@ -97,7 +97,7 @@ class _DepositPageState extends State<DepositPage>
               builder: (context, state) {
                 return state.maybeWhen(orElse: () {
                   return const Center(
-                    child: Text('No data'),
+                    child: CircularProgressIndicator(),
                   );
                 }, loading: () {
                   return const Center(
@@ -192,7 +192,7 @@ class _DepositPageState extends State<DepositPage>
               builder: (context, state) {
                 return state.maybeWhen(orElse: () {
                   return const Center(
-                    child: Text('No data'),
+                    child: CircularProgressIndicator(),
                   );
                 }, loading: () {
                   return const Center(

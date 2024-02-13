@@ -50,19 +50,21 @@ class ManageMenuPage extends StatelessWidget {
             child: Row(
               children: [
                 MenuButton(
-                  iconPath: Assets.images.manageProduct.path,
+                  iconPath: Assets.icons.product.path,
                   label: 'Kelola Produk',
                   onPressed: () => context.push(const ManageProductPage()),
-                  isImage: true,
+                  isImage: false,
+                  isMenu: true,
                 ),
                 const SpaceWidth(15.0),
                 MenuButton(
-                  iconPath: Assets.images.managePrinter.path,
+                  iconPath: Assets.icons.printer.path,
                   label: 'Kelola Printer',
                   onPressed: () {
                     context.push(const ManagePrinterPage());
                   }, //=> context.push(const ManagePrinterPage()),
-                  isImage: true,
+                  isImage: false,
+                  isMenu: true,
                 ),
               ],
             ),
@@ -72,7 +74,7 @@ class ManageMenuPage extends StatelessWidget {
             child: Row(
               children: [
                 MenuButton(
-                  iconPath: Assets.images.managePrinterx.path,
+                  iconPath: Assets.icons.setoran.path,
                   label: 'Kelola Setoran',
                   onPressed: () => Navigator.push(
                       context,
@@ -80,11 +82,12 @@ class ManageMenuPage extends StatelessWidget {
                           builder: (context) => DepositPage(
                                 selectedIndex: 0,
                               ))),
-                  isImage: true,
+                  isImage: false,
+                  isMenu: true,
                 ),
                 const SpaceWidth(15.0),
                 MenuButton(
-                  iconPath: Assets.images.syncCloud.path,
+                  iconPath: Assets.icons.sync.path,
                   label: 'Kelola Sync Data',
                   onPressed: () {
                     Navigator.push(
@@ -92,7 +95,8 @@ class ManageMenuPage extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => const SyncDataPage()));
                   }, //=> context.push(const ManagePrinterPage()),
-                  isImage: true,
+                  isImage: false,
+                  isMenu: true,
                 ),
               ],
             ),

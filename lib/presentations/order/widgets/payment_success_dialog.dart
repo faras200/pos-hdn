@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
@@ -8,15 +9,36 @@ import 'package:pos_hdn/data/dataoutputs/cwb_print.dart';
 import 'package:pos_hdn/presentations/home/bloc/checkout/checkout_bloc.dart';
 import 'package:pos_hdn/presentations/home/pages/dashboard_page.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/deposit_page.dart';
+import 'package:pos_hdn/presentations/manage/pages/printer/manage_printer_page.dart';
 import 'package:pos_hdn/presentations/order/bloc/order/order_bloc.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
 
-class PaymentSuccessDialog extends StatelessWidget {
+class PaymentSuccessDialog extends StatefulWidget {
   const PaymentSuccessDialog({super.key});
+
+  @override
+  State<PaymentSuccessDialog> createState() => _PaymentSuccessDialogState();
+}
+
+class _PaymentSuccessDialogState extends State<PaymentSuccessDialog> {
+  late SharedPreferences prefs;
+  late String? macName = '';
+
+  Future<void> loadPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    macName = prefs.getString("mac_print_name") ?? '';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadPreferences();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +114,33 @@ class PaymentSuccessDialog extends StatelessWidget {
                       Flexible(
                         child: Button.outlined(
                           onPressed: () async {
+                            if (macName == '') {
+                              setState(() {
+                                macName = '0';
+                              });
+                              return AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.error,
+                                      headerAnimationLoop: false,
+                                      animType: AnimType.bottomSlide,
+                                      title: 'Error!',
+                                      desc: 'Printer tidak terdeteksi',
+                                      buttonsTextStyle:
+                                          const TextStyle(color: Colors.white),
+                                      showCloseIcon: true,
+                                      btnOkText: 'Setting Printer',
+                                      btnOkOnPress: () {
+                                        // context.pop();
+                                        // ignore: use_build_context_synchronously
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ManagePrinterPage()));
+                                      },
+                                      btnOkColor: AppColors.primary)
+                                  .show();
+                            }
                             final printValue =
                                 await CwbPrint.instance.printOrder(
                               data,

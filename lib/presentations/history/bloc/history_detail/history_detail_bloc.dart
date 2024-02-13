@@ -16,13 +16,12 @@ class HistoryDetailBloc extends Bloc<HistoryDetailEvent, HistoryDetailState> {
       emit(const HistoryDetailState.loading());
       final data = await OrderLocalDatasource.instance
           .getOrderItemByOrderIdLocal(event.idOrder);
-      List<Product> products = [];
       List<OrderItem> orderItems = [];
 
       for (var dataproduct in data) {
         final product = await ProductLocalDatasource.instance
             .getProductById(dataproduct.productId);
-        products.add(product.first);
+
         orderItems.add(
             OrderItem(product: product.first, quantity: dataproduct.quantity));
       }

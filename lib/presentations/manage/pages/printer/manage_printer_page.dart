@@ -1,13 +1,17 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:esc_pos_utils_plus/esc_pos_utils_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pos_hdn/core/components/loading.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
+import 'package:pos_hdn/presentations/manage/pages/manage_menu_page.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/components/spaces.dart';
 import '../../../../core/constants/colors.dart';
-import '../../widgets/menu_printer_button.dart';
-import '../../widgets/menu_printer_content.dart';
+import 'menu_printer_button.dart';
+import 'menu_printer_content.dart';
 
 class ManagePrinterPage extends StatefulWidget {
   const ManagePrinterPage({super.key});
@@ -53,11 +57,20 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
 
   String optionprinttype = "58 mm";
   List<String> options = ["58 mm", "80 mm"];
+  late SharedPreferences prefs;
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
+    loadPreferences();
+  }
+
+  Future<void> loadPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      macName = prefs.getString("mac_print_name") ?? '';
+    });
   }
 
   Future<void> initPlatformState() async {
@@ -81,8 +94,22 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
     print("bluetooth enabled: $result");
     if (result) {
       _msj = "Bluetooth enabled, please search and connect";
+      getBluetoots();
     } else {
       _msj = "Bluetooth not enabled";
+      // ignore: use_build_context_synchronously
+      return AwesomeDialog(
+              context: context,
+              dialogType: DialogType.warning,
+              headerAnimationLoop: false,
+              animType: AnimType.bottomSlide,
+              title: 'Peringatan!',
+              desc: 'Hidupkan bluetooth ponsel anda!!',
+              buttonsTextStyle: const TextStyle(color: Colors.white),
+              showCloseIcon: true,
+              btnOkOnPress: () {},
+              btnOkColor: AppColors.primary)
+          .show();
     }
 
     setState(() {
@@ -121,13 +148,56 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
       _msjprogress = "Connecting...";
       connected = false;
     });
+    disconnect();
+    MyLoading().loading(context);
     final bool result =
         await PrintBluetoothThermal.connect(macPrinterAddress: mac);
     print("state conected $result");
-    if (result) connected = true;
+    MyLoading().dismiss();
     setState(() {
       _progress = false;
     });
+    if (result) {
+      connected = true;
+      prefs.setString("mac_print_name", mac);
+      // ignore: use_build_context_synchronously
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.success,
+              headerAnimationLoop: false,
+              animType: AnimType.bottomSlide,
+              title: 'Success!',
+              desc: 'Koneksi printer berhasil!!',
+              buttonsTextStyle: const TextStyle(color: Colors.white),
+              showCloseIcon: true,
+              btnOkOnPress: () {
+                context.pop();
+                // ignore: use_build_context_synchronously
+                // Navigator.pushReplacement(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const ManageMenuPage()));
+              },
+              btnOkColor: AppColors.primary)
+          .show();
+
+      // ignore: use_build_context_synchronously
+    } else {
+      macName = '';
+      // ignore: use_build_context_synchronously
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              headerAnimationLoop: false,
+              animType: AnimType.bottomSlide,
+              title: 'Peringatan!',
+              desc: 'Koneksi printer gagal!!',
+              buttonsTextStyle: const TextStyle(color: Colors.white),
+              showCloseIcon: true,
+              btnOkOnPress: () {},
+              btnOkColor: AppColors.primary)
+          .show();
+    }
   }
 
   Future<void> disconnect() async {
@@ -135,6 +205,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
     setState(() {
       connected = false;
     });
+    prefs.setString("mac_print_name", '');
     print("status disconnect $status");
   }
 
@@ -159,8 +230,8 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
     //bytes += generator.setGlobalFont(PosFontType.fontA);
     bytes += generator.reset();
 
-    bytes +=
-        generator.text('Code with Bahri', styles: const PosStyles(bold: true));
+    bytes += generator.text('Hoki Distribusi Niaga',
+        styles: const PosStyles(bold: true));
     bytes +=
         generator.text('Reverse text', styles: const PosStyles(reverse: true));
     bytes += generator.text('Underlined text',
@@ -173,7 +244,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
         styles: const PosStyles(align: PosAlign.right), linesAfter: 1);
 
     bytes += generator.text(
-      'FIC Batch 11',
+      'HOKI HDN',
       styles: const PosStyles(
         height: PosTextSize.size2,
         width: PosTextSize.size2,
@@ -257,7 +328,10 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
                   label: 'Disconnect',
                   onPressed: () {
                     selectedIndex = 1;
-                    setState(() {});
+                    disconnect();
+                    setState(() {
+                      macName = '';
+                    });
                   },
                   isActive: selectedIndex == 1,
                 ),
@@ -265,6 +339,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
                   label: 'Test',
                   onPressed: () {
                     selectedIndex = 2;
+                    printTest();
                     setState(() {});
                   },
                   isActive: selectedIndex == 2,

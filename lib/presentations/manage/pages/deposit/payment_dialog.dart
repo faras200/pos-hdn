@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,10 +15,12 @@ import 'package:pos_hdn/data/datasources/local/order_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/remote/deposit_remote_datasource.dart';
 import 'package:pos_hdn/data/models/request/deposit_request_model.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/payment_deposit_success_dialog.dart';
+import 'package:pos_hdn/presentations/manage/pages/printer/manage_printer_page.dart';
 import 'package:pos_hdn/presentations/order/bloc/qris/qris_bloc.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentDialog extends StatefulWidget {
   final int price;
@@ -36,6 +39,15 @@ class _PaymentDialogState extends State<PaymentDialog> {
   Timer? timer;
   String qris = '';
   String qris_id = '';
+
+  late SharedPreferences prefs;
+  late String? macName = '';
+
+  Future<void> loadPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    macName = prefs.getString("mac_print_name") ?? '';
+  }
+
   @override
   void initState() {
     context.read<QrisBloc>().add(QrisEvent.generateQRCodeDeposit(
@@ -43,6 +55,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
           100,
           // widget.price,
         ));
+    loadPreferences();
     super.initState();
   }
 
@@ -208,6 +221,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
                     Flexible(
                       child: Button.filled(
                         onPressed: () {
+                          timer?.cancel();
                           context.pop();
                         },
                         label: 'Batalkan',
@@ -218,6 +232,33 @@ class _PaymentDialogState extends State<PaymentDialog> {
                     Flexible(
                       child: Button.outlined(
                         onPressed: () async {
+                          if (macName == '') {
+                            setState(() {
+                              macName = '0';
+                            });
+                            return AwesomeDialog(
+                                    context: context,
+                                    dialogType: DialogType.error,
+                                    headerAnimationLoop: false,
+                                    animType: AnimType.bottomSlide,
+                                    title: 'Error!',
+                                    desc: 'Printer tidak terdeteksi',
+                                    buttonsTextStyle:
+                                        const TextStyle(color: Colors.white),
+                                    showCloseIcon: true,
+                                    btnOkText: 'Setting Printer',
+                                    btnOkOnPress: () {
+                                      context.pop();
+                                      // ignore: use_build_context_synchronously
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ManagePrinterPage()));
+                                    },
+                                    btnOkColor: AppColors.primary)
+                                .show();
+                          }
                           final printValue = await CwbPrint.instance.printQris(
                             qris,
                           );

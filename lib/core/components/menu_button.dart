@@ -11,6 +11,7 @@ class MenuButton extends StatelessWidget {
   final bool isActive;
   final VoidCallback onPressed;
   final bool isImage;
+  final bool isMenu;
   final double size;
 
   const MenuButton({
@@ -19,6 +20,7 @@ class MenuButton extends StatelessWidget {
     required this.label,
     this.isActive = false,
     required this.onPressed,
+    this.isMenu = false,
     this.isImage = false,
     this.size = 90,
   });
@@ -52,7 +54,7 @@ class MenuButton extends StatelessWidget {
                       width: size, height: size, fit: BoxFit.contain)
                   : SvgPicture.asset(
                       iconPath,
-                      height: 30,
+                      height: isMenu ? 90 : 30,
                       colorFilter: ColorFilter.mode(
                         isActive ? AppColors.white : AppColors.primary,
                         BlendMode.srcIn,
