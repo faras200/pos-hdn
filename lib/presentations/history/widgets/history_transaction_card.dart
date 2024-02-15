@@ -44,10 +44,10 @@ class HistoryTransactionCard extends StatelessWidget {
             BlendMode.srcIn,
           ),
         ),
-        title: Text(data.uuid),
+        title: Text(data.uuid!),
         subtitle: Text('${data.paymentMethod}, ${data.totalQuantity} items'),
         trailing: Text(
-          data.totalPrice.currencyFormatRp,
+          data.totalPrice!.currencyFormatRp,
           style: const TextStyle(
             color: AppColors.green,
             fontSize: 16,

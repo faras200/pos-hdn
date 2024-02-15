@@ -107,7 +107,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
                       });
                     }, success: (message) async {
                       timer?.cancel();
-                      context.pop();
+
                       EasyLoading.instance
                         ..displayDuration = const Duration(milliseconds: 2000)
                         ..indicatorType = EasyLoadingIndicatorType.threeBounce
@@ -132,14 +132,8 @@ class _PaymentDialogState extends State<PaymentDialog> {
                           .instance
                           .storeDeposit(depositRequestModel);
 
-                      if (saveDbRemote) {
-                        //Update db local to isSync
-                        for (var depo in widget.data) {
-                          await OrderLocalDatasource.instance
-                              .updateIsDepositOrderById(depo.id!);
-                        }
-                      }
                       EasyLoading.dismiss();
+
                       // ignore: use_build_context_synchronously
                       context.pop();
                       // ignore: use_build_context_synchronously

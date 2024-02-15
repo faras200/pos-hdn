@@ -16,25 +16,25 @@ class CwbPrint {
     final generator = Generator(PaperSize.mm58, profile);
 
     bytes += generator.reset();
-    bytes += generator.text('Hoki Distribusi Niaga',
-        styles: const PosStyles(
-          bold: true,
-          align: PosAlign.center,
-          height: PosTextSize.size1,
-          width: PosTextSize.size1,
-        ));
-    bytes += generator.text(
-        'Date : ${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.now())}',
-        styles: const PosStyles(bold: false, align: PosAlign.center));
+    // bytes += generator.text('Hoki Distribusi Niaga',
+    //     styles: const PosStyles(
+    //       bold: true,
+    //       align: PosAlign.center,
+    //       height: PosTextSize.size1,
+    //       width: PosTextSize.size1,
+    //     ));
+    // bytes += generator.text(
+    //     'Date : ${DateFormat('dd-MM-yyyy HH:mm').format(DateTime.now())}',
+    //     styles: const PosStyles(bold: false, align: PosAlign.center));
 
     bytes += generator.hr();
 
-    bytes += generator.qrcode(qris, size: QRSize.Size8);
+    bytes += generator.qrcode(qris, size: QRSize.Size6);
 
     bytes += generator.hr();
 
-    bytes += generator.text('Terima kasih',
-        styles: const PosStyles(bold: false, align: PosAlign.center));
+    // bytes += generator.text('Terima kasih',
+    //     styles: const PosStyles(bold: false, align: PosAlign.center));
     bytes += generator.feed(3);
 
     return bytes;

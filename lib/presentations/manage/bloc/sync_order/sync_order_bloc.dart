@@ -28,12 +28,12 @@ class SyncOrderBloc extends Bloc<SyncOrderEvent, SyncOrderState> {
             .getOrderItemByOrderIdLocal(order.id!);
 
         final orderRequest = OrderRequestModel(
-            uuid: order.uuid,
-            transactionTime: order.transactionTime,
-            totalItem: order.totalQuantity,
-            totalPrice: order.totalPrice,
-            kasirId: order.idKasir,
-            paymentMethod: order.paymentMethod,
+            uuid: order.uuid!,
+            transactionTime: order.transactionTime!,
+            totalItem: order.totalQuantity!,
+            totalPrice: order.totalPrice!,
+            kasirId: order.idKasir!,
+            paymentMethod: order.paymentMethod!,
             orderItems: orderItems);
         final response = await orderRemoteDatasource.sendOrder(orderRequest);
         if (response) {

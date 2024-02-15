@@ -5,17 +5,17 @@ import '../../home/models/order_item.dart';
 
 class OrderModel {
   final int? id;
-  final String paymentMethod;
-  final int nominalBayar;
+  final String? paymentMethod;
+  final int? nominalBayar;
   final List<OrderItem> orders;
-  final int totalQuantity;
-  final int totalPrice;
-  final int idKasir;
-  final String namaKasir;
-  final String transactionTime;
+  final int? totalQuantity;
+  final int? totalPrice;
+  final int? idKasir;
+  final String? namaKasir;
+  final String? transactionTime;
   final bool isSync;
-  final String uuid;
-  final String qris;
+  final String? uuid;
+  final String? qris;
   OrderModel({
     this.id,
     required this.paymentMethod,
@@ -105,4 +105,21 @@ class OrderModel {
 
   factory OrderModel.fromJson(String source) =>
       OrderModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  factory OrderModel.fromMapRemote(Map<String, dynamic> json) {
+    return OrderModel(
+      id: json["id"],
+      paymentMethod: json["payment_method"],
+      nominalBayar: json['nominalBayar'] ?? 0,
+      orders: [],
+      totalQuantity: json['totalQuantity'] ?? 0,
+      totalPrice: json['amount'] ?? 0,
+      idKasir: json['idKasir'] ?? 0,
+      namaKasir: json['namaKasir'] ?? '',
+      transactionTime: json['transactionTime'] ?? '',
+      isSync: json['isSync'] == 1 ? true : false,
+      uuid: json['uuid'] ?? '',
+      qris: json['qris'] ?? '',
+    );
+  }
 }

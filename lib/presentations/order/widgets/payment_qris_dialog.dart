@@ -99,7 +99,7 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                             });
                           }, success: (message) async {
                             timer?.cancel();
-                            context.pop();
+
                             EasyLoading.instance
                               ..displayDuration =
                                   const Duration(milliseconds: 2000)
@@ -161,15 +161,16 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                                   .updateIsSyncOrderById(saveDbLocal);
                             }
 
+                            EasyLoading.dismiss();
+
+                            // ignore: use_build_context_synchronously
+                            context.pop();
                             // ignore: use_build_context_synchronously
                             context
                                 .read<OrderBloc>()
                                 .add(OrderEvent.addNominalBayar(
                                   total,
                                 ));
-                            EasyLoading.dismiss();
-                            // ignore: use_build_context_synchronously
-                            context.pop();
                             // ignore: use_build_context_synchronously
                             showDialog(
                               context: context,

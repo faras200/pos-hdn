@@ -51,7 +51,7 @@ class _TransactionDetailDialogeState extends State<TransactionDetailDialoge> {
   @override
   Widget build(BuildContext context) {
     DateTime parseDate = DateFormat("yyyy-MM-ddTHH:mm:ss")
-        .parse(widget.dataDetail.transactionTime);
+        .parse(widget.dataDetail.transactionTime!);
     var inputDate = DateTime.parse(parseDate.toString());
     var outputDate = inputDate.toFormattedTime();
 
@@ -77,12 +77,12 @@ class _TransactionDetailDialogeState extends State<TransactionDetailDialoge> {
           _LabelValue(
             label: 'TOTAL PEMBELIAN',
             value:
-                '${widget.dataDetail.totalPrice.currencyFormatRp}   ( ${widget.dataDetail.paymentMethod} )',
+                '${widget.dataDetail.totalPrice!.currencyFormatRp}   ( ${widget.dataDetail.paymentMethod} )',
           ),
           const Divider(height: 36.0),
           _LabelValue(
             label: 'NOMINAL BAYAR',
-            value: widget.dataDetail.nominalBayar.currencyFormatRp,
+            value: widget.dataDetail.nominalBayar!.currencyFormatRp,
           ),
           const Divider(height: 30.0),
           _LabelValue(
@@ -173,11 +173,11 @@ class _TransactionDetailDialogeState extends State<TransactionDetailDialoge> {
                                 final printValue =
                                     await CwbPrint.instance.printOrder(
                                   orders,
-                                  widget.dataDetail.totalQuantity,
-                                  widget.dataDetail.totalPrice,
-                                  widget.dataDetail.paymentMethod,
-                                  widget.dataDetail.nominalBayar,
-                                  widget.dataDetail.namaKasir,
+                                  widget.dataDetail.totalQuantity!,
+                                  widget.dataDetail.totalPrice!,
+                                  widget.dataDetail.paymentMethod!,
+                                  widget.dataDetail.nominalBayar!,
+                                  widget.dataDetail.namaKasir!,
                                 );
                                 await PrintBluetoothThermal.writeBytes(
                                     printValue);

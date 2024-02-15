@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 
 import 'package:pos_hdn/data/datasources/local/order_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/remote/deposit_remote_datasource.dart';
+import 'package:pos_hdn/data/datasources/remote/order_remote_datasource.dart';
 import 'package:pos_hdn/data/models/response/deposit_response_model.dart';
 import 'package:pos_hdn/presentations/manage/pages/deposit/models/deposit_model.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
@@ -18,8 +19,15 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
   DepositBloc() : super(const _Initial()) {
     on<_Fetch>((event, emit) async {
       emit(const DepositState.loading());
-      final data = await OrderLocalDatasource.instance.getOrderTunai();
-      emit(DepositState.success(data));
+      final response =
+          await OrderRemoteDatasource.instance.fetchOrder('PENDING');
+      final value = switch (response) {
+        Success(value: final result) =>
+          emit(DepositState.success(result.data!)),
+        Failure(exception: final exception) => emit(
+            DepositState.error('Something went wrong: $exception'),
+          ),
+      };
     });
 
     on<_FetchRemote>((event, emit) async {

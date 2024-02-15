@@ -78,13 +78,13 @@ class DetailDialog extends StatelessWidget {
                       ),
                       child: ListTile(
                         title: Text(
-                          data.uuid,
+                          data.uuid!,
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        subtitle: Text('${data.totalQuantity} items'),
+                        subtitle: Text(''),
                         trailing: Text(
                           int.parse(data.totalPrice.toString()).currencyFormat,
                           style: const TextStyle(

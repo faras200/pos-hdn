@@ -142,7 +142,7 @@ class _DepositPageState extends State<DepositPage>
                               setState(() {
                                 selectedItem[index] = !isSelectedData;
                                 isSelectItem = selectedItem.containsValue(true);
-                                totalPrice += data.totalPrice;
+                                totalPrice += data.totalPrice!;
                                 selectedData.add(data);
                               });
                             }
@@ -155,24 +155,23 @@ class _DepositPageState extends State<DepositPage>
                               });
 
                               if (isSelectedData) {
-                                totalPrice -= data.totalPrice;
+                                totalPrice -= data.totalPrice!;
                                 selectedData.remove(data);
                               } else {
-                                totalPrice += data.totalPrice;
+                                totalPrice += data.totalPrice!;
                                 selectedData.add(data);
                               }
                             } else {
                               // Open Detail Page
                             }
                           },
-                          title: Text(data.uuid,
+                          title: Text(data.uuid!,
                               style: const TextStyle(
                                 fontSize: 14,
                               )),
-                          subtitle: Text(
-                              '${data.paymentMethod}, ${data.totalQuantity} items'),
+                          subtitle: Text('${data.paymentMethod}'),
                           trailing: Text(
-                            data.totalPrice.currencyFormatRp,
+                            data.totalPrice!.currencyFormatRp,
                             style: const TextStyle(
                               color: AppColors.green,
                               fontSize: 16,
@@ -333,7 +332,7 @@ class _DepositPageState extends State<DepositPage>
     if (isFalseAvailable) {
       dataSetoran.forEach((data) {
         selectedData.add(data);
-        totalPrice += data.totalPrice;
+        totalPrice += data.totalPrice!;
       });
     } else {
       selectedData = [];
