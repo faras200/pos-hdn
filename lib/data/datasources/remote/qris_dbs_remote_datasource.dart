@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:logger/logger.dart';
 import 'package:pos_hdn/core/constants/variabels.dart';
 import 'package:pos_hdn/data/datasources/local/auth_local_datasource.dart';
 import 'package:pos_hdn/data/datasources/remote/result_response_api.dart';
@@ -90,8 +91,10 @@ class QrisDbsRemoteDatasource {
 
     final body = jsonEncode({
       'tgl': '',
-      'total': orderId,
+      'uuid': orderId,
     });
+
+    Logger().d(body);
 
     final response = await http.post(
       Uri.parse('${Variables.baseUrl}/dbs/status'),
