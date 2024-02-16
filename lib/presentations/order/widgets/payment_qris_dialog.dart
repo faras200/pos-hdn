@@ -37,8 +37,8 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
     orderId = 'INV${DateTime.now().millisecondsSinceEpoch}';
     context.read<QrisBloc>().add(QrisEvent.generateQRCode(
           orderId,
-          100,
-          // widget.price,
+          // 100,
+          widget.price,
         ));
     super.initState();
   }

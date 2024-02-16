@@ -52,8 +52,8 @@ class _PaymentDialogState extends State<PaymentDialog> {
   void initState() {
     context.read<QrisBloc>().add(QrisEvent.generateQRCodeDeposit(
           orderId,
-          100,
-          // widget.price,
+          // 100,
+          widget.price,
         ));
     loadPreferences();
     super.initState();

@@ -30,7 +30,13 @@ class MenuProductItem extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(10.0)),
             child: CachedNetworkImage(
               imageUrl: "${Variables.imageBaseUrl}${data.image}",
-              placeholder: (context, url) => const CircularProgressIndicator(),
+              placeholder: (context, url) => Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(5.0),
+                  width: 80,
+                  height: 80,
+                  constraints: const BoxConstraints(maxWidth: 90.0),
+                  child: const CircularProgressIndicator()),
               errorWidget: (context, url, error) => const Icon(
                 Icons.food_bank_outlined,
                 size: 80,

@@ -52,7 +52,9 @@ class ManageMenuPage extends StatelessWidget {
                 MenuButton(
                   iconPath: Assets.icons.product.path,
                   label: 'Kelola Produk',
-                  onPressed: () => context.push(const ManageProductPage()),
+                  onPressed: () {
+                    // context.push(const ManageProductPage());
+                  },
                   isImage: false,
                   isMenu: true,
                 ),
