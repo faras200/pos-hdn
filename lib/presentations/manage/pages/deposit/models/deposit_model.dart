@@ -54,11 +54,13 @@ class DetailDepositModel {
   final String? uuid;
   final int? depositId;
   final int? amount;
+  final List<Detail>? detail;
 
   DetailDepositModel({
     this.uuid,
     this.depositId,
     this.amount,
+    this.detail,
   });
 
   factory DetailDepositModel.fromJson(String str) =>
@@ -71,11 +73,73 @@ class DetailDepositModel {
         uuid: json["uuid"],
         depositId: json["deposit_id"],
         amount: int.parse(json["amount"]),
+        detail: json["detail"] == null
+            ? []
+            : List<Detail>.from(json["detail"]!.map((x) => Detail.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
         "uuid": uuid,
         "deposit_id": depositId,
         "amount": amount,
+        "detail": detail == null
+            ? []
+            : List<dynamic>.from(detail!.map((x) => x.toMap())),
+      };
+}
+
+class Detail {
+  final int? produkId;
+  final int? detailId;
+  final String? code;
+  final String? harga;
+  final String? qty;
+  final String? name;
+  final String? salesname;
+  final int? typeId;
+  final String? total;
+  final String? produk;
+
+  Detail({
+    this.produkId,
+    this.detailId,
+    this.code,
+    this.harga,
+    this.qty,
+    this.name,
+    this.salesname,
+    this.typeId,
+    this.total,
+    this.produk,
+  });
+
+  factory Detail.fromJson(String str) => Detail.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Detail.fromMap(Map<String, dynamic> json) => Detail(
+        produkId: json["produk_id"],
+        detailId: json["detail_id"],
+        code: json["code"],
+        harga: json["harga"],
+        qty: json["qty"],
+        name: json["name"],
+        salesname: json["salesname"],
+        typeId: json["type_id"],
+        total: json["total"],
+        produk: json["produk"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "produk_id": produkId,
+        "detail_id": detailId,
+        "code": code,
+        "harga": harga,
+        "qty": qty,
+        "name": name,
+        "salesname": salesname,
+        "type_id": typeId,
+        "total": total,
+        "produk": produk,
       };
 }

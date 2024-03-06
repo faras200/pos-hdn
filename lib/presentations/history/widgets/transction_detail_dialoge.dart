@@ -57,16 +57,21 @@ class _TransactionDetailDialogeState extends State<TransactionDetailDialoge> {
 
     return AlertDialog(
       scrollable: true,
-      title: const Column(
+      title: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SpaceHeight(24.0),
-          Text(
+          const SpaceHeight(24.0),
+          const Text(
             'Detail Order',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20,
             ),
+          ),
+          Text(
+            widget.dataDetail.uuid!,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ],
       ),
@@ -79,17 +84,17 @@ class _TransactionDetailDialogeState extends State<TransactionDetailDialoge> {
             value:
                 '${widget.dataDetail.totalPrice!.currencyFormatRp}   ( ${widget.dataDetail.paymentMethod} )',
           ),
-          const Divider(height: 36.0),
+          const Divider(height: 26.0),
           _LabelValue(
             label: 'NOMINAL BAYAR',
             value: widget.dataDetail.nominalBayar!.currencyFormatRp,
           ),
-          const Divider(height: 30.0),
+          const Divider(height: 26.0),
           _LabelValue(
             label: 'WAKTU PEMBAYARAN',
             value: outputDate,
           ),
-          const SpaceHeight(30.0),
+          const SpaceHeight(26.0),
           const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -178,6 +183,8 @@ class _TransactionDetailDialogeState extends State<TransactionDetailDialoge> {
                                   widget.dataDetail.paymentMethod!,
                                   widget.dataDetail.nominalBayar!,
                                   widget.dataDetail.namaKasir!,
+                                  widget.dataDetail.uuid!,
+                                  widget.dataDetail.transactionTime!,
                                 );
                                 await PrintBluetoothThermal.writeBytes(
                                     printValue);

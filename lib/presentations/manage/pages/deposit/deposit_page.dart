@@ -233,6 +233,7 @@ class _DepositPageState extends State<DepositPage>
                                 dataDetail: deposits[index].orders!,
                                 amount: data.amount!,
                                 time: data.time!,
+                                uuid: data.uuid!,
                               ),
                             );
                           },

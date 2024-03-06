@@ -1,4 +1,4 @@
-package com.example.pos_hdn
+package hdn.co.id
 
 import io.flutter.embedding.android.FlutterActivity
 

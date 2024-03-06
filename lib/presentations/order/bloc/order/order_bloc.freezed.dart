@@ -12,7 +12,7 @@ part of 'order_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderEvent {
@@ -20,6 +20,7 @@ mixin _$OrderEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(int nominal) addNominalBayar,
+    required TResult Function(String uuid) addUuid,
     required TResult Function(String paymentMethod, List<OrderItem> orders)
         processOrder,
   }) =>
@@ -28,6 +29,7 @@ mixin _$OrderEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(int nominal)? addNominalBayar,
+    TResult? Function(String uuid)? addUuid,
     TResult? Function(String paymentMethod, List<OrderItem> orders)?
         processOrder,
   }) =>
@@ -36,6 +38,7 @@ mixin _$OrderEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(int nominal)? addNominalBayar,
+    TResult Function(String uuid)? addUuid,
     TResult Function(String paymentMethod, List<OrderItem> orders)?
         processOrder,
     required TResult orElse(),
@@ -45,6 +48,7 @@ mixin _$OrderEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_AddNominalBayar value) addNominalBayar,
+    required TResult Function(_AddUuid value) addUuid,
     required TResult Function(_ProcessOrder value) processOrder,
   }) =>
       throw _privateConstructorUsedError;
@@ -52,6 +56,7 @@ mixin _$OrderEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_AddNominalBayar value)? addNominalBayar,
+    TResult? Function(_AddUuid value)? addUuid,
     TResult? Function(_ProcessOrder value)? processOrder,
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +64,7 @@ mixin _$OrderEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_AddNominalBayar value)? addNominalBayar,
+    TResult Function(_AddUuid value)? addUuid,
     TResult Function(_ProcessOrder value)? processOrder,
     required TResult orElse(),
   }) =>
@@ -129,6 +135,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(int nominal) addNominalBayar,
+    required TResult Function(String uuid) addUuid,
     required TResult Function(String paymentMethod, List<OrderItem> orders)
         processOrder,
   }) {
@@ -140,6 +147,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(int nominal)? addNominalBayar,
+    TResult? Function(String uuid)? addUuid,
     TResult? Function(String paymentMethod, List<OrderItem> orders)?
         processOrder,
   }) {
@@ -151,6 +159,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(int nominal)? addNominalBayar,
+    TResult Function(String uuid)? addUuid,
     TResult Function(String paymentMethod, List<OrderItem> orders)?
         processOrder,
     required TResult orElse(),
@@ -166,6 +175,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_AddNominalBayar value) addNominalBayar,
+    required TResult Function(_AddUuid value) addUuid,
     required TResult Function(_ProcessOrder value) processOrder,
   }) {
     return started(this);
@@ -176,6 +186,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_AddNominalBayar value)? addNominalBayar,
+    TResult? Function(_AddUuid value)? addUuid,
     TResult? Function(_ProcessOrder value)? processOrder,
   }) {
     return started?.call(this);
@@ -186,6 +197,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_AddNominalBayar value)? addNominalBayar,
+    TResult Function(_AddUuid value)? addUuid,
     TResult Function(_ProcessOrder value)? processOrder,
     required TResult orElse(),
   }) {
@@ -277,6 +289,7 @@ class _$AddNominalBayarImpl
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(int nominal) addNominalBayar,
+    required TResult Function(String uuid) addUuid,
     required TResult Function(String paymentMethod, List<OrderItem> orders)
         processOrder,
   }) {
@@ -288,6 +301,7 @@ class _$AddNominalBayarImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(int nominal)? addNominalBayar,
+    TResult? Function(String uuid)? addUuid,
     TResult? Function(String paymentMethod, List<OrderItem> orders)?
         processOrder,
   }) {
@@ -299,6 +313,7 @@ class _$AddNominalBayarImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(int nominal)? addNominalBayar,
+    TResult Function(String uuid)? addUuid,
     TResult Function(String paymentMethod, List<OrderItem> orders)?
         processOrder,
     required TResult orElse(),
@@ -314,6 +329,7 @@ class _$AddNominalBayarImpl
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_AddNominalBayar value) addNominalBayar,
+    required TResult Function(_AddUuid value) addUuid,
     required TResult Function(_ProcessOrder value) processOrder,
   }) {
     return addNominalBayar(this);
@@ -324,6 +340,7 @@ class _$AddNominalBayarImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_AddNominalBayar value)? addNominalBayar,
+    TResult? Function(_AddUuid value)? addUuid,
     TResult? Function(_ProcessOrder value)? processOrder,
   }) {
     return addNominalBayar?.call(this);
@@ -334,6 +351,7 @@ class _$AddNominalBayarImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_AddNominalBayar value)? addNominalBayar,
+    TResult Function(_AddUuid value)? addUuid,
     TResult Function(_ProcessOrder value)? processOrder,
     required TResult orElse(),
   }) {
@@ -350,6 +368,162 @@ abstract class _AddNominalBayar implements OrderEvent {
   int get nominal;
   @JsonKey(ignore: true)
   _$$AddNominalBayarImplCopyWith<_$AddNominalBayarImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AddUuidImplCopyWith<$Res> {
+  factory _$$AddUuidImplCopyWith(
+          _$AddUuidImpl value, $Res Function(_$AddUuidImpl) then) =
+      __$$AddUuidImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uuid});
+}
+
+/// @nodoc
+class __$$AddUuidImplCopyWithImpl<$Res>
+    extends _$OrderEventCopyWithImpl<$Res, _$AddUuidImpl>
+    implements _$$AddUuidImplCopyWith<$Res> {
+  __$$AddUuidImplCopyWithImpl(
+      _$AddUuidImpl _value, $Res Function(_$AddUuidImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uuid = null,
+  }) {
+    return _then(_$AddUuidImpl(
+      null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddUuidImpl with DiagnosticableTreeMixin implements _AddUuid {
+  const _$AddUuidImpl(this.uuid);
+
+  @override
+  final String uuid;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'OrderEvent.addUuid(uuid: $uuid)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'OrderEvent.addUuid'))
+      ..add(DiagnosticsProperty('uuid', uuid));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddUuidImpl &&
+            (identical(other.uuid, uuid) || other.uuid == uuid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uuid);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddUuidImplCopyWith<_$AddUuidImpl> get copyWith =>
+      __$$AddUuidImplCopyWithImpl<_$AddUuidImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(int nominal) addNominalBayar,
+    required TResult Function(String uuid) addUuid,
+    required TResult Function(String paymentMethod, List<OrderItem> orders)
+        processOrder,
+  }) {
+    return addUuid(uuid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(int nominal)? addNominalBayar,
+    TResult? Function(String uuid)? addUuid,
+    TResult? Function(String paymentMethod, List<OrderItem> orders)?
+        processOrder,
+  }) {
+    return addUuid?.call(uuid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(int nominal)? addNominalBayar,
+    TResult Function(String uuid)? addUuid,
+    TResult Function(String paymentMethod, List<OrderItem> orders)?
+        processOrder,
+    required TResult orElse(),
+  }) {
+    if (addUuid != null) {
+      return addUuid(uuid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_AddNominalBayar value) addNominalBayar,
+    required TResult Function(_AddUuid value) addUuid,
+    required TResult Function(_ProcessOrder value) processOrder,
+  }) {
+    return addUuid(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_AddNominalBayar value)? addNominalBayar,
+    TResult? Function(_AddUuid value)? addUuid,
+    TResult? Function(_ProcessOrder value)? processOrder,
+  }) {
+    return addUuid?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_AddNominalBayar value)? addNominalBayar,
+    TResult Function(_AddUuid value)? addUuid,
+    TResult Function(_ProcessOrder value)? processOrder,
+    required TResult orElse(),
+  }) {
+    if (addUuid != null) {
+      return addUuid(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddUuid implements OrderEvent {
+  const factory _AddUuid(final String uuid) = _$AddUuidImpl;
+
+  String get uuid;
+  @JsonKey(ignore: true)
+  _$$AddUuidImplCopyWith<_$AddUuidImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -444,6 +618,7 @@ class _$ProcessOrderImpl with DiagnosticableTreeMixin implements _ProcessOrder {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(int nominal) addNominalBayar,
+    required TResult Function(String uuid) addUuid,
     required TResult Function(String paymentMethod, List<OrderItem> orders)
         processOrder,
   }) {
@@ -455,6 +630,7 @@ class _$ProcessOrderImpl with DiagnosticableTreeMixin implements _ProcessOrder {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(int nominal)? addNominalBayar,
+    TResult? Function(String uuid)? addUuid,
     TResult? Function(String paymentMethod, List<OrderItem> orders)?
         processOrder,
   }) {
@@ -466,6 +642,7 @@ class _$ProcessOrderImpl with DiagnosticableTreeMixin implements _ProcessOrder {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(int nominal)? addNominalBayar,
+    TResult Function(String uuid)? addUuid,
     TResult Function(String paymentMethod, List<OrderItem> orders)?
         processOrder,
     required TResult orElse(),
@@ -481,6 +658,7 @@ class _$ProcessOrderImpl with DiagnosticableTreeMixin implements _ProcessOrder {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_AddNominalBayar value) addNominalBayar,
+    required TResult Function(_AddUuid value) addUuid,
     required TResult Function(_ProcessOrder value) processOrder,
   }) {
     return processOrder(this);
@@ -491,6 +669,7 @@ class _$ProcessOrderImpl with DiagnosticableTreeMixin implements _ProcessOrder {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_AddNominalBayar value)? addNominalBayar,
+    TResult? Function(_AddUuid value)? addUuid,
     TResult? Function(_ProcessOrder value)? processOrder,
   }) {
     return processOrder?.call(this);
@@ -501,6 +680,7 @@ class _$ProcessOrderImpl with DiagnosticableTreeMixin implements _ProcessOrder {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_AddNominalBayar value)? addNominalBayar,
+    TResult Function(_AddUuid value)? addUuid,
     TResult Function(_ProcessOrder value)? processOrder,
     required TResult orElse(),
   }) {
@@ -536,7 +716,8 @@ mixin _$OrderState {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)
+            String namaKasir,
+            String uuid)
         success,
     required TResult Function(String message) error,
   }) =>
@@ -552,7 +733,8 @@ mixin _$OrderState {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)?
+            String namaKasir,
+            String uuid)?
         success,
     TResult? Function(String message)? error,
   }) =>
@@ -568,7 +750,8 @@ mixin _$OrderState {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)?
+            String namaKasir,
+            String uuid)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -672,7 +855,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)
+            String namaKasir,
+            String uuid)
         success,
     required TResult Function(String message) error,
   }) {
@@ -691,7 +875,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)?
+            String namaKasir,
+            String uuid)?
         success,
     TResult? Function(String message)? error,
   }) {
@@ -710,7 +895,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)?
+            String namaKasir,
+            String uuid)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -816,7 +1002,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)
+            String namaKasir,
+            String uuid)
         success,
     required TResult Function(String message) error,
   }) {
@@ -835,7 +1022,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)?
+            String namaKasir,
+            String uuid)?
         success,
     TResult? Function(String message)? error,
   }) {
@@ -854,7 +1042,8 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)?
+            String namaKasir,
+            String uuid)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -920,7 +1109,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       String paymentMethod,
       int nominalBayar,
       int idKasir,
-      String namaKasir});
+      String namaKasir,
+      String uuid});
 }
 
 /// @nodoc
@@ -941,6 +1131,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
     Object? nominalBayar = null,
     Object? idKasir = null,
     Object? namaKasir = null,
+    Object? uuid = null,
   }) {
     return _then(_$SuccessImpl(
       null == products
@@ -971,6 +1162,10 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.namaKasir
           : namaKasir // ignore: cast_nullable_to_non_nullable
               as String,
+      null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -985,7 +1180,8 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
       this.paymentMethod,
       this.nominalBayar,
       this.idKasir,
-      this.namaKasir)
+      this.namaKasir,
+      this.uuid)
       : _products = products;
 
   final List<OrderItem> _products;
@@ -1008,10 +1204,12 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
   final int idKasir;
   @override
   final String namaKasir;
+  @override
+  final String uuid;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'OrderState.success(products: $products, totalQuantity: $totalQuantity, totalPrice: $totalPrice, paymentMethod: $paymentMethod, nominalBayar: $nominalBayar, idKasir: $idKasir, namaKasir: $namaKasir)';
+    return 'OrderState.success(products: $products, totalQuantity: $totalQuantity, totalPrice: $totalPrice, paymentMethod: $paymentMethod, nominalBayar: $nominalBayar, idKasir: $idKasir, namaKasir: $namaKasir, uuid: $uuid)';
   }
 
   @override
@@ -1025,7 +1223,8 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
       ..add(DiagnosticsProperty('paymentMethod', paymentMethod))
       ..add(DiagnosticsProperty('nominalBayar', nominalBayar))
       ..add(DiagnosticsProperty('idKasir', idKasir))
-      ..add(DiagnosticsProperty('namaKasir', namaKasir));
+      ..add(DiagnosticsProperty('namaKasir', namaKasir))
+      ..add(DiagnosticsProperty('uuid', uuid));
   }
 
   @override
@@ -1044,7 +1243,8 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
                 other.nominalBayar == nominalBayar) &&
             (identical(other.idKasir, idKasir) || other.idKasir == idKasir) &&
             (identical(other.namaKasir, namaKasir) ||
-                other.namaKasir == namaKasir));
+                other.namaKasir == namaKasir) &&
+            (identical(other.uuid, uuid) || other.uuid == uuid));
   }
 
   @override
@@ -1056,7 +1256,8 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
       paymentMethod,
       nominalBayar,
       idKasir,
-      namaKasir);
+      namaKasir,
+      uuid);
 
   @JsonKey(ignore: true)
   @override
@@ -1076,12 +1277,13 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)
+            String namaKasir,
+            String uuid)
         success,
     required TResult Function(String message) error,
   }) {
     return success(products, totalQuantity, totalPrice, paymentMethod,
-        nominalBayar, idKasir, namaKasir);
+        nominalBayar, idKasir, namaKasir, uuid);
   }
 
   @override
@@ -1096,12 +1298,13 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)?
+            String namaKasir,
+            String uuid)?
         success,
     TResult? Function(String message)? error,
   }) {
     return success?.call(products, totalQuantity, totalPrice, paymentMethod,
-        nominalBayar, idKasir, namaKasir);
+        nominalBayar, idKasir, namaKasir, uuid);
   }
 
   @override
@@ -1116,14 +1319,15 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements _Success {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)?
+            String namaKasir,
+            String uuid)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
       return success(products, totalQuantity, totalPrice, paymentMethod,
-          nominalBayar, idKasir, namaKasir);
+          nominalBayar, idKasir, namaKasir, uuid);
     }
     return orElse();
   }
@@ -1174,7 +1378,8 @@ abstract class _Success implements OrderState {
       final String paymentMethod,
       final int nominalBayar,
       final int idKasir,
-      final String namaKasir) = _$SuccessImpl;
+      final String namaKasir,
+      final String uuid) = _$SuccessImpl;
 
   List<OrderItem> get products;
   int get totalQuantity;
@@ -1183,6 +1388,7 @@ abstract class _Success implements OrderState {
   int get nominalBayar;
   int get idKasir;
   String get namaKasir;
+  String get uuid;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1269,7 +1475,8 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)
+            String namaKasir,
+            String uuid)
         success,
     required TResult Function(String message) error,
   }) {
@@ -1288,7 +1495,8 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)?
+            String namaKasir,
+            String uuid)?
         success,
     TResult? Function(String message)? error,
   }) {
@@ -1307,7 +1515,8 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
             String paymentMethod,
             int nominalBayar,
             int idKasir,
-            String namaKasir)?
+            String namaKasir,
+            String uuid)?
         success,
     TResult Function(String message)? error,
     required TResult orElse(),

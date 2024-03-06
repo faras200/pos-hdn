@@ -73,7 +73,7 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                   child: CircularProgressIndicator(),
                 );
               }, success: (data, qty, total, paymentMethod, nominal, idKasir,
-                  namaKasir) {
+                  namaKasir, uuid) {
                 return Container(
                   width: context.deviceWidth,
                   padding: const EdgeInsets.all(14.0),
@@ -171,6 +171,11 @@ class _PaymentQrisDialogState extends State<PaymentQrisDialog> {
                                 .add(OrderEvent.addNominalBayar(
                                   total,
                                 ));
+
+                            // ignore: use_build_context_synchronously
+                            context
+                                .read<OrderBloc>()
+                                .add(OrderEvent.addUuid(uuid));
                             // ignore: use_build_context_synchronously
                             showDialog(
                               context: context,

@@ -9,20 +9,34 @@ part 'order_state.dart';
 part 'order_bloc.freezed.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
-  OrderBloc() : super(const _Success([], 0, 0, '', 0, 0, '')) {
+  OrderBloc() : super(const _Success([], 0, 0, '', 0, 0, '', '')) {
     on<_AddNominalBayar>((event, emit) {
       var currentStates = state as _Success;
       emit(const _Loading());
 
       emit(_Success(
-        currentStates.products,
-        currentStates.totalQuantity,
-        currentStates.totalPrice,
-        currentStates.paymentMethod,
-        event.nominal,
-        currentStates.idKasir,
-        currentStates.namaKasir,
-      ));
+          currentStates.products,
+          currentStates.totalQuantity,
+          currentStates.totalPrice,
+          currentStates.paymentMethod,
+          event.nominal,
+          currentStates.idKasir,
+          currentStates.namaKasir,
+          currentStates.uuid));
+    });
+
+    on<_AddUuid>((event, emit) {
+      var currentStates = state as _Success;
+
+      emit(_Success(
+          currentStates.products,
+          currentStates.totalQuantity,
+          currentStates.totalPrice,
+          currentStates.paymentMethod,
+          currentStates.nominalBayar,
+          currentStates.idKasir,
+          currentStates.namaKasir,
+          event.uuid));
     });
 
     on<_ProcessOrder>((event, emit) async {
@@ -30,24 +44,24 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
       final userData = await AuthLocalDatasource().getAuthData();
       emit(_Success(
-        event.orders,
-        event.orders.fold(
-            0, (previousValue, element) => previousValue + element.quantity),
-        event.orders.fold(
-            0,
-            (previousValue, element) =>
-                previousValue + (element.quantity * element.product.harga)),
-        event.paymentMethod,
-        0,
-        userData!.data.user.id,
-        userData.data.user.name,
-      ));
+          event.orders,
+          event.orders.fold(
+              0, (previousValue, element) => previousValue + element.quantity),
+          event.orders.fold(
+              0,
+              (previousValue, element) =>
+                  previousValue + (element.quantity * element.product.harga)),
+          event.paymentMethod,
+          0,
+          userData!.data.user.id,
+          userData.data.user.name,
+          ''));
     });
 
     //started
     on<_Started>((event, emit) {
       emit(const _Loading());
-      emit(const _Success([], 0, 0, '', 0, 0, ''));
+      emit(const _Success([], 0, 0, '', 0, 0, '', ''));
     });
   }
 }

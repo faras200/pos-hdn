@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:pos_hdn/core/constants/colors.dart';
 import 'package:pos_hdn/core/extensions/build_context_ext.dart';
 import 'package:pos_hdn/core/extensions/date_time_ext.dart';
@@ -48,12 +49,12 @@ class _PaymentSuccessDialogState extends State<PaymentSuccessDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Center(child: Assets.icons.done.svg()),
-          const SpaceHeight(24.0),
+          const SpaceHeight(14.0),
           const Text(
-            'Pembayaran telah sukses dilakukan',
+            'Pembayaran berhasil',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 18,
             ),
           ),
         ],
@@ -62,8 +63,8 @@ class _PaymentSuccessDialogState extends State<PaymentSuccessDialog> {
         builder: (context, state) {
           return state.maybeWhen(
             orElse: () => const SizedBox.shrink(),
-            success:
-                (data, qty, total, paymentType, nominal, idKasir, nameKasir) {
+            success: (data, qty, total, paymentType, nominal, idKasir,
+                nameKasir, uuid) {
               context.read<CheckoutBloc>().add(const CheckoutEvent.started());
               return Column(
                 mainAxisSize: MainAxisSize.min,
@@ -71,27 +72,36 @@ class _PaymentSuccessDialogState extends State<PaymentSuccessDialog> {
                 children: [
                   const SpaceHeight(12.0),
                   _LabelValue(
+                    label: 'NOMOR FAKTUR',
+                    value: uuid,
+                  ),
+                  const Divider(height: 26.0),
+                  _LabelValue(
                     label: 'METODE PEMBAYARAN',
                     value: paymentType,
                   ),
-                  const Divider(height: 36.0),
+                  const Divider(height: 26.0),
                   _LabelValue(
                     label: 'TOTAL PEMBELIAN',
                     value: total.currencyFormatRp,
                   ),
-                  const Divider(height: 36.0),
+                  const Divider(height: 26.0),
                   _LabelValue(
                     label: 'NOMINAL BAYAR',
                     value: nominal.currencyFormatRp,
                   ),
-                  const Divider(height: 36.0),
+                  (nominal - total) > 0
+                      ? const Divider(height: 26.0)
+                      : const SizedBox.shrink(),
+                  (nominal - total) > 0
+                      ? _LabelValue(
+                          label: 'Total Kembalian',
+                          value: (nominal - total).currencyFormatRp,
+                        )
+                      : const SizedBox.shrink(),
+                  const Divider(height: 26.0),
                   _LabelValue(
-                    label: 'Total Kembalian',
-                    value: (nominal - total).currencyFormatRp,
-                  ),
-                  const Divider(height: 36.0),
-                  _LabelValue(
-                    label: 'WAKTU PEMBAYARAN',
+                    label: 'WAKTU TRANSAKSI',
                     value: DateTime.now().toFormattedTime(),
                   ),
                   const SpaceHeight(40.0),
@@ -141,15 +151,17 @@ class _PaymentSuccessDialogState extends State<PaymentSuccessDialog> {
                                       btnOkColor: AppColors.primary)
                                   .show();
                             }
-                            final printValue =
-                                await CwbPrint.instance.printOrder(
-                              data,
-                              qty,
-                              total,
-                              paymentType,
-                              nominal,
-                              nameKasir,
-                            );
+                            final printValue = await CwbPrint.instance
+                                .printOrder(
+                                    data,
+                                    qty,
+                                    total,
+                                    paymentType,
+                                    nominal,
+                                    nameKasir,
+                                    uuid,
+                                    DateFormat('yyyy-MM-ddTHH:mm:ss')
+                                        .format(DateTime.now()));
                             await PrintBluetoothThermal.writeBytes(printValue);
                             // final result =
                             //     await PrintBluetoothThermal.writeBytes(ticket);

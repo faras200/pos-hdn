@@ -174,73 +174,76 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
               state.maybeWhen(
                 orElse: () {},
                 success: (data, qty, total, payment, nominal, idKasir,
-                    namaKasir) async {
+                    namaKasir, uuid) async {
                   // Logger().d(total);
-                  EasyLoading.instance
-                    ..displayDuration = const Duration(milliseconds: 2000)
-                    ..indicatorType = EasyLoadingIndicatorType.threeBounce
-                    ..loadingStyle = EasyLoadingStyle.custom
-                    ..indicatorSize = 40.0
-                    ..radius = 10.0
-                    ..backgroundColor = AppColors.primary
-                    ..indicatorColor = AppColors.white
-                    ..textColor = AppColors.white
-                    ..maskType = EasyLoadingMaskType.black
-                    ..userInteractions = false
-                    ..dismissOnTap = false;
-                  EasyLoading.show(status: 'loading...');
-                  final timeNow =
-                      DateFormat('yyyy-MM-ddTHH:mm:ss').format(DateTime.now());
-                  final uuid = 'INV${DateTime.now().millisecondsSinceEpoch}';
-                  final orderModel = OrderModel(
-                      uuid: uuid,
-                      qris: '',
-                      paymentMethod: payment,
-                      nominalBayar: nominal,
-                      orders: data,
-                      totalQuantity: qty,
-                      totalPrice: total,
-                      idKasir: idKasir,
-                      namaKasir: namaKasir,
-                      transactionTime: timeNow,
-                      isSync: false);
+                  if (uuid != '') {
+                    EasyLoading.instance
+                      ..displayDuration = const Duration(milliseconds: 2000)
+                      ..indicatorType = EasyLoadingIndicatorType.threeBounce
+                      ..loadingStyle = EasyLoadingStyle.custom
+                      ..indicatorSize = 40.0
+                      ..radius = 10.0
+                      ..backgroundColor = AppColors.primary
+                      ..indicatorColor = AppColors.white
+                      ..textColor = AppColors.white
+                      ..maskType = EasyLoadingMaskType.black
+                      ..userInteractions = false
+                      ..dismissOnTap = false;
+                    EasyLoading.show(status: 'loading...');
+                    final timeNow = DateFormat('yyyy-MM-ddTHH:mm:ss')
+                        .format(DateTime.now());
 
-                  final saveDbLocal = await OrderLocalDatasource.instance
-                      .saveOrder(orderModel); //return id order
-
-                  if (connectivityController.isConnected.value) {
-                    final orderItems = data
-                        .map((e) => OrderItemModel(
-                            productId: e.product.id!,
-                            quantity: e.quantity,
-                            totalPrice: (e.quantity * e.product.harga)))
-                        .toList();
-
-                    final orderRequestModel = OrderRequestModel(
-                        transactionTime: timeNow,
-                        kasirId: idKasir,
+                    final orderModel = OrderModel(
+                        uuid: uuid,
+                        qris: '',
+                        paymentMethod: payment,
+                        nominalBayar: nominal,
+                        orders: data,
+                        totalQuantity: qty,
                         totalPrice: total,
-                        totalItem: qty,
-                        orderItems: orderItems,
-                        uuid: uuid);
+                        idKasir: idKasir,
+                        namaKasir: namaKasir,
+                        transactionTime: timeNow,
+                        isSync: false);
 
-                    final saveDbRemote = await OrderRemoteDatasource.instance
-                        .sendOrder(orderRequestModel);
+                    final saveDbLocal = await OrderLocalDatasource.instance
+                        .saveOrder(orderModel); //return id order
 
-                    if (saveDbRemote) {
-                      //Update db local to isSync
-                      OrderLocalDatasource.instance
-                          .updateIsSyncOrderById(saveDbLocal);
+                    if (connectivityController.isConnected.value) {
+                      final orderItems = data
+                          .map((e) => OrderItemModel(
+                              productId: e.product.id!,
+                              quantity: e.quantity,
+                              totalPrice: (e.quantity * e.product.harga)))
+                          .toList();
+
+                      final orderRequestModel = OrderRequestModel(
+                          transactionTime: timeNow,
+                          kasirId: idKasir,
+                          totalPrice: total,
+                          totalItem: qty,
+                          orderItems: orderItems,
+                          uuid: uuid);
+
+                      final saveDbRemote = await OrderRemoteDatasource.instance
+                          .sendOrder(orderRequestModel);
+
+                      if (saveDbRemote) {
+                        //Update db local to isSync
+                        OrderLocalDatasource.instance
+                            .updateIsSyncOrderById(saveDbLocal);
+                      }
                     }
+                    EasyLoading.dismiss();
+
+                    // ignore: use_build_context_synchronously
+                    context.pop();
+                    // ignore: use_build_context_synchronously
+                    showDialog(
+                      context: context,
+                      builder: (context) => const PaymentSuccessDialog(),
+                    );
                   }
-                  EasyLoading.dismiss();
-                  // ignore: use_build_context_synchronously
-                  context.pop();
-                  // ignore: use_build_context_synchronously
-                  showDialog(
-                    context: context,
-                    builder: (context) => const PaymentSuccessDialog(),
-                  );
                 },
               );
             },
@@ -251,7 +254,8 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              }, success: (data, qty, total, payment, _, idKasir, namaKasir) {
+              }, success:
+                  (data, qty, total, payment, _, idKasir, namaKasir, uuid) {
                 return Button.filled(
                   onPressed: () {
                     if (priceController!.text.toIntegerFromText < total) {
@@ -274,11 +278,9 @@ class _PaymentCashDialogState extends State<PaymentCashDialog> {
                           priceController!.text.toIntegerFromText,
                         )); // set it to true now
 
-                    // var datachekout = CheckoutBloc().state;
-
-                    // context
-                    //     .read<OrderBloc>()
-                    //     .add(OrderEvent.processOrder(data));
+                    final uuid = 'INV${DateTime.now().millisecondsSinceEpoch}';
+                    // ignore: use_build_context_synchronously
+                    context.read<OrderBloc>().add(OrderEvent.addUuid(uuid));
                   },
                   label: 'Proses',
                 );

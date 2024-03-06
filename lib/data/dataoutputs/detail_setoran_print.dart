@@ -4,28 +4,22 @@ import 'package:intl/intl.dart';
 import 'package:pos_hdn/core/extensions/date_time_ext.dart';
 import 'package:pos_hdn/core/extensions/int_ext.dart';
 import 'package:pos_hdn/presentations/home/models/order_item.dart';
+import 'package:pos_hdn/presentations/manage/pages/deposit/models/deposit_model.dart';
 
-class CwbPrint {
-  CwbPrint._init();
+class DetailSetoranPrint {
+  DetailSetoranPrint._init();
 
-  static final CwbPrint instance = CwbPrint._init();
+  static final DetailSetoranPrint instance = DetailSetoranPrint._init();
 
-  Future<List<int>> printOrder(
-    List<OrderItem> products,
-    int totalQuantity,
+  Future<List<int>> printDetail(
+    List<DetailDepositModel> products,
     int totalPrice,
-    String paymentMethod,
-    int nominalBayar,
-    String namaKasir,
     String uuid,
+    String paymentMethod,
     String transactionTime,
   ) async {
     List<int> bytes = [];
-
-    DateTime parseDate =
-        DateFormat("yyyy-MM-ddTHH:mm:ss").parse(transactionTime);
-    var inputDate = DateTime.parse(parseDate.toString());
-    var outputDate = inputDate.toFormattedTime();
+    var outputDate = transactionTime;
 
     final profile = await CapabilityProfile.load();
     final generator = Generator(PaperSize.mm58, profile);
@@ -38,13 +32,6 @@ class CwbPrint {
           height: PosTextSize.size1,
           width: PosTextSize.size1,
         ));
-    // bytes += generator.text('Code with Bahri',
-    //     styles: const PosStyles(
-    //       bold: true,
-    //       align: PosAlign.center,
-    //       height: PosTextSize.size1,
-    //       width: PosTextSize.size1,
-    //     ));
 
     bytes += generator.text(
         'Jl. Peta Barat No.9a, Kec. Kalideres, Kota Jakarta Barat 11830',
@@ -82,9 +69,10 @@ class CwbPrint {
     );
 
     bytes += generator.hr();
-    bytes += generator.text('Pesanan:',
+    bytes += generator.text('Invoice Setoran:',
         styles: const PosStyles(bold: false, align: PosAlign.center));
     //for from data
+    final lastProduct = products.last;
     for (final product in products) {
       // bytes += generator.text(product.product.name,
       //     maxCharsPerLine: 25, styles: const PosStyles(align: PosAlign.left));
@@ -92,38 +80,60 @@ class CwbPrint {
       bytes += generator.row(
         [
           PosColumn(
-            text: product.product.name,
+            text: product.uuid!,
             width: 10,
             styles: const PosStyles(align: PosAlign.left, underline: true),
           ),
           PosColumn(
+            // text: product.amount!.currencyFormat,
             text: '',
             width: 2,
             styles: const PosStyles(align: PosAlign.right),
           ),
         ],
       );
+      double totalSatuan = 0;
+      for (final detail in product.detail!) {
+        totalSatuan = (int.parse(detail.total!) / int.parse(detail.qty!));
+        bytes += generator.row(
+          [
+            PosColumn(
+              text: detail.produk == null ? '' : detail.produk!,
+              width: 10,
+              styles: const PosStyles(align: PosAlign.left, underline: true),
+            ),
+            PosColumn(
+              text: '',
+              width: 2,
+              styles: const PosStyles(align: PosAlign.right),
+            ),
+          ],
+        );
 
-      bytes += generator.row([
-        PosColumn(
-          text:
-              '${product.quantity} x  @${product.product.harga.currencyFormat}',
-          width: 8,
-          styles: const PosStyles(align: PosAlign.left),
-        ),
-        PosColumn(
-          text: (product.product.harga * product.quantity).currencyFormat,
-          width: 4,
-          styles: const PosStyles(align: PosAlign.right),
-        ),
-      ]);
+        bytes += generator.row([
+          PosColumn(
+            text: '${detail.qty} x  @${totalSatuan.toInt().currencyFormat}',
+            width: 8,
+            styles: const PosStyles(align: PosAlign.left),
+          ),
+          PosColumn(
+            text: int.parse(detail.total!).currencyFormat,
+            width: 4,
+            styles: const PosStyles(align: PosAlign.right),
+          ),
+        ]);
+      }
+
+      if (product != lastProduct) {
+        bytes += generator.feed(1);
+      }
     }
 
     bytes += generator.hr();
 
     bytes += generator.row([
       PosColumn(
-        text: 'Total',
+        text: 'Total Setoran',
         width: 6,
         styles: const PosStyles(align: PosAlign.left),
       ),
@@ -133,34 +143,6 @@ class CwbPrint {
         styles: const PosStyles(align: PosAlign.right),
       ),
     ]);
-
-    bytes += generator.row([
-      PosColumn(
-        text: 'Bayar $paymentMethod',
-        width: 6,
-        styles: const PosStyles(align: PosAlign.left),
-      ),
-      PosColumn(
-        text: nominalBayar.currencyFormatRp,
-        width: 6,
-        styles: const PosStyles(align: PosAlign.right),
-      ),
-    ]);
-
-    if ((nominalBayar - totalPrice) > 0) {
-      bytes += generator.row([
-        PosColumn(
-          text: 'Kembalian',
-          width: 8,
-          styles: const PosStyles(align: PosAlign.left),
-        ),
-        PosColumn(
-          text: (nominalBayar - totalPrice).currencyFormatRp,
-          width: 4,
-          styles: const PosStyles(align: PosAlign.right),
-        ),
-      ]);
-    }
 
     bytes += generator.hr();
 
