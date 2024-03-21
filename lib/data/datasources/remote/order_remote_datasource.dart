@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:logger/logger.dart';
 import 'package:pos_hdn/core/constants/variabels.dart';
 import 'package:pos_hdn/data/datasources/remote/result_response_api.dart';
@@ -67,6 +69,41 @@ class OrderRemoteDatasource {
     } on Exception catch (e) {
       // 4. return Failure here too
       return Failure(e);
+    }
+  }
+
+  Future<bool> deleteOrder(List uuids) async {
+    final url = Uri.parse('${Variables.baseUrl}/pos/transactions/delete');
+    final authData = await AuthLocalDatasource().getAuthData();
+    final Map<String, String> headers = {
+      'Authorization': 'Bearer ${authData?.data.token}',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+    final log = Logger();
+    Map<String, dynamic> data = {
+      "orders": uuids.map((uuid) => {"uuid": uuid}).toList(),
+    };
+    String jsonStr = jsonEncode(data);
+    // log.d(jsonStr);
+
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: jsonStr,
+      );
+      log.d(response.body);
+      // ignore: unnecessary_null_comparison
+      if (response.statusCode == 201 || response != null) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      // 4. return Failure here too
+      return false;
     }
   }
 }

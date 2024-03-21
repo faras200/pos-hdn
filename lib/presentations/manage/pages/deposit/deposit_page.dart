@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 
 import 'package:pos_hdn/core/assets/assets.gen.dart';
 import 'package:pos_hdn/core/components/spaces.dart';
@@ -152,6 +153,8 @@ class _DepositPageState extends State<DepositPage>
                               setState(() {
                                 selectedItem[index] = !isSelectedData;
                                 isSelectItem = selectedItem.containsValue(true);
+                                Logger().d(isSelectItem);
+                                Logger().d(selectedItem);
                               });
 
                               if (isSelectedData) {

@@ -20,18 +20,21 @@ mixin _$HistoryEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
+    required TResult Function(List<OrderModel> histories) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
+    TResult? Function(List<OrderModel> histories)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
+    TResult Function(List<OrderModel> histories)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$HistoryEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +120,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
+    required TResult Function(List<OrderModel> histories) delete,
   }) {
     return started();
   }
@@ -123,6 +130,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
+    TResult? Function(List<OrderModel> histories)? delete,
   }) {
     return started?.call();
   }
@@ -132,6 +140,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
+    TResult Function(List<OrderModel> histories)? delete,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -145,6 +154,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Delete value) delete,
   }) {
     return started(this);
   }
@@ -154,6 +164,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Delete value)? delete,
   }) {
     return started?.call(this);
   }
@@ -163,6 +174,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -216,6 +228,7 @@ class _$FetchImpl implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
+    required TResult Function(List<OrderModel> histories) delete,
   }) {
     return fetch();
   }
@@ -225,6 +238,7 @@ class _$FetchImpl implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
+    TResult? Function(List<OrderModel> histories)? delete,
   }) {
     return fetch?.call();
   }
@@ -234,6 +248,7 @@ class _$FetchImpl implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
+    TResult Function(List<OrderModel> histories)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -247,6 +262,7 @@ class _$FetchImpl implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Delete value) delete,
   }) {
     return fetch(this);
   }
@@ -256,6 +272,7 @@ class _$FetchImpl implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Delete value)? delete,
   }) {
     return fetch?.call(this);
   }
@@ -265,6 +282,7 @@ class _$FetchImpl implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -279,12 +297,159 @@ abstract class _Fetch implements HistoryEvent {
 }
 
 /// @nodoc
+abstract class _$$DeleteImplCopyWith<$Res> {
+  factory _$$DeleteImplCopyWith(
+          _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
+      __$$DeleteImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<OrderModel> histories});
+}
+
+/// @nodoc
+class __$$DeleteImplCopyWithImpl<$Res>
+    extends _$HistoryEventCopyWithImpl<$Res, _$DeleteImpl>
+    implements _$$DeleteImplCopyWith<$Res> {
+  __$$DeleteImplCopyWithImpl(
+      _$DeleteImpl _value, $Res Function(_$DeleteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? histories = null,
+  }) {
+    return _then(_$DeleteImpl(
+      null == histories
+          ? _value._histories
+          : histories // ignore: cast_nullable_to_non_nullable
+              as List<OrderModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteImpl implements _Delete {
+  const _$DeleteImpl(final List<OrderModel> histories) : _histories = histories;
+
+  final List<OrderModel> _histories;
+  @override
+  List<OrderModel> get histories {
+    if (_histories is EqualUnmodifiableListView) return _histories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_histories);
+  }
+
+  @override
+  String toString() {
+    return 'HistoryEvent.delete(histories: $histories)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteImpl &&
+            const DeepCollectionEquality()
+                .equals(other._histories, _histories));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_histories));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      __$$DeleteImplCopyWithImpl<_$DeleteImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() fetch,
+    required TResult Function(List<OrderModel> histories) delete,
+  }) {
+    return delete(histories);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? fetch,
+    TResult? Function(List<OrderModel> histories)? delete,
+  }) {
+    return delete?.call(histories);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? fetch,
+    TResult Function(List<OrderModel> histories)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(histories);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements HistoryEvent {
+  const factory _Delete(final List<OrderModel> histories) = _$DeleteImpl;
+
+  List<OrderModel> get histories;
+  @JsonKey(ignore: true)
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$HistoryState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<OrderModel> histories) success,
+    required TResult Function(bool success) successDelete,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -293,6 +458,7 @@ mixin _$HistoryState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<OrderModel> histories)? success,
+    TResult? Function(bool success)? successDelete,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -301,6 +467,7 @@ mixin _$HistoryState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<OrderModel> histories)? success,
+    TResult Function(bool success)? successDelete,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -310,6 +477,7 @@ mixin _$HistoryState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -318,6 +486,7 @@ mixin _$HistoryState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessDelete value)? successDelete,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -326,6 +495,7 @@ mixin _$HistoryState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -391,6 +561,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<OrderModel> histories) success,
+    required TResult Function(bool success) successDelete,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -402,6 +573,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<OrderModel> histories)? success,
+    TResult? Function(bool success)? successDelete,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -413,6 +585,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<OrderModel> histories)? success,
+    TResult Function(bool success)? successDelete,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -428,6 +601,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -439,6 +613,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessDelete value)? successDelete,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -450,6 +625,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -505,6 +681,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<OrderModel> histories) success,
+    required TResult Function(bool success) successDelete,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -516,6 +693,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<OrderModel> histories)? success,
+    TResult? Function(bool success)? successDelete,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -527,6 +705,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<OrderModel> histories)? success,
+    TResult Function(bool success)? successDelete,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -542,6 +721,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -553,6 +733,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessDelete value)? successDelete,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -564,6 +745,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -653,6 +835,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<OrderModel> histories) success,
+    required TResult Function(bool success) successDelete,
     required TResult Function(String message) error,
   }) {
     return success(histories);
@@ -664,6 +847,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<OrderModel> histories)? success,
+    TResult? Function(bool success)? successDelete,
     TResult? Function(String message)? error,
   }) {
     return success?.call(histories);
@@ -675,6 +859,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<OrderModel> histories)? success,
+    TResult Function(bool success)? successDelete,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -690,6 +875,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
     required TResult Function(_Error value) error,
   }) {
     return success(this);
@@ -701,6 +887,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessDelete value)? successDelete,
     TResult? Function(_Error value)? error,
   }) {
     return success?.call(this);
@@ -712,6 +899,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -728,6 +916,157 @@ abstract class _Success implements HistoryState {
   List<OrderModel> get histories;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SuccessDeleteImplCopyWith<$Res> {
+  factory _$$SuccessDeleteImplCopyWith(
+          _$SuccessDeleteImpl value, $Res Function(_$SuccessDeleteImpl) then) =
+      __$$SuccessDeleteImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool success});
+}
+
+/// @nodoc
+class __$$SuccessDeleteImplCopyWithImpl<$Res>
+    extends _$HistoryStateCopyWithImpl<$Res, _$SuccessDeleteImpl>
+    implements _$$SuccessDeleteImplCopyWith<$Res> {
+  __$$SuccessDeleteImplCopyWithImpl(
+      _$SuccessDeleteImpl _value, $Res Function(_$SuccessDeleteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? success = null,
+  }) {
+    return _then(_$SuccessDeleteImpl(
+      null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SuccessDeleteImpl implements _SuccessDelete {
+  const _$SuccessDeleteImpl(this.success);
+
+  @override
+  final bool success;
+
+  @override
+  String toString() {
+    return 'HistoryState.successDelete(success: $success)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessDeleteImpl &&
+            (identical(other.success, success) || other.success == success));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, success);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessDeleteImplCopyWith<_$SuccessDeleteImpl> get copyWith =>
+      __$$SuccessDeleteImplCopyWithImpl<_$SuccessDeleteImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<OrderModel> histories) success,
+    required TResult Function(bool success) successDelete,
+    required TResult Function(String message) error,
+  }) {
+    return successDelete(this.success);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<OrderModel> histories)? success,
+    TResult? Function(bool success)? successDelete,
+    TResult? Function(String message)? error,
+  }) {
+    return successDelete?.call(this.success);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<OrderModel> histories)? success,
+    TResult Function(bool success)? successDelete,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (successDelete != null) {
+      return successDelete(this.success);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
+    required TResult Function(_Error value) error,
+  }) {
+    return successDelete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessDelete value)? successDelete,
+    TResult? Function(_Error value)? error,
+  }) {
+    return successDelete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (successDelete != null) {
+      return successDelete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SuccessDelete implements HistoryState {
+  const factory _SuccessDelete(final bool success) = _$SuccessDeleteImpl;
+
+  bool get success;
+  @JsonKey(ignore: true)
+  _$$SuccessDeleteImplCopyWith<_$SuccessDeleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -798,6 +1137,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<OrderModel> histories) success,
+    required TResult Function(bool success) successDelete,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -809,6 +1149,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<OrderModel> histories)? success,
+    TResult? Function(bool success)? successDelete,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -820,6 +1161,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<OrderModel> histories)? success,
+    TResult Function(bool success)? successDelete,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -835,6 +1177,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -846,6 +1189,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_SuccessDelete value)? successDelete,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -857,6 +1201,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

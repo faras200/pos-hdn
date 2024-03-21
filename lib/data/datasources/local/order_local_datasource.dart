@@ -76,4 +76,11 @@ class OrderLocalDatasource {
     return await db.update(tableOrders, {'is_deposit': 1},
         where: 'id = ?', whereArgs: [id]);
   }
+
+  Future<int> deleteOrderById(List uuid) async {
+    final db = await instanceDb.database;
+    return await db.delete(tableOrders,
+        where: 'uuid IN (${List.filled(uuid.length, '?').join(',')})',
+        whereArgs: uuid);
+  }
 }
