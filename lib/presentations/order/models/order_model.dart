@@ -7,7 +7,7 @@ class OrderModel {
   final int? id;
   final String? paymentMethod;
   final int? nominalBayar;
-  final List<OrderItem> orders;
+  List<OrderItem> orders;
   final int? totalQuantity;
   final int? totalPrice;
   final int? idKasir;

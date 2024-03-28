@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:pos_hdn/data/datasources/db/config_db_local.dart';
 import 'package:pos_hdn/data/models/request/order_request_model.dart';
 import 'package:pos_hdn/presentations/order/models/order_model.dart';
@@ -49,6 +50,17 @@ class OrderLocalDatasource {
   Future<List<OrderModel>> getAllOrder() async {
     final db = await instanceDb.database;
     final result = await db.query(tableOrders, orderBy: 'id DESC');
+
+    return result.map((e) => OrderModel.fromLocalMap(e)).toList();
+  }
+
+  //get all orders
+  Future<List<OrderModel>> getByDate(String fromDate, String toDate) async {
+    final db = await instanceDb.database;
+    Logger().d(
+        "SELECT * FROM $tableOrders where transaction_time >= '$fromDate' and transaction_time <= '$toDate' ");
+    final result = await db.rawQuery(
+        "SELECT * FROM $tableOrders where transaction_time >= '$fromDate' and transaction_time <= '$toDate' ");
 
     return result.map((e) => OrderModel.fromLocalMap(e)).toList();
   }

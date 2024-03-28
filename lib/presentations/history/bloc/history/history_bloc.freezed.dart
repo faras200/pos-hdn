@@ -20,6 +20,7 @@ mixin _$HistoryEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
+    required TResult Function(String fromDate, String toDate) fetchbydate,
     required TResult Function(List<OrderModel> histories) delete,
   }) =>
       throw _privateConstructorUsedError;
@@ -27,6 +28,7 @@ mixin _$HistoryEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
+    TResult? Function(String fromDate, String toDate)? fetchbydate,
     TResult? Function(List<OrderModel> histories)? delete,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,6 +36,7 @@ mixin _$HistoryEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
+    TResult Function(String fromDate, String toDate)? fetchbydate,
     TResult Function(List<OrderModel> histories)? delete,
     required TResult orElse(),
   }) =>
@@ -42,6 +45,7 @@ mixin _$HistoryEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchByDate value) fetchbydate,
     required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +53,7 @@ mixin _$HistoryEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchByDate value)? fetchbydate,
     TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +61,7 @@ mixin _$HistoryEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchByDate value)? fetchbydate,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
@@ -120,6 +126,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
+    required TResult Function(String fromDate, String toDate) fetchbydate,
     required TResult Function(List<OrderModel> histories) delete,
   }) {
     return started();
@@ -130,6 +137,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
+    TResult? Function(String fromDate, String toDate)? fetchbydate,
     TResult? Function(List<OrderModel> histories)? delete,
   }) {
     return started?.call();
@@ -140,6 +148,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
+    TResult Function(String fromDate, String toDate)? fetchbydate,
     TResult Function(List<OrderModel> histories)? delete,
     required TResult orElse(),
   }) {
@@ -154,6 +163,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchByDate value) fetchbydate,
     required TResult Function(_Delete value) delete,
   }) {
     return started(this);
@@ -164,6 +174,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchByDate value)? fetchbydate,
     TResult? Function(_Delete value)? delete,
   }) {
     return started?.call(this);
@@ -174,6 +185,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchByDate value)? fetchbydate,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
@@ -228,6 +240,7 @@ class _$FetchImpl implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
+    required TResult Function(String fromDate, String toDate) fetchbydate,
     required TResult Function(List<OrderModel> histories) delete,
   }) {
     return fetch();
@@ -238,6 +251,7 @@ class _$FetchImpl implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
+    TResult? Function(String fromDate, String toDate)? fetchbydate,
     TResult? Function(List<OrderModel> histories)? delete,
   }) {
     return fetch?.call();
@@ -248,6 +262,7 @@ class _$FetchImpl implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
+    TResult Function(String fromDate, String toDate)? fetchbydate,
     TResult Function(List<OrderModel> histories)? delete,
     required TResult orElse(),
   }) {
@@ -262,6 +277,7 @@ class _$FetchImpl implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchByDate value) fetchbydate,
     required TResult Function(_Delete value) delete,
   }) {
     return fetch(this);
@@ -272,6 +288,7 @@ class _$FetchImpl implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchByDate value)? fetchbydate,
     TResult? Function(_Delete value)? delete,
   }) {
     return fetch?.call(this);
@@ -282,6 +299,7 @@ class _$FetchImpl implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchByDate value)? fetchbydate,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
@@ -294,6 +312,162 @@ class _$FetchImpl implements _Fetch {
 
 abstract class _Fetch implements HistoryEvent {
   const factory _Fetch() = _$FetchImpl;
+}
+
+/// @nodoc
+abstract class _$$FetchByDateImplCopyWith<$Res> {
+  factory _$$FetchByDateImplCopyWith(
+          _$FetchByDateImpl value, $Res Function(_$FetchByDateImpl) then) =
+      __$$FetchByDateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String fromDate, String toDate});
+}
+
+/// @nodoc
+class __$$FetchByDateImplCopyWithImpl<$Res>
+    extends _$HistoryEventCopyWithImpl<$Res, _$FetchByDateImpl>
+    implements _$$FetchByDateImplCopyWith<$Res> {
+  __$$FetchByDateImplCopyWithImpl(
+      _$FetchByDateImpl _value, $Res Function(_$FetchByDateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fromDate = null,
+    Object? toDate = null,
+  }) {
+    return _then(_$FetchByDateImpl(
+      null == fromDate
+          ? _value.fromDate
+          : fromDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == toDate
+          ? _value.toDate
+          : toDate // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FetchByDateImpl implements _FetchByDate {
+  const _$FetchByDateImpl(this.fromDate, this.toDate);
+
+  @override
+  final String fromDate;
+  @override
+  final String toDate;
+
+  @override
+  String toString() {
+    return 'HistoryEvent.fetchbydate(fromDate: $fromDate, toDate: $toDate)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchByDateImpl &&
+            (identical(other.fromDate, fromDate) ||
+                other.fromDate == fromDate) &&
+            (identical(other.toDate, toDate) || other.toDate == toDate));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fromDate, toDate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchByDateImplCopyWith<_$FetchByDateImpl> get copyWith =>
+      __$$FetchByDateImplCopyWithImpl<_$FetchByDateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() fetch,
+    required TResult Function(String fromDate, String toDate) fetchbydate,
+    required TResult Function(List<OrderModel> histories) delete,
+  }) {
+    return fetchbydate(fromDate, toDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? fetch,
+    TResult? Function(String fromDate, String toDate)? fetchbydate,
+    TResult? Function(List<OrderModel> histories)? delete,
+  }) {
+    return fetchbydate?.call(fromDate, toDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? fetch,
+    TResult Function(String fromDate, String toDate)? fetchbydate,
+    TResult Function(List<OrderModel> histories)? delete,
+    required TResult orElse(),
+  }) {
+    if (fetchbydate != null) {
+      return fetchbydate(fromDate, toDate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchByDate value) fetchbydate,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return fetchbydate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchByDate value)? fetchbydate,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return fetchbydate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchByDate value)? fetchbydate,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (fetchbydate != null) {
+      return fetchbydate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchByDate implements HistoryEvent {
+  const factory _FetchByDate(final String fromDate, final String toDate) =
+      _$FetchByDateImpl;
+
+  String get fromDate;
+  String get toDate;
+  @JsonKey(ignore: true)
+  _$$FetchByDateImplCopyWith<_$FetchByDateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -369,6 +543,7 @@ class _$DeleteImpl implements _Delete {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() fetch,
+    required TResult Function(String fromDate, String toDate) fetchbydate,
     required TResult Function(List<OrderModel> histories) delete,
   }) {
     return delete(histories);
@@ -379,6 +554,7 @@ class _$DeleteImpl implements _Delete {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? fetch,
+    TResult? Function(String fromDate, String toDate)? fetchbydate,
     TResult? Function(List<OrderModel> histories)? delete,
   }) {
     return delete?.call(histories);
@@ -389,6 +565,7 @@ class _$DeleteImpl implements _Delete {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? fetch,
+    TResult Function(String fromDate, String toDate)? fetchbydate,
     TResult Function(List<OrderModel> histories)? delete,
     required TResult orElse(),
   }) {
@@ -403,6 +580,7 @@ class _$DeleteImpl implements _Delete {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchByDate value) fetchbydate,
     required TResult Function(_Delete value) delete,
   }) {
     return delete(this);
@@ -413,6 +591,7 @@ class _$DeleteImpl implements _Delete {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchByDate value)? fetchbydate,
     TResult? Function(_Delete value)? delete,
   }) {
     return delete?.call(this);
@@ -423,6 +602,7 @@ class _$DeleteImpl implements _Delete {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchByDate value)? fetchbydate,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
